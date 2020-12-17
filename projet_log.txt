@@ -1,0 +1,10 @@
+09/12/2020 - Création d'un server discord pour échanger sur le projet
+11/12/2020 - Mise en place du repository git et configuration gitbash
+16/12/2020 - Création d'un drive Google + travail d'un document simplifié du cahier des charges. (A partir de sujetGenConf)
+17/12/2020 - Prise en compte du fichier dossier_modelisation étudiant
+17/12/2020 - Création projet VisualParadigm pour utiliser TeamWork
+17/12/2020 - Diagramme sous-processus métier : initialiser la conférence + inscire et donner droit admin conf (auteur : Hippolyte)
+17/12/2020 - Tableau de priorité des cas d'utilisation (auteur : Sylvain)
+17/12/2020 - Scénario de cas d'utilisation back office (auteur : Léo)
+17/12/2020 - Diagramme sous-processus métier : définir site public et lancer inscription (auteur : Dane)
+17/12/2020 - Diagramme sous-processus métier : finaliser site privé (auteurs : Dane, Hippolyte)
