@@ -4,7 +4,14 @@
 17/12/2020 - Prise en compte du fichier dossier_modelisation étudiant
 17/12/2020 - Création projet VisualParadigm pour utiliser TeamWork
 17/12/2020 - Diagramme sous-processus métier : initialiser la conférence + inscire et donner droit admin conf (auteur : Hippolyte)
-17/12/2020 - Tableau de priorité des cas d'utilisation (auteur : Sylvain)
-17/12/2020 - Scénario de cas d'utilisation back office (auteur : Léo)
-17/12/2020 - Diagramme sous-processus métier : définir site public et lancer inscription (auteur : Dane)
-17/12/2020 - Diagramme sous-processus métier : finaliser site privé (auteurs : Dane, Hippolyte)
+17/12/2020 - Tableau de priorité des cas d'utilisation (auteur : Sylvain) : partie 1
+17/12/2020 - Scénario de cas d'utilisation back office (auteur : Léo) : partie 1
+17/12/2020 - Diagramme sous-processus métier : définir site public et lancer inscription (auteur : Dane) : partie 1
+17/12/2020 - Diagramme sous-processus métier : finaliser site privé (auteurs : Dane, Hippolyte) : partie 1 
+18/12/2020 - Diagramme sous-processus métier : définir site public et lancer inscription (auteur : Dane) : partie 2
+18/12/2020 - Diagramme sous-processus métier : finaliser site privé (auteurs : Dane, Hippolyte) : partie 2
+18/12/2020 - Tableau de priorité des cas d'utilisation (auteur : Sylvain) : partie 2 
+18/12/2020 - Scénario de cas d'utilisation back office (auteur : Léo) : partie 2
+18/12/2020 - Consultation diagramme de cas d'utilisations général
+18/12/2020 - Diagramme de cas d'utilisation admin conf (auteurs : tous les membres du projet)
+18/12/2020 - Division du travail pour la réalisation du diagramme de cas d'utilisation
