@@ -1,41 +1,10 @@
 package fr.uga.iut2.genconf.vue;
 
-import fr.uga.iut2.genconf.controleur.Commande;
 import java.time.LocalDate;
 import java.util.Set;
 
-/**
- *
- * @author Raphaël Bleuse <raphael.bleuse@univ-grenoble-alpes.fr>
- */
+
 public abstract class IHM {
-
-    /**
-     * Affiche un message d'information à l'attention de l'utilisa·teur/trice.
-     *
-     * @param msg Le message à afficher.
-     *
-     * @param succes true si le message informe d'une opération réussie, false
-     *     sinon.
-     */
-    public abstract void informerUtilisateur(final String msg, final boolean succes);
-
-    /**
-     * Lit une {@link Commande}.
-     *
-     * @return La {@link Commande} saisie par l'utilisa·teur/trice.
-     */
-    public abstract Commande lireCommande();
-
-    /**
-     * Récupère les informations à propos d'un
-     * {@link fr.uga.iut2.genconf.modele.Utilisateur}.
-     *
-     * @return Le conteneur {@link InfosUtilisateur} contenant les informations
-     *     lues.
-     */
-    public abstract InfosUtilisateur saisirUtilisateur();
-
     /**
      * Classe conteneur pour les informations saisies à propos d'un
      * {@link fr.uga.iut2.genconf.modele.Utilisateur}.
@@ -56,18 +25,6 @@ public abstract class IHM {
             this.prenom = prenom;
         }
     }
-
-    /**
-     * Récupère les informations nécessaires à la création d'une nouvelle
-     * {@link fr.uga.iut2.genconf.modele.Conference}.
-     *
-     * @param nomsExistants L'ensemble des noms de conférences qui ne sont plus
-     *     disponibles.
-     *
-     * @return Le conteneur {@link InfosNouvelleConference} contenant les
-     *     informations lues.
-     */
-    public abstract InfosNouvelleConference saisirNouvelleConference(final Set<String> nomsExistants);
 
     /**
      * Classe conteneur pour les informations saisies pour une nouvelle
@@ -92,4 +49,46 @@ public abstract class IHM {
             this.admin = admin;
         }
     }
+
+    /**
+     * Rend actif l'interface Humain-machine.
+     *
+     * L'appel est bloquant : le contrôle est rendu à l'appelant une fois que
+     * l'IHM est fermée.
+     *
+     */
+    public abstract void afficherInterface();
+
+    /**
+     * Rend inactif l'interface Humain-machine.
+     *
+     */
+    public abstract void fermerInterface();
+
+    /**
+     * Affiche un message d'information à l'attention de l'utilisa·teur/trice.
+     *
+     * @param msg Le message à afficher.
+     *
+     * @param succes true si le message informe d'une opération réussie, false
+     *     sinon.
+     */
+    public abstract void informerUtilisateur(final String msg, final boolean succes);
+
+    /**
+     * Récupère les informations à propos d'un
+     * {@link fr.uga.iut2.genconf.modele.Utilisateur}.
+     *
+     */
+    public abstract void saisirUtilisateur();
+
+    /**
+     * Récupère les informations nécessaires à la création d'une nouvelle
+     * {@link fr.uga.iut2.genconf.modele.Conference}.
+     *
+     * @param nomsExistants L'ensemble des noms de conférences qui ne sont plus
+     *     disponibles.
+     *
+     */
+    public abstract void saisirNouvelleConference(final Set<String> nomsExistants);
 }

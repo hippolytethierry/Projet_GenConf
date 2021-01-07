@@ -1,0 +1,25 @@
+Commandes :
+
+Programme : 
+
+- Creer session 
+- Modifier session 
+- Creer track 
+- Modifier tracks
+- Creer programme
+- Gérer programmes
+- Creer communication 
+- Modifier communication 
+
+Infos : 
+
+- Créer informations conférences
+- Gérer infos
+- Gérer infos communications
+
+Prévisualisation :
+
+- Visualiser infos de bases
+- Visualiser sessions
+- Visualiser communications
+- Visualiser programmes 

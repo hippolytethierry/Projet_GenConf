@@ -15,3 +15,6 @@
 18/12/2020 - Consultation diagramme de cas d'utilisations général
 18/12/2020 - Diagramme de cas d'utilisation admin conf (auteurs : tous les membres du projet)
 18/12/2020 - Division du travail pour la réalisation du diagramme de cas d'utilisation
+06/01/2021 - Réalisation du diagramme de classe avec l'ensemble des membres du projet
+07/01/2021 - Finition du diagramme de classe UML
+07/01/2021 - Prise en compte de l'aspect technique et de la réalisation

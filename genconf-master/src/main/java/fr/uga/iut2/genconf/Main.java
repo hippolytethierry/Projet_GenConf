@@ -5,10 +5,7 @@ import fr.uga.iut2.genconf.modele.GenConf;
 import fr.uga.iut2.genconf.util.Persisteur;
 import java.io.IOException;
 
-/**
- *
- * @author Raphaël Bleuse <raphael.bleuse@univ-grenoble-alpes.fr>
- */
+
 public class Main {
 
     public static final int EXIT_ERR_LOAD = 2;
@@ -26,9 +23,10 @@ public class Main {
             System.exit(Main.EXIT_ERR_LOAD);
         }
 
-        // Controleur garde le contrôle de l'exécution tant que
+        Controleur controleur = new Controleur(genconf);
+        // `Controleur.demarrer` garde le contrôle de l'exécution tant que
         // l'utilisa·teur/trice n'a pas saisi la commande QUITTER.
-        new Controleur(genconf);
+        controleur.demarrer();
 
         try {
             Persisteur.sauverEtat(genconf);
