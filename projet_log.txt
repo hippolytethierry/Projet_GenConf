@@ -18,3 +18,5 @@
 06/01/2021 - Réalisation du diagramme de classe avec l'ensemble des membres du projet
 07/01/2021 - Finition du diagramme de classe UML
 07/01/2021 - Prise en compte de l'aspect technique et de la réalisation
+10/01/2021 - Diagramme de classe terminé
+10/01/2021 - Diagrames de sequences terminés
