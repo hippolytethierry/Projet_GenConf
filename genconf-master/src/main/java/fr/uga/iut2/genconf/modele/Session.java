@@ -23,10 +23,16 @@ public class Session implements Serializable{
     private LocalDate dateFin;
     private Type type;
     private Map<String, Utilisateur> animateurs;
+    private Map<String, Communication> communications;
     private Conference conf;
     
     public Session(String nom, Type type, LocalDate dateDebut, LocalDate dateFin){
-        
+        this.animateurs = new HashMap();
+        this.communications = new HashMap();
+        setNom(nom);
+        setType(type);
+        setDateDebut(dateDebut);
+        setDateFin(dateFin);        
     }
     
     private Map<String, Utilisateur> getAnimateurs(){
@@ -38,7 +44,7 @@ public class Session implements Serializable{
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nom = nom.toLowerCase();
     }
 
     public LocalDate getDateDebut() {
@@ -67,6 +73,7 @@ public class Session implements Serializable{
         this.type = type;
     }
     
+    public 
     public void ajouterAnimateur(Utilisateur anim){
         assert !getAnimateurs().containsKey(anim.getEmail());
         getAnimateurs().put(anim.getEmail(), anim);
