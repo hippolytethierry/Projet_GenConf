@@ -37,6 +37,9 @@ public class Conference implements Serializable {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
         this.administrateurs = new HashMap<>();
+        this.inscrits = new HashMap<>();
+        this.sessions = new HashMap<>();
+        definirProgramme();
     }
 
     public String getNom() {
@@ -72,15 +75,16 @@ public class Conference implements Serializable {
     }
     
     public void ajouterInscrit(Utilisateur inscrit){
-        this.inscrits.put(inscrit.getEmail(), inscrit);
+        getInscrits().put(inscrit.getEmail(), inscrit);
     }
 
     public Map<String, Session> getSessions() {
         return sessions;
     }
     
-    public void créerSession(String nom,Type type, LocalDate dateDebut, LocalDate dateFin){
-        this.sessions.put(nom, new Session(nom,type,dateDebut,dateFin));
+    public void creerSession(String nom,Type type, LocalDate dateDebut, LocalDate dateFin, Utilisateur animateur){
+        Session s = Session.intialiseSession(nom,type,dateDebut,animateur);
+        getSessions().put(nom, s);
     }
          
 
