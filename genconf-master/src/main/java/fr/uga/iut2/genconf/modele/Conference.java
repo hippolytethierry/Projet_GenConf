@@ -64,7 +64,7 @@ public class Conference implements Serializable {
     public void ajouteAdministrateur(Utilisateur admin) {
         assert !this.administrateurs.containsKey(admin.getEmail());
         this.administrateurs.put(admin.getEmail(), admin);
-        admin.ajouteConferenceAdministree(this);
+        admin.addConferenceAdministree(this);
     }
 
     public Map<String, Utilisateur> getInscrits() {
