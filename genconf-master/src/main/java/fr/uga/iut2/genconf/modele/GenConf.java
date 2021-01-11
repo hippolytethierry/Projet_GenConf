@@ -26,16 +26,19 @@ public class GenConf implements Serializable {
         }
     }
 
-    public Map<String, Conference> getConferences() {
-        return this.conferences;
-    }
-
     public void nouvelleConference(String nom, LocalDate dateDebut, LocalDate dateFin, String adminEmail) {
-        assert !this.conferences.containsKey(nom);
-        assert this.utilisateurs.containsKey(adminEmail);
+        assert !getConferences().containsKey(nom);
+        assert getUsers().containsKey(adminEmail);
         Utilisateur admin = this.utilisateurs.get(adminEmail);
         Conference conf = Conference.initialiseConference(this, nom, dateDebut, dateFin, admin);
         this.conferences.put(nom, conf);
     }
-
+    
+    public Map<String, Conference> getConferences(){
+        return this.conferences;
+    }
+    
+    public Map<String, Utilisateur> getUsers(){
+        return this.utilisateurs;
+    }
 }
