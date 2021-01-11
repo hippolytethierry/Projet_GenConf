@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class GenConf implements Serializable {
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
@@ -29,9 +28,9 @@ public class GenConf implements Serializable {
     public void nouvelleConference(String nom, LocalDate dateDebut, LocalDate dateFin, String adminEmail) {
         assert !getConferences().containsKey(nom);
         assert getUsers().containsKey(adminEmail);
-        Utilisateur admin = this.utilisateurs.get(adminEmail);
+        Utilisateur admin = getUsers().get(adminEmail);
         Conference conf = Conference.initialiseConference(this, nom, dateDebut, dateFin, admin);
-        this.conferences.put(nom, conf);
+        getConferences().put(nom, conf);
     }
     
     public Map<String, Conference> getConferences(){

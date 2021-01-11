@@ -58,7 +58,7 @@ public class Controleur {
         }
     }
 
-    public void creerConference(IHM.InfosNouvelleConference infos) {
+    public void creerConference(IHM.InfosConference infos) {
         // création d'un Utilisateur si nécessaire
         boolean nouvelUtilisateur = this.genconf.ajouteUtilisateur(
                 infos.admin.email,
@@ -81,5 +81,9 @@ public class Controleur {
                 "Nouvelle conférence : " + infos.nom + ", administrée par " + infos.admin.email,
                 true
         );
+    }
+    
+    public void modifierConference(IHM.InfosConference infos){
+        
     }
 }

@@ -35,13 +35,13 @@ public abstract class IHM {
      * <li>Tous les attributs sont `final` pour ne pas être modifiables.</li>
      * </ul>
      */
-    public static class InfosNouvelleConference {
+    public static class InfosConference {
         public final String nom;
         public final LocalDate dateDebut;
         public final LocalDate dateFin;
         public final InfosUtilisateur admin;
 
-        public InfosNouvelleConference(final String nom, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur admin) {
+        public InfosConference(final String nom, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur admin) {
             assert !dateDebut.isAfter(dateFin);
             this.nom = nom;
             this.dateDebut = dateDebut;

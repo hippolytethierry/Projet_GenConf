@@ -82,17 +82,10 @@ public class Conference implements Serializable {
         return sessions;
     }
     
-<<<<<<< HEAD
-    public void créerSession(String nom,Type type, LocalDate dateDebut, LocalDate dateFin){
-        this.sessions.put(nom, new Session(nom,type,dateDebut,dateFin));
-    }         
-=======
-    public void creerSession(String nom,Type type, LocalDate dateDebut, LocalDate dateFin, Utilisateur animateur){
-        Session s = Session.intialiseSession(nom,type,dateDebut,animateur);
+    public void creerSession(String nom, Type type, LocalDate dateDebut, LocalDate dateFin, Utilisateur animateur){
+        Session s = Session.initialiseSession(nom,type,dateDebut,dateFin,this,animateur);
         getSessions().put(nom, s);
     }
-         
->>>>>>> 448a1defc77e3f0bcbf28906c55a811ec76d0e0c
 
     public Programme getProgramme() {
         return programme;
