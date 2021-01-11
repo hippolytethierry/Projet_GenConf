@@ -1,5 +1,6 @@
 package fr.uga.iut2.genconf.modele;
 
+import fr.uga.iut2.genconf.util.Type;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -14,6 +15,10 @@ public class Conference implements Serializable {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private final Map<String, Utilisateur> administrateurs;  // association qualifiée par l'email
+    private final Map<String, Utilisateur> inscrits;//associattion qualifié par l'email
+    private final Map<String, Session> sessions;//association qualifié par les noms
+    private Programme programme;
+            
 
     // Invariant de classe : !dateDebut.isAfter(dateFin)
     //     On utilise la négation ici pour exprimer (dateDebut <= dateFin), ce
@@ -61,4 +66,35 @@ public class Conference implements Serializable {
         this.administrateurs.put(admin.getEmail(), admin);
         admin.ajouteConferenceAdministree(this);
     }
+
+    public Map<String, Utilisateur> getInscrits() {
+        return inscrits;
+    }
+    
+    public void ajouterInscrit(Utilisateur inscrit){
+        this.inscrits.put(inscrit.getEmail(), inscrit);
+    }
+
+    public Map<String, Session> getSessions() {
+        return sessions;
+    }
+    
+    public void créerSession(String nom,Type type, LocalDate dateDebut, LocalDate dateFin){
+        this.sessions.put(nom, new Session(nom,type,dateDebut,dateFin));
+    }
+         
+
+    public Programme getProgramme() {
+        return programme;
+    }
+    
+    public void definirProgramme(){
+        this.programme = new Programme(this);
+    }
+    
+    public void update(){
+        
+    }
+    
+    
 }
