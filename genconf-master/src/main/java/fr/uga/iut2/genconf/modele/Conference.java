@@ -81,8 +81,7 @@ public class Conference implements Serializable {
     
     public void créerSession(String nom,Type type, LocalDate dateDebut, LocalDate dateFin){
         this.sessions.put(nom, new Session(nom,type,dateDebut,dateFin));
-    }
-         
+    }         
 
     public Programme getProgramme() {
         return programme;

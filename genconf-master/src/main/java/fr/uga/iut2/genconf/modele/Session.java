@@ -26,14 +26,21 @@ public class Session implements Serializable{
     private Map<String, Communication> communications;
     private Conference conf;
     
-    public Session(String nom, Type type, LocalDate dateDebut, LocalDate dateFin){
+    public Session(String nom, Type type, LocalDate dateDebut, LocalDate dateFin, Conference conf, Utilisateur anim){
+        this.conf = conf;
         this.animateurs = new HashMap();
         this.communications = new HashMap();
         setNom(nom);
         setType(type);
         setDateDebut(dateDebut);
-        setDateFin(dateFin);        
+        setDateFin(dateFin);
     }
+    
+    public static Session initialiseSession(String nom, Type type, LocalDate dateDebut, LocalDate dateFin, Conference conf, Utilisateur anim){
+        Session s = new Session(nom, type, dateDebut, dateFin, conf, anim);
+        s.ajouterAnimateur(anim);
+        return s;
+    } 
     
     private Map<String, Utilisateur> getAnimateurs(){
         return this.animateurs;
@@ -73,9 +80,17 @@ public class Session implements Serializable{
         this.type = type;
     }
     
-    public 
+    public Map<String, Communication> getCommunications(){
+        return this.communications;
+    }
+    
     public void ajouterAnimateur(Utilisateur anim){
         assert !getAnimateurs().containsKey(anim.getEmail());
         getAnimateurs().put(anim.getEmail(), anim);
+        anim.addSessionAnimee(this);
+    }
+    
+    protected void update(Session s){
+        
     }
 }
