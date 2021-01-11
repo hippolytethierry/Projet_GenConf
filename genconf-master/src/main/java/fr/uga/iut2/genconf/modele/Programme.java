@@ -7,7 +7,6 @@ package fr.uga.iut2.genconf.modele;
 
 import fr.uga.iut2.genconf.vue.CLI;
 import java.time.LocalDate;
-import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -21,7 +20,7 @@ public class Programme {
 
     public Programme(Conference conf) {
         this.conf = conf;
-        String s = ("Quelle date horraire voulait vous pour le déjeuner?");
+        String s = ("Quelle date horraire voulait vous pour le dï¿½jeuner?");
         CLI.informerUtilisateur(s, true);
     }
 
@@ -29,11 +28,11 @@ public class Programme {
         for (LocalDate pause : this.pauses){
             System.out.println(pause);
             
-            //A faire afficher toute les pauses sur une interface graphique et pouvoir récuperer une. 
+            //A faire afficher toute les pauses sur une interface graphique et pouvoir rï¿½cuperer une. 
             
-            if (bouton selectionné){
-                //demande de rentrer la nouvelle heure voulu pour la pause sélectioné
-                //mofifier en conséquence
+            if (bouton selectionnï¿½){
+                //demande de rentrer la nouvelle heure voulu pour la pause sï¿½lectionï¿½
+                //mofifier en consï¿½quence
         }
         }
     }
