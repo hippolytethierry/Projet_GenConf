@@ -15,7 +15,7 @@ import fr.uga.iut2.genconf.util.Type;
  *
  * @author hippo
  */
-public class Session implements Serializable{
+public class Session implements Serializable, Comparable<Session>{
     
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
     private String nom;
@@ -92,5 +92,10 @@ public class Session implements Serializable{
     
     protected void update(Session s){
         
+    }
+    
+    @Override
+    public int compareTo(Session s) {
+        return this.getNom().compareTo(s.getNom());
     }
 }

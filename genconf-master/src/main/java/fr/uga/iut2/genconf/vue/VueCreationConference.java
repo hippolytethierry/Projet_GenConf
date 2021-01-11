@@ -263,7 +263,7 @@ public class VueCreationConference extends javax.swing.JPanel {
          LocalDate dateFin = dateDebut.plusDays((Integer) nbJours.getValue() - 1);
 
          // Infos sur la nouvelle conference
-         IHM.InfosNouvelleConference nlleConf = new IHM.InfosNouvelleConference(
+         IHM.InfosConference nlleConf = new IHM.InfosConference(
                  this.nomConference.getText(),
                  dateDebut,
                  dateFin,

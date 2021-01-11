@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Conference implements Serializable {
+public class Conference implements Serializable, Comparable<Conference> {
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
     private final GenConf genconf;
@@ -98,6 +98,14 @@ public class Conference implements Serializable {
     public void update(){
         
     }
-    
-    
+
+    @Override
+    public int compareTo(Conference conf) {
+        if (this.getDateDebut().isBefore(conf.getDateDebut())){
+            return -1;
+        }else if (this.getDateDebut().isAfter(conf.getDateDebut())){
+            return 1;
+        }else 
+            return 0;
+    }   
 }

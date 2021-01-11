@@ -21,7 +21,7 @@ public class Programme {
     public Programme(Conference conf) {
         this.conf = conf;
         String s = ("Quelle date horraire voulait vous pour le d�jeuner?");
-        CLI.informerUtilisateur(s, true);
+       // CLI.informerUtilisateur(s, true);
     }
 
     protected void update(){
@@ -30,10 +30,10 @@ public class Programme {
             
             //A faire afficher toute les pauses sur une interface graphique et pouvoir r�cuperer une. 
             
-            if (bouton selectionn�){
+            //if (bouton selectionn�){
                 //demande de rentrer la nouvelle heure voulu pour la pause s�lection�
                 //mofifier en cons�quence
-        }
+       // }
         }
     }
     

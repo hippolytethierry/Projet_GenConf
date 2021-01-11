@@ -6,7 +6,8 @@ import java.util.Map;
 import org.apache.commons.validator.routines.EmailValidator;
 
 
-public class Utilisateur implements Serializable {
+
+public class Utilisateur implements Serializable, Comparable<Utilisateur>{
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
     private final String email;
@@ -71,5 +72,10 @@ public class Utilisateur implements Serializable {
     public void addConferenceAdministree(Conference conf) {
         assert !getConfs().containsKey(conf.getNom());
         getConfs().put(conf.getNom(), conf);
+    }
+
+    @Override
+    public int compareTo(Utilisateur user) {
+        return this.getNom().compareTo(user.getNom());
     }
 }
