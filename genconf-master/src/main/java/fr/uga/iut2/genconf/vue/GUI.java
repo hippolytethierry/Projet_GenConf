@@ -61,7 +61,7 @@ public class GUI extends IHM {
         );
     }
 
-    protected void creerConference(Optional<InfosNouvelleConference> nlleConf) {
+    protected void creerConference(Optional<InfosConference> nlleConf) {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         nlleConf.ifPresentOrElse(
                 infos -> this.controleur.creerConference(infos),
