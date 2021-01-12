@@ -15,11 +15,11 @@ public class Controleur {
         this.genconf = genconf;
 
         // choisir la classe CLI ou GUI
-//        this.ihm = new CLI(this);
+        // this.ihm = new CLI(this);
         this.ihm = new GUI(this);
     }
 
-    public void demarrer() {
+    public void run() {
         this.ihm.afficherInterface();
     }
 

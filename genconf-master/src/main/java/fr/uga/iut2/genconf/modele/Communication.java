@@ -6,13 +6,16 @@
 package fr.uga.iut2.genconf.modele;
 
 import fr.uga.iut2.genconf.util.Type;
+import java.io.Serializable;
+
 
 /**
  *
  * @author leola
  */
-public class Communication {
+public class Communication implements Serializable, Comparable<Communication>{
     
+    private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
     private String titre;
     private Type type;
     private Utilisateur correspondant;
@@ -24,14 +27,16 @@ public class Communication {
         return com;
     }
 
-    public Communication(String titre, Type type,Utilisateur Correspondant, Session session) {
+    public Communication(String titre, Type type, Utilisateur correspondant, Session session) {
         setTitre(titre);
-        setType(type);
-        setCorrespondant(Correspondant);
+        assert !session.getType().equals(type);
+        this.type = type;
+        setCorrespondant(correspondant);
         setSession(session);
     }
     
     public void ajouterCorrespondant(Utilisateur corres){
+        assert !getCorrespondant().equals(null);
         corres.addCommunications(this);
     }
 
@@ -47,30 +52,21 @@ public class Communication {
         return correspondant;
     }
 
-    public void setCorrespondant(Utilisateur correspondant) {
+    private void setCorrespondant(Utilisateur correspondant) {
         this.correspondant = correspondant;
     }
 
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
+    private void setSession(Session session) {
         this.session = session;
     }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
     
-    public void update(){
+    protected void update(){
         
     }
     
-    
-    
-    
-    
-    
+    @Override
+    public int compareTo(Communication com) {
+        return this.getTitre().compareTo(com.getTitre());
+    }
     
 }

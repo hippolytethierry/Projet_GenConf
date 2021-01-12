@@ -2,6 +2,7 @@ package fr.uga.iut2.genconf.vue;
 
 import java.time.LocalDate;
 import java.util.Set;
+import fr.uga.iut2.genconf.util.Type;
 
 
 public abstract class IHM {
@@ -49,7 +50,36 @@ public abstract class IHM {
             this.admin = admin;
         }
     }
-
+    
+    public static class InfosSession {
+        public final String nom;
+        public final LocalDate dateDebut;
+        public final LocalDate dateFin;
+        public final InfosUtilisateur anim;
+        public final Type type;
+        
+        public InfosSession(final String nom, final Type type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur anim){
+            assert !dateDebut.isAfter(dateFin);
+            this.nom = nom;
+            this.type = type;
+            this.dateDebut = dateDebut;
+            this.dateFin = dateFin;
+            this.anim = anim;
+        }        
+    }
+    
+    public static class InfosCommunication {
+        public final String nom;
+        public final InfosUtilisateur correspondant;
+        public final Type type;
+        
+        public InfosCommunication(final String nom, final Type type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur correspondant){
+            assert !dateDebut.isAfter(dateFin);
+            this.nom = nom;
+            this.type = type;
+            this.correspondant = correspondant;
+        }        
+    }    
     /**
      * Rend actif l'interface Humain-machine.
      *
