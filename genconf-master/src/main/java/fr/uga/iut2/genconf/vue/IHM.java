@@ -65,9 +65,21 @@ public abstract class IHM {
             this.dateDebut = dateDebut;
             this.dateFin = dateFin;
             this.anim = anim;
-        }
-        
+        }        
     }
+    
+    public static class InfosCommunication {
+        public final String nom;
+        public final InfosUtilisateur correspondant;
+        public final Type type;
+        
+        public InfosCommunication(final String nom, final Type type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur correspondant){
+            assert !dateDebut.isAfter(dateFin);
+            this.nom = nom;
+            this.type = type;
+            this.correspondant = correspondant;
+        }        
+    }    
     /**
      * Rend actif l'interface Humain-machine.
      *
