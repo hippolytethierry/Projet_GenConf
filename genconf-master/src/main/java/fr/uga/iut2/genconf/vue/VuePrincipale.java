@@ -53,6 +53,7 @@ public class VuePrincipale extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -79,6 +80,9 @@ public class VuePrincipale extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem3);
+
+        jMenuItem5.setText("Modifier conférence");
+        jMenu1.add(jMenuItem5);
         jMenu1.add(jSeparator2);
 
         jMenuItem4.setText("Quitter");
@@ -115,6 +119,7 @@ public class VuePrincipale extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }

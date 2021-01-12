@@ -12,7 +12,7 @@ import javax.swing.JSpinner;
 import org.apache.commons.validator.routines.EmailValidator;
 
 
-public class VueCreationSession extends javax.swing.JPanel {
+public class VueCreationCommunication extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> nomsExistants;
     private boolean valideAdmin, valideConf;
@@ -20,7 +20,7 @@ public class VueCreationSession extends javax.swing.JPanel {
     /**
      * Creates new form VueCreationConference
      */
-    public VueCreationSession(GUI gui) {
+    public VueCreationCommunication(GUI gui) {
         this.gui = gui;
         this.nomsExistants = new HashSet<>();
         this.valideAdmin = false;
@@ -76,9 +76,9 @@ public class VueCreationSession extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        Session.setBorder(javax.swing.BorderFactory.createTitledBorder("Session"));
+        Session.setBorder(javax.swing.BorderFactory.createTitledBorder("Communication"));
 
-        jLabel1.setText("Nom de la session :");
+        jLabel1.setText("Nom de la communication :");
 
         nomConference.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -113,7 +113,7 @@ public class VueCreationSession extends javax.swing.JPanel {
                         .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(SessionLayout.createSequentialGroup()
                                 .addComponent(nbJours, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 279, Short.MAX_VALUE))
+                                .addGap(0, 244, Short.MAX_VALUE))
                             .addComponent(nomConference))
                         .addContainerGap())))
         );
@@ -134,7 +134,7 @@ public class VueCreationSession extends javax.swing.JPanel {
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
-        saisieAdminPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Anima·teur/trice"));
+        saisieAdminPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Correspondant"));
 
         jLabel4.setText("Nom :");
 
@@ -209,7 +209,7 @@ public class VueCreationSession extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Créer une session");
+        jLabel7.setText("Créer une communication");
 
         jButton1.setText("Precedent");
 
@@ -249,8 +249,6 @@ public class VueCreationSession extends javax.swing.JPanel {
                     .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        Session.getAccessibleContext().setAccessibleName("Session");
     }// </editor-fold>//GEN-END:initComponents
 
     private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
