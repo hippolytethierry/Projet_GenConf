@@ -15,17 +15,17 @@ import java.util.Set;
  */
 public class Programme {
     
-    private Set<LocalDate> pauses;
+    private Set<LocalDate> planning;
     private Conference conf;
 
     public Programme(Conference conf) {
         this.conf = conf;
-        String s = ("Quelle date horraire voulait vous pour le d�jeuner?");
-       // CLI.informerUtilisateur(s, true);
+        String s = ("Quelle date horaire voulez vous pour le dejeuner ?");
+        // CLI.informerUtilisateur(s, true);
     }
 
     protected void update(){
-        for (LocalDate pause : this.pauses){
+        for (LocalDate pause : this.planning){
             System.out.println(pause);
             
             //A faire afficher toute les pauses sur une interface graphique et pouvoir r�cuperer une. 
@@ -38,11 +38,11 @@ public class Programme {
     }
     
     public void addPause(LocalDate date){
-        this.pauses.add(date);
+        this.planning.add(date);
     }
 
     public Set<LocalDate> getPauses() {
-        return pauses;
+        return planning;
     }
     
     

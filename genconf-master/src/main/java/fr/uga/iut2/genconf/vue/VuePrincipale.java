@@ -29,7 +29,7 @@ public class VuePrincipale extends javax.swing.JFrame {
         cLayout.addLayoutComponent(vue, id);
         this.add(vue);
     }
-
+    
     protected void afficherVue(String id) {
         CardLayout cLayout = (CardLayout) getContentPane().getLayout();
         cLayout.show(this.getContentPane(), id);

@@ -26,7 +26,7 @@ public class GUI extends IHM {
 
         // initialisé à 1 pour attendre l'évènement correspondant à la fin de vie de GUI
         this.eolBarrier = new CountDownLatch(1);
-
+        
         // création de l'interface
         this.vueEtat = new VueEtat(this);
         this.vueCreationConf = new VueCreationConference(this);
@@ -53,19 +53,19 @@ public class GUI extends IHM {
         this.controleur.gererDialogue(Commande.QUITTER);
     }
 
-    protected void creerUtilisateur(Optional<InfosUtilisateur> nouvelUtilisateur) {
+    protected void creerUtilisateur(Optional<InfosUtilisateur> nouvelUtilisateur){
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         nouvelUtilisateur.ifPresentOrElse(
-                infos -> this.controleur.creerUtilisateur(infos),
-                () -> this.vueEtat.setEtat("")
+                infos -> this.controleur.creerUtilisateur(infos),   // suite a bouton creer
+                () -> this.vueEtat.setEtat("")                      // suite a bouton annuler
         );
     }
 
-    protected void creerConference(Optional<InfosNouvelleConference> nlleConf) {
+    protected void creerConference(Optional<InfosConference> nlleConf) {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         nlleConf.ifPresentOrElse(
-                infos -> this.controleur.creerConference(infos),
-                () -> this.vueEtat.setEtat("")
+                infos -> this.controleur.creerConference(infos),    
+                () -> this.vueEtat.setEtat("")                      
         );
     }
 
