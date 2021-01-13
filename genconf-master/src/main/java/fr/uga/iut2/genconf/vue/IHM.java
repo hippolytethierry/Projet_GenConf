@@ -49,6 +49,10 @@ public abstract class IHM {
             this.dateFin = dateFin;
             this.admin = admin;
         }
+        
+        public InfosConference getInfos(String nomConf){
+            
+        }
     }
     
     public static class InfosSession {
