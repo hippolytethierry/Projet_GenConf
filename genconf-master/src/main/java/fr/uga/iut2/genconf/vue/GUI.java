@@ -73,6 +73,22 @@ public class GUI extends IHM {
         );
     }
 
+    protected void creerCommunication(Optional<InfosCommunication> nlleComm) {
+        this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
+        nlleComm.ifPresentOrElse(
+                infos -> this.controleur.creerCommunication(infos),
+                () -> this.vueEtat.setEtat("")
+        );
+    }
+
+    protected void creerSession(Optional<InfosSession> nlleSession) {
+        this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
+        nlleSession.ifPresentOrElse(
+                infos -> this.controleur.creerSession(infos),
+                () -> this.vueEtat.setEtat("")
+        );
+    }
+
 //-----  Implémentation des méthodes abstraites  -------------------------------
 
     @Override
