@@ -14,12 +14,14 @@ public class GUI extends IHM {
     private final VuePrincipale vuePrincipale;
     private final VueCreationConference vueCreationConf;
     private final VueCreationUtilisateur vueCreationUser;
+    private final VueConference vueConf;
     private final VueEtat vueEtat;
 
     // identifiants uniques pour les vues composant la vue principale
     private static final String VUE_ETAT = "etat";
     private static final String VUE_CREATION_CONF = "creation_conf";
     private static final String VUE_CREATION_USER = "creation_user";
+    private static final String VUE_CONFS = "liste_des_conferences";
 
     public GUI(Controleur controleur) {
         this.controleur = controleur;
@@ -31,11 +33,13 @@ public class GUI extends IHM {
         this.vueEtat = new VueEtat(this);
         this.vueCreationConf = new VueCreationConference(this);
         this.vueCreationUser = new VueCreationUtilisateur(this);
+        this.vueConf = new VueConference(this);
 
         this.vuePrincipale = new VuePrincipale(this);
         this.vuePrincipale.ajouterVue(this.vueEtat, GUI.VUE_ETAT);
         this.vuePrincipale.ajouterVue(this.vueCreationConf, GUI.VUE_CREATION_CONF);
         this.vuePrincipale.ajouterVue(this.vueCreationUser, GUI.VUE_CREATION_USER);
+        this.vuePrincipale.ajouterVue(this.vueConf, GUI.VUE_CONFS);
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
     }
 
@@ -108,5 +112,10 @@ public class GUI extends IHM {
     public void saisirNouvelleConference(final Set<String> nomsExistants) {
         this.vueCreationConf.setNomsExistants(nomsExistants);
         this.vuePrincipale.afficherVue(GUI.VUE_CREATION_CONF);
+    }
+    
+    public void choisirConference(final Set<String> nomsExistants){
+        this.vueConf.setConfsExistantes(nomsExistants);
+        this.vuePrincipale.afficherVue(GUI.VUE_CONFS);
     }
 }
