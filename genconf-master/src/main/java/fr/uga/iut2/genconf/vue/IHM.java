@@ -137,4 +137,8 @@ public abstract class IHM {
      *
      */
     public abstract void saisirNouvelleConference(final Set<String> nomsExistants);
+    
+    
+    
+    public abstract void saisirNouvelleCommunication(final Set<String> nomsExistants);
 }

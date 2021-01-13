@@ -101,4 +101,8 @@ public class Controleur {
         Conference confSelectionne = this.genconf.getConferences().get(nomConf);
         return confSelectionne.getSessions().keySet();
     }
+    
+    public void modifierCommunication(IHM.InfosConference infos){
+        
+    }
 }
