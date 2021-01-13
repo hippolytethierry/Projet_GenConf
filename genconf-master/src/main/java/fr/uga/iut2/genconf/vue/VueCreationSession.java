@@ -10,12 +10,13 @@ import java.util.Optional;
 import java.util.Set;
 import javax.swing.JSpinner;
 import org.apache.commons.validator.routines.EmailValidator;
+import fr.uga.iut2.genconf.util.Type;
 
 
 public class VueCreationSession extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> nomsExistants;
-    private boolean valideAdmin, valideConf;
+    private boolean valideAnim, valideSess;
 
     /**
      * Creates new form VueCreationConference
@@ -23,8 +24,8 @@ public class VueCreationSession extends javax.swing.JPanel {
     public VueCreationSession(GUI gui) {
         this.gui = gui;
         this.nomsExistants = new HashSet<>();
-        this.valideAdmin = false;
-        this.valideConf = false;
+        this.valideAnim = false;
+        this.valideSess = false;
 
         // création de l'interface générée
         this.initComponents();
@@ -57,24 +58,24 @@ public class VueCreationSession extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         Session = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        nomConference = new javax.swing.JTextField();
+        nomSess = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         nbJours = new javax.swing.JSpinner();
         dateDebut = new javax.swing.JSpinner();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        typeSess = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         saisieAdminPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        adminNom = new javax.swing.JTextField();
-        adminPrenom = new javax.swing.JTextField();
-        adminEmail = new javax.swing.JTextField();
+        animNom = new javax.swing.JTextField();
+        animPrenom = new javax.swing.JTextField();
+        animEmail = new javax.swing.JTextField();
         creerButton = new javax.swing.JButton();
         annulerButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        precedentButton = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -82,12 +83,12 @@ public class VueCreationSession extends javax.swing.JPanel {
 
         jLabel1.setText("Nom de la session :");
 
-        nomConference.addActionListener(new java.awt.event.ActionListener() {
+        nomSess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomConferenceActionPerformed(evt);
+                nomSessActionPerformed(evt);
             }
         });
-        nomConference.addKeyListener(new java.awt.event.KeyAdapter() {
+        nomSess.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 verificationConference(evt);
             }
@@ -101,7 +102,7 @@ public class VueCreationSession extends javax.swing.JPanel {
 
         dateDebut.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(), null, java.util.Calendar.DAY_OF_MONTH));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        typeSess.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "keynote", "atelier", "article" }));
 
         jLabel8.setText("Type de la session :");
 
@@ -118,12 +119,12 @@ public class VueCreationSession extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomConference)
+                    .addComponent(nomSess)
                     .addGroup(SessionLayout.createSequentialGroup()
                         .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nbJours, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(typeSess, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 209, Short.MAX_VALUE))))
         );
         SessionLayout.setVerticalGroup(
@@ -131,7 +132,7 @@ public class VueCreationSession extends javax.swing.JPanel {
             .addGroup(SessionLayout.createSequentialGroup()
                 .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(nomConference, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomSess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -143,7 +144,7 @@ public class VueCreationSession extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(typeSess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -155,19 +156,19 @@ public class VueCreationSession extends javax.swing.JPanel {
 
         jLabel6.setText("Email :");
 
-        adminNom.addKeyListener(new java.awt.event.KeyAdapter() {
+        animNom.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 verificationAdmin(evt);
             }
         });
 
-        adminPrenom.addKeyListener(new java.awt.event.KeyAdapter() {
+        animPrenom.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 verificationAdmin(evt);
             }
         });
 
-        adminEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+        animEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 verificationAdmin(evt);
             }
@@ -185,9 +186,9 @@ public class VueCreationSession extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(adminNom)
-                    .addComponent(adminPrenom)
-                    .addComponent(adminEmail))
+                    .addComponent(animNom)
+                    .addComponent(animPrenom)
+                    .addComponent(animEmail))
                 .addContainerGap())
         );
         saisieAdminPanelLayout.setVerticalGroup(
@@ -196,15 +197,15 @@ public class VueCreationSession extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(adminNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(animNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(adminPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(animPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(adminEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(animEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -224,7 +225,7 @@ public class VueCreationSession extends javax.swing.JPanel {
 
         jLabel7.setText("Créer une session");
 
-        jButton1.setText("Precedent");
+        precedentButton.setText("Precedent");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -235,7 +236,7 @@ public class VueCreationSession extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(saisieAdminPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(precedentButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(annulerButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -259,18 +260,16 @@ public class VueCreationSession extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(annulerButton)
                     .addComponent(creerButton)
-                    .addComponent(jButton1))
+                    .addComponent(precedentButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        Session.getAccessibleContext().setAccessibleName("Session");
     }// </editor-fold>//GEN-END:initComponents
 
     private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
-         IHM.InfosUtilisateur admin = new IHM.InfosUtilisateur(
-                this.adminEmail.getText().trim().toLowerCase(),
-                this.adminNom.getText().trim(),
-                this.adminPrenom.getText().trim()
+         IHM.InfosUtilisateur anim = new IHM.InfosUtilisateur(
+                this.animEmail.getText().trim().toLowerCase(),
+                this.animNom.getText().trim(),
+                this.animPrenom.getText().trim()
          );
 
          // Traitement des dates de début et fin
@@ -281,14 +280,15 @@ public class VueCreationSession extends javax.swing.JPanel {
          LocalDate dateFin = dateDebut.plusDays((Integer) nbJours.getValue() - 1);
 
          // Infos sur la nouvelle conference
-         IHM.InfosConference nlleConf = new IHM.InfosConference(
-                 this.nomConference.getText(),
+         IHM.InfosSession nlleSess = new IHM.InfosSession(
+                 this.nomSess.getText(),
+                 this.typeSess.getActionCommand(),
                  dateDebut,
                  dateFin,
-                 admin
+                 anim
          );
 
-         this.gui.creerConference(Optional.of(nlleConf));
+         this.gui.creerSession(Optional.of(nlleSess));
     }//GEN-LAST:event_creerButtonActionPerformed
 
     private void verificationAdmin(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationAdmin
@@ -296,43 +296,41 @@ public class VueCreationSession extends javax.swing.JPanel {
         String nom, prenom;
         EmailValidator validator = EmailValidator.getInstance(false, false);
 
-        nom = this.adminNom.getText().trim();
-        prenom = this.adminPrenom.getText().trim();
-        validEmail = validator.isValid(this.adminEmail.getText().trim().toLowerCase());
-        this.adminEmail.setForeground(validEmail ? Color.black : Color.red);
+        nom = this.animNom.getText().trim();
+        prenom = this.animPrenom.getText().trim();
+        validEmail = validator.isValid(this.animEmail.getText().trim().toLowerCase());
+        this.animEmail.setForeground(validEmail ? Color.black : Color.red);
 
-        this.valideAdmin = validEmail
+        this.valideAnim = validEmail
                  && (nom != null) && (nom.length() > 0)
                  && (prenom != null) && (prenom.length() > 0);
 
-        this.creerButton.setEnabled(this.valideAdmin && this.valideConf);
+        this.creerButton.setEnabled(this.valideAnim&& this.valideSess);
     }//GEN-LAST:event_verificationAdmin
 
     private void verificationConference(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationConference
-         this.valideConf = !nomsExistants.contains(nomConference.getText());
-         this.nomConference.setForeground(this.valideConf ? Color.black : Color.red);
-         this.creerButton.setEnabled(this.valideAdmin && this.valideConf);
+         this.valideSess = !nomsExistants.contains(nomSess.getText());
+         this.nomSess.setForeground(this.valideSess ? Color.black : Color.red);
+         this.creerButton.setEnabled(this.valideAnim && this.valideSess);
     }//GEN-LAST:event_verificationConference
 
     private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerButtonActionPerformed
         this.gui.creerConference(Optional.empty());
     }//GEN-LAST:event_annulerButtonActionPerformed
 
-    private void nomConferenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomConferenceActionPerformed
+    private void nomSessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSessActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomConferenceActionPerformed
+    }//GEN-LAST:event_nomSessActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Session;
-    private javax.swing.JTextField adminEmail;
-    private javax.swing.JTextField adminNom;
-    private javax.swing.JTextField adminPrenom;
+    private javax.swing.JTextField animEmail;
+    private javax.swing.JTextField animNom;
+    private javax.swing.JTextField animPrenom;
     private javax.swing.JButton annulerButton;
     private javax.swing.JButton creerButton;
     private javax.swing.JSpinner dateDebut;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -342,7 +340,9 @@ public class VueCreationSession extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSpinner nbJours;
-    private javax.swing.JTextField nomConference;
+    private javax.swing.JTextField nomSess;
+    private javax.swing.JButton precedentButton;
     private javax.swing.JPanel saisieAdminPanel;
+    private javax.swing.JComboBox<String> typeSess;
     // End of variables declaration//GEN-END:variables
 }
