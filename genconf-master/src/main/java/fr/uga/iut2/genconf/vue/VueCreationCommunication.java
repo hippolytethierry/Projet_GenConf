@@ -55,32 +55,32 @@ public class VueCreationCommunication extends javax.swing.JPanel {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
-        Session = new javax.swing.JPanel();
+        communication = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        nomConference = new javax.swing.JTextField();
+        nomCommunication = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         nbJours = new javax.swing.JSpinner();
         dateDebut = new javax.swing.JSpinner();
-        saisieAdminPanel = new javax.swing.JPanel();
+        correspondant = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        adminNom = new javax.swing.JTextField();
-        adminPrenom = new javax.swing.JTextField();
-        adminEmail = new javax.swing.JTextField();
+        corresNom = new javax.swing.JTextField();
+        corresPrenom = new javax.swing.JTextField();
+        corresEmail = new javax.swing.JTextField();
         creerButton = new javax.swing.JButton();
         annulerButton = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        creerCom = new javax.swing.JLabel();
+        precedentButton = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        Session.setBorder(javax.swing.BorderFactory.createTitledBorder("Communication"));
+        communication.setBorder(javax.swing.BorderFactory.createTitledBorder("Communication"));
 
         jLabel1.setText("Nom de la communication :");
 
-        nomConference.addKeyListener(new java.awt.event.KeyAdapter() {
+        nomCommunication.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 verificationConference(evt);
             }
@@ -94,47 +94,47 @@ public class VueCreationCommunication extends javax.swing.JPanel {
 
         dateDebut.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(), null, java.util.Calendar.DAY_OF_MONTH));
 
-        javax.swing.GroupLayout SessionLayout = new javax.swing.GroupLayout(Session);
-        Session.setLayout(SessionLayout);
-        SessionLayout.setHorizontalGroup(
-            SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SessionLayout.createSequentialGroup()
+        javax.swing.GroupLayout communicationLayout = new javax.swing.GroupLayout(communication);
+        communication.setLayout(communicationLayout);
+        communicationLayout.setHorizontalGroup(
+            communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(communicationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addGap(12, 12, 12)
-                .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SessionLayout.createSequentialGroup()
+                .addGroup(communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(communicationLayout.createSequentialGroup()
                         .addComponent(dateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(SessionLayout.createSequentialGroup()
-                        .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(SessionLayout.createSequentialGroup()
+                    .addGroup(communicationLayout.createSequentialGroup()
+                        .addGroup(communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(communicationLayout.createSequentialGroup()
                                 .addComponent(nbJours, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 244, Short.MAX_VALUE))
-                            .addComponent(nomConference))
+                            .addComponent(nomCommunication))
                         .addContainerGap())))
         );
-        SessionLayout.setVerticalGroup(
-            SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SessionLayout.createSequentialGroup()
-                .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        communicationLayout.setVerticalGroup(
+            communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(communicationLayout.createSequentialGroup()
+                .addGroup(communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(nomConference, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomCommunication, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(dateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nbJours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
-        saisieAdminPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Correspondant"));
+        correspondant.setBorder(javax.swing.BorderFactory.createTitledBorder("Correspondant"));
 
         jLabel4.setText("Nom :");
 
@@ -142,58 +142,61 @@ public class VueCreationCommunication extends javax.swing.JPanel {
 
         jLabel6.setText("Email :");
 
-        adminNom.addKeyListener(new java.awt.event.KeyAdapter() {
+        corresNom.setName(""); // NOI18N
+        corresNom.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 verificationAdmin(evt);
             }
         });
 
-        adminPrenom.addKeyListener(new java.awt.event.KeyAdapter() {
+        corresPrenom.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 verificationAdmin(evt);
             }
         });
 
-        adminEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+        corresEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 verificationAdmin(evt);
             }
         });
 
-        javax.swing.GroupLayout saisieAdminPanelLayout = new javax.swing.GroupLayout(saisieAdminPanel);
-        saisieAdminPanel.setLayout(saisieAdminPanelLayout);
-        saisieAdminPanelLayout.setHorizontalGroup(
-            saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(saisieAdminPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout correspondantLayout = new javax.swing.GroupLayout(correspondant);
+        correspondant.setLayout(correspondantLayout);
+        correspondantLayout.setHorizontalGroup(
+            correspondantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(correspondantLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(correspondantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(adminNom, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-                    .addComponent(adminPrenom)
-                    .addComponent(adminEmail))
+                .addGroup(correspondantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(corresNom, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                    .addComponent(corresPrenom)
+                    .addComponent(corresEmail))
                 .addContainerGap())
         );
-        saisieAdminPanelLayout.setVerticalGroup(
-            saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(saisieAdminPanelLayout.createSequentialGroup()
+        correspondantLayout.setVerticalGroup(
+            correspondantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(correspondantLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(correspondantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(adminNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(corresNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(correspondantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(adminPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(corresPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(correspondantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(adminEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(corresEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        corresNom.getAccessibleContext().setAccessibleName("corresNom");
 
         creerButton.setText("Créer");
         creerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -209,9 +212,9 @@ public class VueCreationCommunication extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Créer une communication");
+        creerCom.setText("Créer une communication");
 
-        jButton1.setText("Precedent");
+        precedentButton.setText("Precedent");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -220,16 +223,16 @@ public class VueCreationCommunication extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(saisieAdminPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Session, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(correspondant, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(communication, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(precedentButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(annulerButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(creerButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(creerCom)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -237,22 +240,22 @@ public class VueCreationCommunication extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
+                .addComponent(creerCom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Session, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(communication, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saisieAdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(correspondant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(annulerButton)
                     .addComponent(creerButton)
-                    .addComponent(jButton1))
+                    .addComponent(precedentButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
-         IHM.InfosUtilisateur correspondant = new IHM.InfosUtilisateur(
+         IHM.InfosUtilisateur corres = new IHM.InfosUtilisateur(
                 this.corresEmail.getText().trim().toLowerCase(),
                 this.corresNom.getText().trim(),
                 this.corresPrenom.getText().trim()
@@ -266,14 +269,14 @@ public class VueCreationCommunication extends javax.swing.JPanel {
          LocalDate dateFin = dateDebut.plusDays((Integer) nbJours.getValue() - 1);
 
          // Infos sur la nouvelle conference
-         IHM.InfosNouvelleCommunication nlleConf = new IHM.InfosNouvelleCommunication(
+         IHM.InfosCommunication nlleComm = new IHM.InfosCommunication(
                  this.nomCommunication.getText(),
                  dateDebut,
                  dateFin,
-                 admin
+                 corres
          );
 
-         this.gui.creerCommunication(Optional.of(nlleConf));
+         this.gui.creerCommunication(Optional.of(nlleComm));
     }//GEN-LAST:event_creerButtonActionPerformed
 
     private void verificationCorres(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationAdmin
@@ -294,8 +297,8 @@ public class VueCreationCommunication extends javax.swing.JPanel {
     }//GEN-LAST:event_verificationAdmin
 
     private void verificationCommunication(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationConference
-         this.valideComm = !nomsExistants.contains(nomConference.getText());
-         this.nomConference.setForeground(this.valideComm ? Color.black : Color.red);
+         this.valideComm = !nomsExistants.contains(nomCommunication.getText());
+         this.nomCommunication.setForeground(this.valideComm ? Color.black : Color.red);
          this.creerButton.setEnabled(this.valideCorres && this.valideComm);
     }//GEN-LAST:event_verificationConference
 
@@ -304,14 +307,15 @@ public class VueCreationCommunication extends javax.swing.JPanel {
     }//GEN-LAST:event_annulerButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Session;
-    private javax.swing.JTextField adminEmail;
-    private javax.swing.JTextField adminNom;
-    private javax.swing.JTextField adminPrenom;
     private javax.swing.JButton annulerButton;
+    private javax.swing.JPanel communication;
+    private javax.swing.JTextField corresEmail;
+    private javax.swing.JTextField corresNom;
+    private javax.swing.JTextField corresPrenom;
+    private javax.swing.JPanel correspondant;
     private javax.swing.JButton creerButton;
+    private javax.swing.JLabel creerCom;
     private javax.swing.JSpinner dateDebut;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -319,9 +323,8 @@ public class VueCreationCommunication extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JSpinner nbJours;
-    private javax.swing.JTextField nomConference;
-    private javax.swing.JPanel saisieAdminPanel;
+    private javax.swing.JTextField nomCommunication;
+    private javax.swing.JButton precedentButton;
     // End of variables declaration//GEN-END:variables
 }
