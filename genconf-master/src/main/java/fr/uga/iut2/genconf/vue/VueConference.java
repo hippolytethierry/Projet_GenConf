@@ -7,6 +7,7 @@ package fr.uga.iut2.genconf.vue;
 
 import fr.uga.iut2.genconf.modele.Conference;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -18,6 +19,7 @@ import javax.swing.ButtonGroup;
 public class VueConference extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> confsExistantes;
+    JRadioButton [] boutonsConfs;
     
     
     /**
@@ -55,8 +57,6 @@ public class VueConference extends javax.swing.JPanel {
         confsPane = new javax.swing.JScrollPane();
         supConf = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         conference.setText("Choisir la conférence : ");
 
         modifier.setText("Modifier");
@@ -74,11 +74,21 @@ public class VueConference extends javax.swing.JPanel {
         });
 
         voirPlus.setText("Voir plus...");
+        voirPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voirPlusActionPerformed(evt);
+            }
+        });
 
         supConf.setText("Supprimer conférence");
+        supConf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supConfActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -118,21 +128,43 @@ public class VueConference extends javax.swing.JPanel {
                     .addComponent(annuler))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
-        // TODO add your handling code here:
+        this.gui.modifierConference(Optional.empty());
     }//GEN-LAST:event_annulerActionPerformed
 
     private void modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierActionPerformed
-        // TODO add your handling code here:
+        for (JRadioButton uneConf : getContentPane()){
+            if (uneConf.isSelected()){
+                this.gui.toModifierConference(uneConf.getName());
+                break;
+            }
+        }
+            
     }//GEN-LAST:event_modifierActionPerformed
+
+    private void voirPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voirPlusActionPerformed
+        for (JRadioButton uneConf : getContentPane()){
+            if (uneConf.isSelected()){
+                this.gui.toVoirPlusConference(uneConf.getName());
+                break;
+            }
+        }
+    }//GEN-LAST:event_voirPlusActionPerformed
+
+    private void supConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supConfActionPerformed
+        for (JRadioButton uneConf : getContentPane()){
+            if (uneConf.isSelected()){
+                this.gui.supprimerConference(uneConf.getName());
+                break;
+            }
+        }
+    }//GEN-LAST:event_supConfActionPerformed
 
     private void contentPane(Set<String> confs){
         JRadioButton boutonConf;
-        JRadioButton [] boutonsConfs = new JRadioButton[confs.size()];
+        boutonsConfs = new JRadioButton[confs.size()];
         ButtonGroup confGroup = new ButtonGroup();
         int i = 0;
         for (String uneConf : confs){
@@ -143,7 +175,11 @@ public class VueConference extends javax.swing.JPanel {
             i++;
         }        
     }
-
+    
+    private JRadioButton[] getContentPane(){
+        return boutonsConfs;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private javax.swing.JLabel conference;

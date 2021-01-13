@@ -1,9 +1,10 @@
 package fr.uga.iut2.genconf.controleur;
 
+import fr.uga.iut2.genconf.modele.*;
 import fr.uga.iut2.genconf.modele.GenConf;
-import fr.uga.iut2.genconf.vue.CLI;
 import fr.uga.iut2.genconf.vue.GUI;
 import fr.uga.iut2.genconf.vue.IHM;
+import java.util.Set;
 
 
 public class Controleur {
@@ -85,5 +86,19 @@ public class Controleur {
     
     public void modifierConference(IHM.InfosConference infos){
         
+    }
+    
+    public void supprimerConference(String nomConf) {
+        this.ihm.informerUtilisateur("La conférence "+nomConf+" à été supprimé.", true);        
+        this.genconf.getConferences().remove(nomConf);
+    }
+    
+    public void toModifierConf(String nomConf){
+        
+    }
+            
+    public Set<String> voirPlusConference(String nomConf){
+        Conference confSelectionne = this.genconf.getConferences().get(nomConf);
+        return confSelectionne.getSessions().keySet();
     }
 }

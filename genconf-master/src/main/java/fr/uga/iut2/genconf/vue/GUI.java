@@ -2,6 +2,7 @@ package fr.uga.iut2.genconf.vue;
 
 import fr.uga.iut2.genconf.controleur.Commande;
 import fr.uga.iut2.genconf.controleur.Controleur;
+import fr.uga.iut2.genconf.modele.Conference;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
@@ -15,6 +16,8 @@ public class GUI extends IHM {
     private final VueCreationConference vueCreationConf;
     private final VueCreationUtilisateur vueCreationUser;
     private final VueConference vueConf;
+    private final VueSession vueSession;
+    private final VueModifierConference vueModifierConf;
     private final VueEtat vueEtat;
 
     // identifiants uniques pour les vues composant la vue principale
@@ -22,6 +25,8 @@ public class GUI extends IHM {
     private static final String VUE_CREATION_CONF = "creation_conf";
     private static final String VUE_CREATION_USER = "creation_user";
     private static final String VUE_CONFS = "liste_des_conferences";
+    private static final String VUE_SESSIONS = "liste_des_sessions";
+    private static final String VUE_MODIFIER_CONFERENCE = "modifier_une_conf";
 
     public GUI(Controleur controleur) {
         this.controleur = controleur;
@@ -34,12 +39,16 @@ public class GUI extends IHM {
         this.vueCreationConf = new VueCreationConference(this);
         this.vueCreationUser = new VueCreationUtilisateur(this);
         this.vueConf = new VueConference(this);
+        this.vueSession = new VueSession(this);
+        this.vueModifierConf = new VueModifierConference(this);
 
         this.vuePrincipale = new VuePrincipale(this);
         this.vuePrincipale.ajouterVue(this.vueEtat, GUI.VUE_ETAT);
         this.vuePrincipale.ajouterVue(this.vueCreationConf, GUI.VUE_CREATION_CONF);
         this.vuePrincipale.ajouterVue(this.vueCreationUser, GUI.VUE_CREATION_USER);
         this.vuePrincipale.ajouterVue(this.vueConf, GUI.VUE_CONFS);
+        this.vuePrincipale.ajouterVue(this.vueSession, GUI.VUE_SESSIONS);
+        this.vuePrincipale.ajouterVue(this.vueModifierConf, GUI.VUE_MODIFIER_CONFERENCE);
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
     }
 
@@ -72,6 +81,28 @@ public class GUI extends IHM {
                 () -> this.vueEtat.setEtat("")                      
         );
     }
+    
+    protected void modifierConference(Optional<InfosConference> conf){
+        this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
+        conf.ifPresentOrElse(
+                infos -> this.controleur.modifierConference(infos),
+                () -> this.vueEtat.setEtat("")
+        );
+    }
+    
+    protected void toModifierConference(String nomConf){
+        this.vuePrincipale.afficherVue(GUI.VUE_MODIFIER_CONFERENCE);        
+    }
+    
+    protected void supprimerConference(String nomConf){
+        this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
+        this.controleur.supprimerConference(nomConf);
+    }
+    
+    protected void toVoirPlusConference(String nomConf){
+        this.vuePrincipale.afficherVue(GUI.VUE_SESSIONS);
+//        this.controleur.voirPlusConference(nomConf);
+    }
 
 //-----  Implémentation des méthodes abstraites  -------------------------------
 
@@ -100,7 +131,7 @@ public class GUI extends IHM {
 
     @Override
     public void informerUtilisateur(final String msg, final boolean succes) {
-        this.vueEtat.setEtat(msg + (succes ? " [Création ok]" : " [ÉCHEC]"));
+        this.vueEtat.setEtat(msg + (succes ? " [OPERATION VALIDE]" : " [ÉCHEC]"));
     }
 
     @Override
