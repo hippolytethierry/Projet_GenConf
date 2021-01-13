@@ -15,7 +15,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 public class VueCreationCommunication extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> nomsExistants;
-    private boolean valideAdmin, valideConf;
+    private boolean valideCorres, valideComm;
 
     /**
      * Creates new form VueCreationConference
@@ -23,8 +23,8 @@ public class VueCreationCommunication extends javax.swing.JPanel {
     public VueCreationCommunication(GUI gui) {
         this.gui = gui;
         this.nomsExistants = new HashSet<>();
-        this.valideAdmin = false;
-        this.valideConf = false;
+        this.valideCorres = false;
+        this.valideComm = false;
 
         // création de l'interface générée
         this.initComponents();
@@ -252,10 +252,10 @@ public class VueCreationCommunication extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
-         IHM.InfosUtilisateur admin = new IHM.InfosUtilisateur(
-                this.adminEmail.getText().trim().toLowerCase(),
-                this.adminNom.getText().trim(),
-                this.adminPrenom.getText().trim()
+         IHM.InfosUtilisateur correspondant = new IHM.InfosUtilisateur(
+                this.corresEmail.getText().trim().toLowerCase(),
+                this.corresNom.getText().trim(),
+                this.corresPrenom.getText().trim()
          );
 
          // Traitement des dates de début et fin
@@ -266,41 +266,41 @@ public class VueCreationCommunication extends javax.swing.JPanel {
          LocalDate dateFin = dateDebut.plusDays((Integer) nbJours.getValue() - 1);
 
          // Infos sur la nouvelle conference
-         IHM.InfosNouvelleConference nlleConf = new IHM.InfosNouvelleConference(
-                 this.nomConference.getText(),
+         IHM.InfosNouvelleCommunication nlleConf = new IHM.InfosNouvelleCommunication(
+                 this.nomCommunication.getText(),
                  dateDebut,
                  dateFin,
                  admin
          );
 
-         this.gui.creerConference(Optional.of(nlleConf));
+         this.gui.creerCommunication(Optional.of(nlleConf));
     }//GEN-LAST:event_creerButtonActionPerformed
 
-    private void verificationAdmin(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationAdmin
+    private void verificationCorres(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationAdmin
         boolean validEmail;
         String nom, prenom;
         EmailValidator validator = EmailValidator.getInstance(false, false);
 
-        nom = this.adminNom.getText().trim();
-        prenom = this.adminPrenom.getText().trim();
-        validEmail = validator.isValid(this.adminEmail.getText().trim().toLowerCase());
-        this.adminEmail.setForeground(validEmail ? Color.black : Color.red);
+        nom = this.corresNom.getText().trim();
+        prenom = this.corresPrenom.getText().trim();
+        validEmail = validator.isValid(this.corresEmail.getText().trim().toLowerCase());
+        this.corresEmail.setForeground(validEmail ? Color.black : Color.red);
 
-        this.valideAdmin = validEmail
+        this.valideCorres = validEmail
                  && (nom != null) && (nom.length() > 0)
                  && (prenom != null) && (prenom.length() > 0);
 
-        this.creerButton.setEnabled(this.valideAdmin && this.valideConf);
+        this.creerButton.setEnabled(this.valideCorres && this.valideComm);
     }//GEN-LAST:event_verificationAdmin
 
-    private void verificationConference(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationConference
-         this.valideConf = !nomsExistants.contains(nomConference.getText());
-         this.nomConference.setForeground(this.valideConf ? Color.black : Color.red);
-         this.creerButton.setEnabled(this.valideAdmin && this.valideConf);
+    private void verificationCommunication(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationConference
+         this.valideComm = !nomsExistants.contains(nomConference.getText());
+         this.nomConference.setForeground(this.valideComm ? Color.black : Color.red);
+         this.creerButton.setEnabled(this.valideCorres && this.valideComm);
     }//GEN-LAST:event_verificationConference
 
     private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerButtonActionPerformed
-        this.gui.creerConference(Optional.empty());
+        this.gui.creerCommunication(Optional.empty());
     }//GEN-LAST:event_annulerButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
