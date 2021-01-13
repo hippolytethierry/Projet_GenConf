@@ -5,6 +5,8 @@
  */
 package fr.uga.iut2.genconf.vue;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
@@ -16,15 +18,29 @@ import javax.swing.JRadioButton;
 public class VueSession extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> sessionsExistantes;
-    JRadioButton [] boutonsSessions;
+    private JRadioButton [] boutonsSessions;
+    private String conf;
     /**
      * Creates new form VueConference
      */
     public VueSession(GUI gui) {
         this.gui = gui;
+        this.sessionsExistantes = new HashSet();
+        
         initComponents();
+        contentPane(sessionsExistantes);
+        
+//        this.modifier.setEnabled(false);
     }
 
+    public void setSessionsExistantes(final Set<String> sessionsExistantes) {
+        assert sessionsExistantes != null;
+        this.sessionsExistantes = sessionsExistantes;
+    }
+    
+    public void setConf(String nomConf){
+        this.conf = nomConf;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,42 +51,62 @@ public class VueSession extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        modifier = new javax.swing.JButton();
+        annuler = new javax.swing.JButton();
+        voirPlus = new javax.swing.JButton();
         sessionsPane = new javax.swing.JScrollPane();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        creerSession = new javax.swing.JButton();
+        precedent = new javax.swing.JButton();
+        supSession = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Choisir la session : ");
 
-        jButton1.setText("Modifier");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        modifier.setText("Modifier");
+        modifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                modifierActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Annuler");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        annuler.setText("Annuler");
+        annuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                annulerActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Voir plus...");
+        voirPlus.setText("Voir plus...");
+        voirPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voirPlusActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Pour la conférence .");
 
-        jButton4.setText("Creer session");
+        creerSession.setText("Creer session");
+        creerSession.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creerSessionActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Precedent");
+        precedent.setText("Precedent");
+        precedent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precedentActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Supprimer session");
+        supSession.setText("Supprimer session");
+        supSession.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supSessionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,18 +116,18 @@ public class VueSession extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5)
+                        .addComponent(precedent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(annuler)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(modifier))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(sessionsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton6)))
+                            .addComponent(creerSession, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(voirPlus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(supSession)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -109,16 +145,16 @@ public class VueSession extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(voirPlus)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(creerSession)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6)
+                        .addComponent(supSession)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton5)))
+                            .addComponent(modifier)
+                            .addComponent(annuler)
+                            .addComponent(precedent)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(sessionsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 37, Short.MAX_VALUE)))
@@ -128,37 +164,72 @@ public class VueSession extends javax.swing.JPanel {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
+        this.gui.modifierConference(Optional.empty());
+    }//GEN-LAST:event_annulerActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierActionPerformed
+        for (JRadioButton uneSession : getContentPane()){
+            if (uneSession.isSelected()){
+                this.gui.toModifierSession(uneSession.getName());
+                break;
+            }
+        } 
+    }//GEN-LAST:event_modifierActionPerformed
 
-    private void contentPane(Set<String> confs){
-        JRadioButton boutonConf;
-        boutonsSessions = new JRadioButton[confs.size()];
-        ButtonGroup confGroup = new ButtonGroup();
+    private void voirPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voirPlusActionPerformed
+        for (JRadioButton uneSession : getContentPane()){
+            if (uneSession.isSelected()){
+                this.gui.toVoirPlusSession(uneSession.getName());
+                break;
+            }
+        } 
+    }//GEN-LAST:event_voirPlusActionPerformed
+
+    private void supSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supSessionActionPerformed
+        for (JRadioButton uneSession : getContentPane()){
+            if (uneSession.isSelected()){
+                this.gui.supprimerSession(uneSession.getName());
+                break;
+            }
+        } 
+    }//GEN-LAST:event_supSessionActionPerformed
+
+    private void creerSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerSessionActionPerformed
+        this.gui.saisirNouvelleSession();
+    }//GEN-LAST:event_creerSessionActionPerformed
+
+    private void precedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentActionPerformed
+        
+    }//GEN-LAST:event_precedentActionPerformed
+
+    private void contentPane(Set<String> sessions){
+        JRadioButton boutonSession;
+        boutonsSessions = new JRadioButton[sessions.size()];
+        ButtonGroup sessionGroup = new ButtonGroup();
         int i = 0;
-        for (String uneConf : confs){
-            boutonConf = new JRadioButton(uneConf);
-            boutonsSessions[i] = boutonConf;
-            confGroup.add(boutonConf);
-            sessionsPane.add(boutonConf);
+        for (String uneConf : sessions){
+            boutonSession = new JRadioButton(uneConf);
+            boutonsSessions[i] = boutonSession;
+            sessionGroup.add(boutonSession);
+            sessionsPane.add(boutonSession);
             i++;
         }        
     }
     
+      private JRadioButton[] getContentPane(){
+        return boutonsSessions;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton annuler;
+    private javax.swing.JButton creerSession;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton modifier;
+    private javax.swing.JButton precedent;
     private javax.swing.JScrollPane sessionsPane;
+    private javax.swing.JButton supSession;
+    private javax.swing.JButton voirPlus;
     // End of variables declaration//GEN-END:variables
 }

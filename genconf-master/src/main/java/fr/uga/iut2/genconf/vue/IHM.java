@@ -3,7 +3,7 @@ package fr.uga.iut2.genconf.vue;
 import java.time.LocalDate;
 import java.util.Set;
 import fr.uga.iut2.genconf.util.Type;
-
+import fr.uga.iut2.genconf.modele.*;
 
 public abstract class IHM {
     /**
@@ -125,4 +125,9 @@ public abstract class IHM {
      *
      */
     public abstract void saisirNouvelleConference(final Set<String> nomsExistants);
+    
+    public abstract void choisirConference(final Set<String> nomsConfsExistantes);
+    
+    public abstract void saisirNouvelleSession(final Set<String> nomsSessionsExistantes);    
+    
 }

@@ -18,6 +18,7 @@ public class GUI extends IHM {
     private final VueConference vueConf;
     private final VueSession vueSession;
     private final VueModifierConference vueModifierConf;
+    private final VueModifierSession vueModifierSession;
     private final VueEtat vueEtat;
 
     // identifiants uniques pour les vues composant la vue principale
@@ -27,6 +28,7 @@ public class GUI extends IHM {
     private static final String VUE_CONFS = "liste_des_conferences";
     private static final String VUE_SESSIONS = "liste_des_sessions";
     private static final String VUE_MODIFIER_CONFERENCE = "modifier_une_conf";
+    private static final String VUE_MODIFIER_SESSION = "modifier_une_session";
 
     public GUI(Controleur controleur) {
         this.controleur = controleur;
@@ -41,6 +43,7 @@ public class GUI extends IHM {
         this.vueConf = new VueConference(this);
         this.vueSession = new VueSession(this);
         this.vueModifierConf = new VueModifierConference(this);
+        this.vueModifierSession = new VueModifierSession(this);
 
         this.vuePrincipale = new VuePrincipale(this);
         this.vuePrincipale.ajouterVue(this.vueEtat, GUI.VUE_ETAT);
@@ -49,6 +52,7 @@ public class GUI extends IHM {
         this.vuePrincipale.ajouterVue(this.vueConf, GUI.VUE_CONFS);
         this.vuePrincipale.ajouterVue(this.vueSession, GUI.VUE_SESSIONS);
         this.vuePrincipale.ajouterVue(this.vueModifierConf, GUI.VUE_MODIFIER_CONFERENCE);
+        this.vuePrincipale.ajouterVue(this.vueModifierSession, GUI.VUE_MODIFIER_SESSION);
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
     }
 
@@ -94,15 +98,15 @@ public class GUI extends IHM {
         this.vuePrincipale.afficherVue(GUI.VUE_MODIFIER_CONFERENCE);        
     }
     
+    protected void returnVueConference(){
+        
+    }
+    
     protected void supprimerConference(String nomConf){
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         this.controleur.supprimerConference(nomConf);
     }
     
-    protected void toVoirPlusConference(String nomConf){
-        this.vuePrincipale.afficherVue(GUI.VUE_SESSIONS);
-//        this.controleur.voirPlusConference(nomConf);
-    }
 
     protected void creerCommunication(Optional<InfosCommunication> nlleComm) {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
@@ -119,7 +123,26 @@ public class GUI extends IHM {
                 () -> this.vueEtat.setEtat("")
         );
     }
-
+    
+    protected void toModifierSession(String nomSession){
+        this.vuePrincipale.afficherVue(GUI.VUE_MODIFIER_CONFERENCE);        
+    }
+    
+    protected void toVoirPlusSession(String nomConf){
+        this.vueSession.setSessionsExistantes(this.controleur.getListeSessions(nomConf));   
+        this.vueSession.setConf(nomConf);
+        this.vuePrincipale.afficherVue(GUI.VUE_SESSIONS);
+//        this.controleur.voirPlusConference(nomConf);
+    }
+    
+    protected void supprimerSession(String nomConf){
+        this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
+        this.controleur.supprimerSession(nomConf);
+    }
+    
+    protected void toVoirPlusCommunications(String nomSession){
+        this.vueCommunication.setComsExistantes(this.controleur.getListeCommunications(nomSession));
+    }
 //-----  Implémentation des méthodes abstraites  -------------------------------
 
     @Override
@@ -161,8 +184,10 @@ public class GUI extends IHM {
         this.vuePrincipale.afficherVue(GUI.VUE_CREATION_CONF);
     }
     
-    public void choisirConference(final Set<String> nomsExistants){
-        this.vueConf.setConfsExistantes(nomsExistants);
+    @Override
+    public void choisirConference(final Set<String> nomsConfsExistantes){
+        this.vueConf.setConfsExistantes(nomsConfsExistantes);
         this.vuePrincipale.afficherVue(GUI.VUE_CONFS);
     }
+    
 }
