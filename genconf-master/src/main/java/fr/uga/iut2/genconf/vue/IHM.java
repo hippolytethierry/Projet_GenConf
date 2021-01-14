@@ -89,10 +89,10 @@ public abstract class IHM {
         public final InfosUtilisateur correspondant;
         public final Type type;
         
-        public InfosCommunication(final String nom, final Type type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur correspondant){
+        public InfosCommunication(final String nom, final String type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur correspondant){
             assert !dateDebut.isAfter(dateFin);
             this.nom = nom;
-            this.type = type;
+            this.type = setType(type);
             this.correspondant = correspondant;
         }        
     }    

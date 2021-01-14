@@ -15,6 +15,7 @@ public class GenConf implements Serializable {
     public GenConf() {
         this.utilisateurs = new HashMap<>();
         this.conferences = new HashMap<>();
+        
     }
 
     public boolean ajouteUtilisateur(String email, String nom, String prenom) {

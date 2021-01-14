@@ -82,10 +82,6 @@ public class Conference implements Serializable, Comparable<Conference> {
         return sessions;
     }
     
-    public void creerSession(String nom, Type type, LocalDate dateDebut, LocalDate dateFin, Utilisateur animateur){
-        Session s = Session.initialiseSession(nom,type,dateDebut,dateFin,this,animateur);
-        getSessions().put(nom, s);
-    }
 
     public Programme getProgramme() {
         return programme;
