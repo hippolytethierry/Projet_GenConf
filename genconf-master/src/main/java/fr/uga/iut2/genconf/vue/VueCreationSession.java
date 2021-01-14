@@ -316,7 +316,7 @@ public class VueCreationSession extends javax.swing.JPanel {
     }//GEN-LAST:event_verificationAdmin
 
     private void verificationConference(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationConference
-         this.valideSess = !nomsExistants.contains(nomSess.getText());
+         this.valideSess = !sessionExistantes.contains(nomSess.getText());
          this.nomSess.setForeground(this.valideSess ? Color.black : Color.red);
          this.creerButton.setEnabled(this.valideAnim && this.valideSess);
     }//GEN-LAST:event_verificationConference
@@ -328,7 +328,11 @@ public class VueCreationSession extends javax.swing.JPanel {
     private void nomSessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSessActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomSessActionPerformed
-
+    
+    private void precedentButtonActionPerformed(java.awt.event.ActionEvent evt){
+        this.gui.toVoirPlusSession(conf.getNom());
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Session;
     private javax.swing.JTextField animEmail;

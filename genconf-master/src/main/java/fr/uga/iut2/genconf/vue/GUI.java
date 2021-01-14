@@ -19,6 +19,7 @@ public class GUI extends IHM {
     private final VueSession vueSession;
     private final VueModifierConference vueModifierConf;
     private final VueEtat vueEtat;
+    private final VueCreationSession vueCreationSession;
 
     // identifiants uniques pour les vues composant la vue principale
     private static final String VUE_ETAT = "etat";
@@ -27,6 +28,7 @@ public class GUI extends IHM {
     private static final String VUE_CONFS = "liste_des_conferences";
     private static final String VUE_SESSIONS = "liste_des_sessions";
     private static final String VUE_MODIFIER_CONFERENCE = "modifier_une_conf";
+    private static final String VUE_CREATION_SESSION = "creation_session";
 
     public GUI(Controleur controleur) {
         this.controleur = controleur;
@@ -41,6 +43,7 @@ public class GUI extends IHM {
         this.vueConf = new VueConference(this);
         this.vueSession = new VueSession(this);
         this.vueModifierConf = new VueModifierConference(this);
+        this.vueCreationSession = new VueCreationSession(this);
 
         this.vuePrincipale = new VuePrincipale(this);
         this.vuePrincipale.ajouterVue(this.vueEtat, GUI.VUE_ETAT);
@@ -49,6 +52,7 @@ public class GUI extends IHM {
         this.vuePrincipale.ajouterVue(this.vueConf, GUI.VUE_CONFS);
         this.vuePrincipale.ajouterVue(this.vueSession, GUI.VUE_SESSIONS);
         this.vuePrincipale.ajouterVue(this.vueModifierConf, GUI.VUE_MODIFIER_CONFERENCE);
+        this.vuePrincipale.ajouterVue(vueCreationSession, GUI.VUE_CREATION_SESSION);
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
     }
 

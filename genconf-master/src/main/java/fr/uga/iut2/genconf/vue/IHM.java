@@ -3,6 +3,7 @@ package fr.uga.iut2.genconf.vue;
 import java.time.LocalDate;
 import java.util.Set;
 import fr.uga.iut2.genconf.util.Type;
+import fr.uga.iut2.genconf.modele.*;
 
 
 public abstract class IHM {
@@ -48,6 +49,7 @@ public abstract class IHM {
             this.dateDebut = dateDebut;
             this.dateFin = dateFin;
             this.admin = admin;
+            
         }
         
         public InfosConference getInfos(String nomConf){
@@ -61,14 +63,16 @@ public abstract class IHM {
         public final LocalDate dateFin;
         public final InfosUtilisateur anim;
         public final Type type;
+        public final Conference conf;
         
-        public InfosSession(final String nom, final String type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur anim){
+        public InfosSession(final String nom, final String type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur anim, Conference conf){
             assert !dateDebut.isAfter(dateFin);
             this.nom = nom;
             this.type=setType(type);
             this.dateDebut = dateDebut;
             this.dateFin = dateFin;
             this.anim = anim;
+            this.conf = conf;
         }        
     }
     
