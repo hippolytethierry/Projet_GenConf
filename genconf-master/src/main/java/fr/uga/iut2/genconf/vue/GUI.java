@@ -203,6 +203,5 @@ public class GUI extends IHM {
         this.vueCreationSession.setSessionsExistantes(this.controleur.getListeSessions(nomConf));
         this.vueCreationSession.setConf(this.controleur.transform(nomConf));
         this.vuePrincipale.afficherVue(GUI.VUE_CREATION_SESSION);
-    }
-    
+    }    
 }
