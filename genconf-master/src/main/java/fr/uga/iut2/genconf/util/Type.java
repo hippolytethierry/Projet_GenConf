@@ -43,5 +43,17 @@ public enum Type implements Serializable{
         }        
     };
     
+     public static Type setType(String type) {
+        if (type==Type.KEYNOTE.toString()) {
+            return Type.KEYNOTE;
+        }
+        else if (type==Type.ATELIER.toString()){
+            return Type.ATELIER;
+        }
+        else{
+            return Type.ARTICLE;
+        }
+    }
+    
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
 }

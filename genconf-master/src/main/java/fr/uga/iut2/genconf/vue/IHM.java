@@ -68,25 +68,15 @@ public abstract class IHM {
         public InfosSession(final String nom, final String type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur anim, Conference conf){
             assert !dateDebut.isAfter(dateFin);
             this.nom = nom;
-            this.type=setType(type);
+            this.type=Type.setType(type);
             this.dateDebut = dateDebut;
             this.dateFin = dateFin;
             this.anim = anim;
             this.conf = conf;
         }        
     }
-    
-    public static Type setType(String type) {
-        if (type==Type.KEYNOTE.toString()) {
-            return Type.KEYNOTE;
-        }
-        else if (type==Type.ATELIER.toString()){
-            return Type.ATELIER;
-        }
-        else{
-            return Type.ARTICLE;
-        }
-    }
+
+   
     
     public static class InfosCommunication {
         public final String nom;

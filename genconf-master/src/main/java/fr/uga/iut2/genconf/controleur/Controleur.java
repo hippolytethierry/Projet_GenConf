@@ -125,7 +125,7 @@ public class Controleur {
                 this.genconf.getUsers().get(infos.anim.email)
         );
         this.ihm.informerUtilisateur(
-                "Nouvelle session : " + infos.nom + ", administrée par " + infos.anim.email,
+                "Nouvelle session : " + infos.nom + ", animée par " + infos.anim.email,
                 true
         );
     }
