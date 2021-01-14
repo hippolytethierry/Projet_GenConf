@@ -9,12 +9,12 @@ package fr.uga.iut2.genconf.vue;
  *
  * @author sylvains
  */
-public class VueAnimateur extends javax.swing.JFrame {
+public class VueAjouterAnimateur extends javax.swing.JFrame {
 
     /**
      * Creates new form VueAnimateur
      */
-    public VueAnimateur() {
+    public VueAjouterAnimateur() {
         initComponents();
     }
 

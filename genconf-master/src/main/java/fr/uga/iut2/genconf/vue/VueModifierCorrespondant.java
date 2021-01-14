@@ -9,12 +9,12 @@ package fr.uga.iut2.genconf.vue;
  *
  * @author sylvains
  */
-public class VueAjouterCorrespondant extends javax.swing.JFrame {
+public class VueModifierCorrespondant extends javax.swing.JFrame {
 
     /**
      * Creates new form VueAjouterCorrespondant
      */
-    public VueAjouterCorrespondant() {
+    public VueModifierCorrespondant() {
         initComponents();
     }
 
