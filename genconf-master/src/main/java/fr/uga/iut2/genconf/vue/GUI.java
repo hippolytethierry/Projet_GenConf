@@ -14,6 +14,7 @@ public class GUI extends IHM {
 
     private final VuePrincipale vuePrincipale;
     private final VueCreationConference vueCreationConf;
+    private final VueCreationSession vueCreationSession;
     private final VueCreationUtilisateur vueCreationUser;
     private final VueConference vueConf;
     private final VueSession vueSession;
@@ -24,6 +25,7 @@ public class GUI extends IHM {
     // identifiants uniques pour les vues composant la vue principale
     private static final String VUE_ETAT = "etat";
     private static final String VUE_CREATION_CONF = "creation_conf";
+    private static final String VUE_CREATION_SESSION = "creation_session";
     private static final String VUE_CREATION_USER = "creation_user";
     private static final String VUE_CONFS = "liste_des_conferences";
     private static final String VUE_SESSIONS = "liste_des_sessions";
@@ -39,7 +41,8 @@ public class GUI extends IHM {
         // création de l'interface
         this.vueEtat = new VueEtat(this);
         this.vueCreationConf = new VueCreationConference(this);
-        this.vueCreationUser = new VueCreationUtilisateur(this);
+        this.vueCreationSession = new VueCreationSession(this);
+        this.vueCreationUser = new VueCreationUtilisateur(this);        
         this.vueConf = new VueConference(this);
         this.vueSession = new VueSession(this);
         this.vueModifierConf = new VueModifierConference(this);
@@ -48,6 +51,7 @@ public class GUI extends IHM {
         this.vuePrincipale = new VuePrincipale(this);
         this.vuePrincipale.ajouterVue(this.vueEtat, GUI.VUE_ETAT);
         this.vuePrincipale.ajouterVue(this.vueCreationConf, GUI.VUE_CREATION_CONF);
+        this.vuePrincipale.ajouterVue(this.vueCreationSession, GUI.VUE_CREATION_SESSION);
         this.vuePrincipale.ajouterVue(this.vueCreationUser, GUI.VUE_CREATION_USER);
         this.vuePrincipale.ajouterVue(this.vueConf, GUI.VUE_CONFS);
         this.vuePrincipale.ajouterVue(this.vueSession, GUI.VUE_SESSIONS);
@@ -64,6 +68,10 @@ public class GUI extends IHM {
 
     protected void actionCreerUtilisateur() {
         this.controleur.gererDialogue(Commande.CREER_UTILISATEUR);
+    }
+    
+    protected void actionModifierConference(){
+        this.controleur.gererDialogue(Commande.MODIFIER_CONFERENCE);
     }
 
     protected void actionTerminer() {
@@ -125,7 +133,7 @@ public class GUI extends IHM {
     }
     
     protected void toModifierSession(String nomSession){
-        this.vuePrincipale.afficherVue(GUI.VUE_MODIFIER_CONFERENCE);        
+        this.vuePrincipale.afficherVue(GUI.VUE_MODIFIER_SESSION);        
     }
     
     protected void toVoirPlusSession(String nomConf){
@@ -188,6 +196,13 @@ public class GUI extends IHM {
     public void choisirConference(final Set<String> nomsConfsExistantes){
         this.vueConf.setConfsExistantes(nomsConfsExistantes);
         this.vuePrincipale.afficherVue(GUI.VUE_CONFS);
+    }
+
+    @Override
+    public void saisirNouvelleSession(String nomConf) {
+        this.vueCreationSession.setSessionsExistantes(this.controleur.getListeSessions(nomConf));
+        this.vueCreationSession.setConf(this.controleur.transform(nomConf));
+        this.vuePrincipale.afficherVue(GUI.VUE_CREATION_SESSION);
     }
     
 }

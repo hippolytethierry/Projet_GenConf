@@ -128,6 +128,6 @@ public abstract class IHM {
     
     public abstract void choisirConference(final Set<String> nomsConfsExistantes);
     
-    public abstract void saisirNouvelleSession(final Set<String> nomsSessionsExistantes);    
+    public abstract void saisirNouvelleSession(final String nomConf);    
     
 }
