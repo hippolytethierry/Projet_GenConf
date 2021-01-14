@@ -96,13 +96,36 @@ public class Controleur {
     public void toModifierConf(String nomConf){
         
     }
+    
+    public Conference selectionnerConference ( String nomConf){
+        return this.genconf.getConferences().get(nomConf);
+    }
             
-    public Set<String> voirPlusConference(String nomConf){
+    public Set<String> getListeSessions(String nomConf){
         Conference confSelectionne = this.genconf.getConferences().get(nomConf);
         return confSelectionne.getSessions().keySet();
+    }
+    
+    public Session selectionnerSession (String nomSession, String nomConf){
+       return this.genconf.getConferences().get(nomConf).getSessions().get(nomSession);
     }
     
     public void modifierCommunication(IHM.InfosConference infos){
         
     }
+    
+        public void supprimerCommunication(String nomCom) {
+        this.ihm.informerUtilisateur("La communication "+nomCom+" à été supprimé.", true);        
+        this.genconf.getConferences().remove(nomCom);
+    }
+        
+    public Set<String> getListeCommunications(String nomSession, String nomConf){
+        Session sessionSelectionne = this.genconf.getConferences().get(nomConf).getSessions().get(nomSession);
+        return sessionSelectionne.getCommunications().keySet();
+    }
+        
+        public void toModifierCommunication(String nomCom){
+        
+    }
+    
 }

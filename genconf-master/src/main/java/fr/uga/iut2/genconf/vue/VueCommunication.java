@@ -19,6 +19,7 @@ public class VueCommunication extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> comsExistantes;
     JRadioButton [] boutonsComs;
+    private Conference conf;
 
     /**
      * Creates new form VueConference
@@ -27,14 +28,21 @@ public class VueCommunication extends javax.swing.JPanel {
         this.gui = gui;
         this.comsExistantes = new HashSet<>();
         
+        
         initComponents();
-        contentPane(getListeCommunications());
+        contentPane(comsExistantes);
     }
         
     public void setComsExistantes(final Set<String> comsExistantes) {
         assert comsExistantes != null;
         this.comsExistantes = comsExistantes;    
     }
+
+    public void setConf(Conference conf) {
+        this.conf = conf;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

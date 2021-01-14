@@ -138,7 +138,8 @@ public abstract class IHM {
      */
     public abstract void saisirNouvelleConference(final Set<String> nomsExistants);
     
+    public abstract void saisirNouvelleCommunication(String nomSession, String nomConf);
     
     
-    public abstract void saisirNouvelleCommunication(final Set<String> nomsExistants);
+    
 }
