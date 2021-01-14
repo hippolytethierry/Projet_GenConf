@@ -10,22 +10,24 @@ import java.util.Optional;
 import java.util.Set;
 import javax.swing.JSpinner;
 import org.apache.commons.validator.routines.EmailValidator;
-import fr.uga.iut2.genconf.util.Type;
+import fr.uga.iut2.genconf.modele.*;
 
 
 public class VueCreationSession extends javax.swing.JPanel {
     private final GUI gui;
-    private Set<String> nomsExistants;
+    private Set<String> sessionExistantes;
     private boolean valideAnim, valideSess;
+    private Conference conf;
 
     /**
      * Creates new form VueCreationConference
      */
     public VueCreationSession(GUI gui) {
         this.gui = gui;
-        this.nomsExistants = new HashSet<>();
+        this.sessionExistantes = new HashSet<>();
         this.valideAnim = false;
         this.valideSess = false;
+        
 
         // création de l'interface générée
         this.initComponents();
@@ -41,9 +43,13 @@ public class VueCreationSession extends javax.swing.JPanel {
         this.creerButton.setEnabled(false);
     }
 
-    public void setNomsExistants(final Set<String> nomsExistants) {
-        assert nomsExistants != null;
-        this.nomsExistants = nomsExistants;
+    public void setSessionsExistantes(final Set<String> sessionExistantes) {
+        assert sessionExistantes != null;
+        this.sessionExistantes = sessionExistantes;
+    }
+    
+    public void setConf(Conference conf){
+        this.conf = conf;
     }
 
     /**
@@ -285,7 +291,8 @@ public class VueCreationSession extends javax.swing.JPanel {
                  this.typeSess.getActionCommand(),
                  dateDebut,
                  dateFin,
-                 anim
+                 anim,
+                 conf
          );
 
          this.gui.creerSession(Optional.of(nlleSess));
@@ -315,7 +322,7 @@ public class VueCreationSession extends javax.swing.JPanel {
     }//GEN-LAST:event_verificationConference
 
     private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerButtonActionPerformed
-        this.gui.creerConference(Optional.empty());
+        this.gui.creerSession(Optional.empty());
     }//GEN-LAST:event_annulerButtonActionPerformed
 
     private void nomSessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSessActionPerformed

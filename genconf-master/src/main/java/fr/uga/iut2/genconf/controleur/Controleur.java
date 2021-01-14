@@ -4,6 +4,7 @@ import fr.uga.iut2.genconf.modele.*;
 import fr.uga.iut2.genconf.modele.GenConf;
 import fr.uga.iut2.genconf.vue.GUI;
 import fr.uga.iut2.genconf.vue.IHM;
+import fr.uga.iut2.genconf.modele.Conference;
 import java.util.Set;
 
 
@@ -100,5 +101,32 @@ public class Controleur {
     public Set<String> voirPlusConference(String nomConf){
         Conference confSelectionne = this.genconf.getConferences().get(nomConf);
         return confSelectionne.getSessions().keySet();
+    }
+    
+        public void creerSession(IHM.InfosSession infos) {
+        // création d'un Utilisateur si nécessaire
+        boolean nouvelUtilisateur = this.genconf.ajouteUtilisateur(
+                infos.anim.email,
+                infos.anim.nom,
+                infos.anim.prenom
+        );
+        if (nouvelUtilisateur) {
+            this.ihm.informerUtilisateur("Nouvel·le utilisa·teur/trice : " + infos.anim.prenom + " " + infos.anim.nom + " <" + infos.anim.email + ">",
+                    true
+            );
+        }
+        
+        Session.initialiseSession(
+                infos.nom,
+                infos.type,
+                infos.dateDebut,
+                infos.dateFin,
+                infos.conf,
+                this.genconf.getUsers().get(infos.anim.email)
+        );
+        this.ihm.informerUtilisateur(
+                "Nouvelle session : " + infos.nom + ", administrée par " + infos.anim.email,
+                true
+        );
     }
 }

@@ -37,10 +37,15 @@ public class Session implements Serializable, Comparable<Session>{
     }
     
     public static Session initialiseSession(String nom, Type type, LocalDate dateDebut, LocalDate dateFin, Conference conf, Utilisateur anim){
-        Session s = new Session(nom, type, dateDebut, dateFin, conf, anim);
+        Session s = new Session(nom, type, dateDebut, dateFin, conf, anim);  
+        s.ajouterSession(nom, s);
         s.ajouterAnimateur(anim);
         return s;
     } 
+    
+    public void ajouterSession(String nom, Session s){
+        this.conf.getSessions().put(nom, s);
+    }
     
     private Map<String, Utilisateur> getAnimateurs(){
         return this.animateurs;
