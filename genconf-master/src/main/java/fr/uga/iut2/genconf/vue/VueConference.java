@@ -32,9 +32,9 @@ public class VueConference extends javax.swing.JPanel {
         initComponents();
         contentPane(confsExistantes);
         
-        this.modifier.setEnabled(false);
-        this.voirPlus.setEnabled(false);
-        this.supConf.setEnabled(false);
+//        this.modifier.setEnabled(false);
+//        this.voirPlus.setEnabled(false);
+//        this.supConf.setEnabled(false);
     }
 
     public void setConfsExistantes(final Set<String> confsExistantes) {
@@ -140,14 +140,13 @@ public class VueConference extends javax.swing.JPanel {
                 this.gui.toModifierConference(uneConf.getName());
                 break;
             }
-        }
-            
+        }            
     }//GEN-LAST:event_modifierActionPerformed
 
     private void voirPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voirPlusActionPerformed
         for (JRadioButton uneConf : getContentPane()){
             if (uneConf.isSelected()){
-                this.gui.toVoirPlusConference(uneConf.getName());
+                this.gui.toVoirPlusSession(uneConf.getName());
                 break;
             }
         }

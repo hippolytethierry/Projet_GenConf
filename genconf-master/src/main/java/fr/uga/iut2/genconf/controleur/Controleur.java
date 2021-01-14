@@ -35,6 +35,10 @@ public class Controleur {
             case CREER_CONFERENCE:
                 this.ihm.saisirNouvelleConference(this.genconf.getConferences().keySet());
                 break;
+            case CREER_SESSION:
+                this.ihm.saisirNouvelleSession(this.genconf.getConferences());
+            case MODIFIER_CONFERENCE:
+                this.ihm.choisirConference(this.genconf.getConferences().keySet());
             default:
                 assert false: "Commande inconnue.";
         }
@@ -106,6 +110,7 @@ public class Controleur {
         return confSelectionne.getSessions().keySet();
     }
     
+
     public Session selectionnerSession (String nomSession, String nomConf){
        return this.genconf.getConferences().get(nomConf).getSessions().get(nomSession);
     }
@@ -114,7 +119,7 @@ public class Controleur {
         
     }
     
-        public void supprimerCommunication(String nomCom) {
+    public void supprimerCommunication(String nomCom) {
         this.ihm.informerUtilisateur("La communication "+nomCom+" à été supprimé.", true);        
         this.genconf.getConferences().remove(nomCom);
     }
@@ -124,8 +129,12 @@ public class Controleur {
         return sessionSelectionne.getCommunications().keySet();
     }
         
-        public void toModifierCommunication(String nomCom){
+    public void toModifierCommunication(String nomCom){
         
     }
-    
+
+    public void supprimerSession(String nomConf) {
+        this.ihm.informerUtilisateur("La conférence "+nomConf+" à été supprimé.", true);        
+        this.genconf.getConferences().remove(nomConf);
+    }    
 }
