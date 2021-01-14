@@ -12,7 +12,7 @@ import java.util.Set;
 import javax.swing.JSpinner;
 import org.apache.commons.validator.routines.EmailValidator;
 import fr.uga.iut2.genconf.modele.*;
-import fr.uga.iut2.genconf.util.*;
+import fr.uga.iut2.genconf.util.DateUtils;
 
 
 public class VueCreationSession extends javax.swing.JPanel {
