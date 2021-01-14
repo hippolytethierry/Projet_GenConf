@@ -129,4 +129,31 @@ public class Controleur {
                 true
         );
     }
+        
+        public void creerCommunication(IHM.InfosCommunication infos) {
+        // création d'un Utilisateur si nécessaire
+        boolean nouvelUtilisateur = this.genconf.ajouteUtilisateur(
+                infos.correspondant.email,
+                infos.correspondant.nom,
+                infos.correspondant.prenom
+        );
+        if (nouvelUtilisateur) {
+            this.ihm.informerUtilisateur("Nouve·au/lle correspondant·e : " + infos.correspondant.prenom + " " + infos.correspondant.nom + " <" + infos.correspondant.email + ">",
+                    true
+            );
+        }
+        
+        Communication.initialiseCommunication(
+                infos.nom,
+                infos.type,
+                /*infos.dateDebut,
+                infos.dateFin,*/
+                this.genconf.getUsers().get(infos.correspondant.email),
+                infos.sess
+        );
+        this.ihm.informerUtilisateur(
+                "Nouvelle session : " + infos.nom + ", animée par " + infos.anim.email,
+                true
+        );
+    }
 }
