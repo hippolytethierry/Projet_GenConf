@@ -19,7 +19,7 @@ public class VueSession extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> sessionsExistantes;
     private JRadioButton [] boutonsSessions;
-    private String conf;
+    private String nomConf;
     /**
      * Creates new form VueConference
      */
@@ -165,7 +165,7 @@ public class VueSession extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
-        this.gui.modifierConference(Optional.empty());
+        this.gui.modifierSession(Optional.empty());
     }//GEN-LAST:event_annulerActionPerformed
 
     private void modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierActionPerformed
@@ -180,7 +180,7 @@ public class VueSession extends javax.swing.JPanel {
     private void voirPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voirPlusActionPerformed
         for (JRadioButton uneSession : getContentPane()){
             if (uneSession.isSelected()){
-                this.gui.toVoirPlusSession(uneSession.getName());
+                this.gui.toVoirPlusCommunications(uneSession.getName(), this.conf);
                 break;
             }
         } 

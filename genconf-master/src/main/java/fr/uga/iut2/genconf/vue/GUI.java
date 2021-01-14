@@ -174,8 +174,18 @@ public class GUI extends IHM {
        return this.controleur.selectionnerSession(nomSession, nomConf);
     }
 
-
-    protected void toModifierSession(String nomSession){
+    protected void modifierSession(Optional<InfosSession> session, String nomSession){
+        this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
+        session.ifPresentOrElse(
+                infos -> this.controleur.modifierSession(infos, nomSession),
+                () -> this.vueEtat.setEtat("")
+        );
+    }
+    
+    protected void toModifierSession(String nomSession, String nomConf){
+        this.vueModifierSession.setSessionsExistantes(this.controleur.getListeSessions(nomConf));
+        this.vueModifierSession.setConf(selectionnerConference(nomConf));
+        this.vueModifierSession.setSession(selectionnerSession(nomSession, nomConf));
         this.vuePrincipale.afficherVue(GUI.VUE_MODIFIER_SESSION);        
     }
     
@@ -189,6 +199,11 @@ public class GUI extends IHM {
     protected void supprimerSession(String nomConf){
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         this.controleur.supprimerSession(nomConf);
+    }
+    
+    protected void supprimerAnimSession(String infosAnim, String nomSession, String nomConf){
+        this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
+        this.controleur.supprimerAnimSession(infosAnim, nomSession, nomConf);         
     }
     
     protected void toVoirPlusCommunications(String nomSession){

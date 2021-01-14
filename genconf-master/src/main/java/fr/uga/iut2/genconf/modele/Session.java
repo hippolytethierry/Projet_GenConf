@@ -42,7 +42,7 @@ public class Session implements Serializable, Comparable<Session>{
         return s;
     } 
     
-    private Map<String, Utilisateur> getAnimateurs(){
+    public Map<String, Utilisateur> getAnimateurs(){
         return this.animateurs;
     }
     

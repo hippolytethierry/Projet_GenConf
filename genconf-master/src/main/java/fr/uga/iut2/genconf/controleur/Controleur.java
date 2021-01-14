@@ -2,8 +2,10 @@ package fr.uga.iut2.genconf.controleur;
 
 import fr.uga.iut2.genconf.modele.*;
 import fr.uga.iut2.genconf.modele.GenConf;
+import fr.uga.iut2.genconf.util.Type;
 import fr.uga.iut2.genconf.vue.GUI;
 import fr.uga.iut2.genconf.vue.IHM;
+import java.time.LocalDate;
 import java.util.Set;
 
 
@@ -101,7 +103,7 @@ public class Controleur {
         
     }
     
-    public Conference selectionnerConference ( String nomConf){
+    public Conference selectionnerConference (String nomConf){
         return this.genconf.getConferences().get(nomConf);
     }
             
@@ -110,7 +112,14 @@ public class Controleur {
         return confSelectionne.getSessions().keySet();
     }
     
-
+    public void modifierSession(IHM.InfosSession infos, String nomSession){
+        Session s = this.genconf.getConferences().get(infos.conf).getSessions().get(nomSession);
+        s.setNom(infos.nom);
+        s.setDateDebut(infos.dateDebut);
+        s.setDateFin(infos.dateFin);
+        this.ihm.informerUtilisateur("La session "+nomSession+" à été modifié; Nom = "+infos.nom+", date de debut = "+infos.dateDebut+", date de fin = "+infos.dateFin, true);
+    }
+    
     public Session selectionnerSession (String nomSession, String nomConf){
        return this.genconf.getConferences().get(nomConf).getSessions().get(nomSession);
     }
@@ -133,8 +142,13 @@ public class Controleur {
         
     }
 
-    public void supprimerSession(String nomConf) {
-        this.ihm.informerUtilisateur("La conférence "+nomConf+" à été supprimé.", true);        
-        this.genconf.getConferences().remove(nomConf);
+    public void supprimerSession(String nomSession) {
+        this.ihm.informerUtilisateur("La session "+nomSession+" à été supprimé.", true);        
+        this.genconf.getConferences().remove(nomSession);
     }    
+    
+    public void supprimerAnimSession(String infoAnim, String nomSession, String nomConf){
+        this.ihm.informerUtilisateur("L'animateur "+infoAnim+" de la session "+nomSession+" à été supprimé.", true);
+        selectionnerSession(nomSession, nomConf).getAnimateurs().remove(infoAnim);
+    }
 }

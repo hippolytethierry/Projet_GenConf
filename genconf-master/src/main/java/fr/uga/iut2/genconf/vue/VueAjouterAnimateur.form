@@ -32,11 +32,11 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="precedent" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="77" max="32767" attributes="0"/>
-                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                      <Component id="annuler" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="valider" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -52,9 +52,9 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="58" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="precedent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="valider" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="annuler" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -94,9 +94,9 @@
                   </Group>
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="textField2" max="32767" attributes="0"/>
-                      <Component id="textField3" max="32767" attributes="0"/>
-                      <Component id="textField1" max="32767" attributes="0"/>
+                      <Component id="textFieldEmailAnim" max="32767" attributes="0"/>
+                      <Component id="textFieldPrenomAnim" max="32767" attributes="0"/>
+                      <Component id="textFieldNomAnim" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -107,16 +107,16 @@
               <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="label4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="textField1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="textFieldNomAnim" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="label3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="textField3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="textFieldPrenomAnim" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="textField2" min="-2" max="-2" attributes="0"/>
+                      <Component id="textFieldEmailAnim" min="-2" max="-2" attributes="0"/>
                       <Component id="label2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="68" max="32767" attributes="0"/>
@@ -125,7 +125,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="java.awt.TextField" name="textField1">
+        <Component class="java.awt.TextField" name="textFieldNomAnim">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -156,14 +156,17 @@
             <Property name="text" type="java.lang.String" value="Nom :"/>
           </Properties>
         </Component>
-        <Component class="java.awt.TextField" name="textField2">
+        <Component class="java.awt.TextField" name="textFieldEmailAnim">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificationAnim"/>
+          </Events>
         </Component>
-        <Component class="java.awt.TextField" name="textField3">
+        <Component class="java.awt.TextField" name="textFieldPrenomAnim">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -172,20 +175,29 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="precedent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Precedent"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="precedentActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="valider">
       <Properties>
         <Property name="text" type="java.lang.String" value="Valider"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="validerActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="annuler">
       <Properties>
         <Property name="text" type="java.lang.String" value="Annuler"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="annulerActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

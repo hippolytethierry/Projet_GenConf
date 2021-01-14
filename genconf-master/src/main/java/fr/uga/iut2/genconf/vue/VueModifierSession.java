@@ -5,19 +5,50 @@
  */
 package fr.uga.iut2.genconf.vue;
 
+import java.awt.Color;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Optional;
+import fr.uga.iut2.genconf.modele.*;
+import java.util.Iterator;
+
 /**
  *
  * @author hippo
  */
 public class VueModifierSession extends javax.swing.JFrame {
-
+    private final GUI gui;
+    private Set<String> sessionsExistantes;
+    private boolean valideSess;
+    private Conference conf;
+    private Session session;
     /**
      * Creates new form VueModifierSession
      */
-    public VueModifierSession() {
+    public VueModifierSession(GUI gui) {
+        this.gui = gui;
+        this.sessionsExistantes = new HashSet();
+        this.valideSess = false;
+        
         initComponents();
     }
-
+    
+    public void setSessionsExistantes(final Set<String> sessionsExistantes) {
+        assert sessionsExistantes != null;
+        this.sessionsExistantes = sessionsExistantes;
+    }
+    
+    public void setConf(Conference conf){
+        this.conf = conf;
+    }
+    
+    public void setSession(Session s){
+        this.session = s;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,93 +58,123 @@ public class VueModifierSession extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        label2 = new java.awt.Label();
-        label3 = new java.awt.Label();
-        label4 = new java.awt.Label();
-        textField1 = new java.awt.TextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
-        label1 = new java.awt.Label();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        button1 = new java.awt.Button();
-        button2 = new java.awt.Button();
+        jPaneSession = new javax.swing.JPanel();
+        nomSession = new java.awt.Label();
+        labelDateDebut = new java.awt.Label();
+        labelDateFin = new java.awt.Label();
+        textFieldNom = new java.awt.TextField();
+        jSpinnerDateDebut = new javax.swing.JSpinner();
+        jSpinnerDateFin = new javax.swing.JSpinner();
+        labelSession = new java.awt.Label();
+        precedent = new javax.swing.JButton();
+        valider = new javax.swing.JButton();
+        annuler = new javax.swing.JButton();
+        buttonSupAnim = new java.awt.Button();
+        buttonAddAnim = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Session"));
+        jPaneSession.setBorder(javax.swing.BorderFactory.createTitledBorder("Session"));
 
-        label2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label2.setText("Nom :");
+        nomSession.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        nomSession.setText("Nom :");
 
-        label3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label3.setText("Date de début :");
+        labelDateDebut.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelDateDebut.setText("Date de début :");
 
-        label4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label4.setText("Date de fin :");
+        labelDateFin.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelDateFin.setText("Date de fin :");
 
-        textField1.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldNom.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldNom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                verificationSession(evt);
+            }
+        });
 
-        jSpinner1.setModel(new javax.swing.SpinnerDateModel());
+        jSpinnerDateDebut.setModel(new javax.swing.SpinnerDateModel());
 
-        jSpinner2.setModel(new javax.swing.SpinnerDateModel());
+        jSpinnerDateFin.setModel(new javax.swing.SpinnerDateModel());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPaneSessionLayout = new javax.swing.GroupLayout(jPaneSession);
+        jPaneSession.setLayout(jPaneSessionLayout);
+        jPaneSessionLayout.setHorizontalGroup(
+            jPaneSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPaneSessionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPaneSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nomSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPaneSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textFieldNom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPaneSessionLayout.createSequentialGroup()
+                        .addGroup(jPaneSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSpinnerDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 68, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jPaneSessionLayout.setVerticalGroup(
+            jPaneSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPaneSessionLayout.createSequentialGroup()
+                .addGroup(jPaneSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nomSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPaneSessionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPaneSessionLayout.createSequentialGroup()
+                        .addComponent(labelDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPaneSessionLayout.createSequentialGroup()
+                        .addComponent(jSpinnerDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSpinnerDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 15, Short.MAX_VALUE))
         );
 
-        label2.getAccessibleContext().setAccessibleName("Nom session");
-        label4.getAccessibleContext().setAccessibleName("date de fin :");
+        nomSession.getAccessibleContext().setAccessibleName("Nom session");
+        labelDateFin.getAccessibleContext().setAccessibleName("date de fin :");
 
-        label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label1.setText("Modifier une session");
+        labelSession.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelSession.setText("Modifier une session");
 
-        jButton1.setText("Precedent");
+        precedent.setText("Precedent");
+        precedent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precedentActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Valider");
+        valider.setText("Valider");
+        valider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Annuler");
+        annuler.setText("Annuler");
+        annuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annulerActionPerformed(evt);
+            }
+        });
 
-        button1.setLabel("Supprimer animateur");
+        buttonSupAnim.setLabel("Supprimer animateur");
+        buttonSupAnim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSupAnimActionPerformed(evt);
+            }
+        });
 
-        button2.setLabel("Ajouter animateur");
+        buttonAddAnim.setLabel("Ajouter animateur");
+        buttonAddAnim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddAnimActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,94 +185,121 @@ public class VueModifierSession extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelSession, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPaneSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(precedent)
                         .addGap(169, 169, 169)
-                        .addComponent(jButton3)
+                        .addComponent(annuler)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(valider)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonSupAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonAddAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPaneSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSupAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonAddAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))))
+                            .addComponent(annuler)
+                            .addComponent(precedent)
+                            .addComponent(valider))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VueModifierSession.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VueModifierSession.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VueModifierSession.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VueModifierSession.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void precedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentActionPerformed
+        this.gui.toVoirPlusSession(this.conf.getNom());
+    }//GEN-LAST:event_precedentActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VueModifierSession().setVisible(true);
-            }
-        });
-    }
+    private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
+        this.gui.modifierSession(Optional.empty(), this.session.getNom());
+    }//GEN-LAST:event_annulerActionPerformed
+
+    private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
+        // Traitement des dates de début et fin
+        Date debut = (Date) this.jSpinnerDateDebut.getModel().getValue();
+        LocalDate dateDebut = Instant.ofEpochMilli(debut.getTime())
+                                     .atZone(ZoneId.systemDefault())
+                                     .toLocalDate();
+        
+        debut = (Date) this.jSpinnerDateFin.getModel().getValue();
+        LocalDate dateFin = Instant.ofEpochMilli(debut.getTime())
+                                     .atZone(ZoneId.systemDefault())
+                                     .toLocalDate();
+        
+        // Iterateur sur les animateurs -> récupérer anim session
+        Iterator it = session.getAnimateurs().values().iterator();
+        Utilisateur user;
+        while(it.hasNext()){
+            user = (Utilisateur) it.next();
+            break;
+        }
+        
+        IHM.InfosUtilisateur anim = new IHM.InfosUtilisateur(
+               user.getEmail(),
+               user.getNom(),
+               user.getPrenom()
+        );
+        
+        // Infos sur la nouvelle conference
+        IHM.InfosSession session = new IHM.InfosSession(
+                this.textFieldNom.getText(),
+                this.session.getType().toString(),
+                dateDebut,
+                dateFin,
+                anim,
+                conf
+        );
+         
+        this.gui.modifierSession(Optional.of(session), this.session.getNom());
+    }//GEN-LAST:event_validerActionPerformed
+
+    private void buttonSupAnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupAnimActionPerformed
+        
+    }//GEN-LAST:event_buttonSupAnimActionPerformed
+
+    private void buttonAddAnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddAnimActionPerformed
+        
+    }//GEN-LAST:event_buttonAddAnimActionPerformed
+
+    private void verificationSession(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationSession
+        this.valideSess = !sessionsExistantes.contains(textFieldNom.getText()) || (textFieldNom.getText() == this.session.getNom());
+        this.textFieldNom.setForeground(this.valideSess ? Color.black : Color.red);
+        this.valider.setEnabled(valideSess);
+    }//GEN-LAST:event_verificationSession
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Button button1;
-    private java.awt.Button button2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private java.awt.Label label1;
-    private java.awt.Label label2;
-    private java.awt.Label label3;
-    private java.awt.Label label4;
-    private java.awt.TextField textField1;
+    private javax.swing.JButton annuler;
+    private java.awt.Button buttonAddAnim;
+    private java.awt.Button buttonSupAnim;
+    private javax.swing.JPanel jPaneSession;
+    private javax.swing.JSpinner jSpinnerDateDebut;
+    private javax.swing.JSpinner jSpinnerDateFin;
+    private java.awt.Label labelDateDebut;
+    private java.awt.Label labelDateFin;
+    private java.awt.Label labelSession;
+    private java.awt.Label nomSession;
+    private javax.swing.JButton precedent;
+    private java.awt.TextField textFieldNom;
+    private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables
 }
