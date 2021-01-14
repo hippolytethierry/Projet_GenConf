@@ -196,11 +196,11 @@ public class VueSession extends javax.swing.JPanel {
     }//GEN-LAST:event_supSessionActionPerformed
 
     private void creerSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerSessionActionPerformed
-        this.gui.saisirNouvelleSession();
+        this.gui.saisirNouvelleSession(this.conf);
     }//GEN-LAST:event_creerSessionActionPerformed
 
     private void precedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentActionPerformed
-        
+        this.gui.actionModifierConference();
     }//GEN-LAST:event_precedentActionPerformed
 
     private void contentPane(Set<String> sessions){
