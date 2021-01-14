@@ -90,8 +90,12 @@ public class Controleur {
         );
     }
     
-    public void modifierConference(IHM.InfosConference infos){
-        
+    public void modifierConference(IHM.InfosConference infos, String nomConf){
+        Conference c = this.genconf.getConferences().get(nomConf);
+        c.setDateDebut(infos.dateDebut);
+        c.setDateFin(infos.dateFin);
+        c.setNom(infos.nom);
+        this.ihm.informerUtilisateur("La conférence "+nomConf+" à été modifié; Nom = "+infos.nom+", date de debut = "+infos.dateDebut+", date de fin = "+infos.dateFin, true);
     }
     
     public void supprimerConference(String nomConf) {
@@ -106,14 +110,18 @@ public class Controleur {
     public Conference selectionnerConference (String nomConf){
         return this.genconf.getConferences().get(nomConf);
     }
-            
+    
+    public Set<String> getListeConferences(){
+        return this.genconf.getConferences().keySet();
+    }
+    
     public Set<String> getListeSessions(String nomConf){
         Conference confSelectionne = this.genconf.getConferences().get(nomConf);
         return confSelectionne.getSessions().keySet();
     }
     
     public void modifierSession(IHM.InfosSession infos, String nomSession){
-        Session s = this.genconf.getConferences().get(infos.conf).getSessions().get(nomSession);
+        Session s = this.genconf.getConferences().get(infos.conf.getNom()).getSessions().get(nomSession);
         s.setNom(infos.nom);
         s.setDateDebut(infos.dateDebut);
         s.setDateFin(infos.dateFin);
@@ -150,5 +158,14 @@ public class Controleur {
     public void supprimerAnimSession(String infoAnim, String nomSession, String nomConf){
         this.ihm.informerUtilisateur("L'animateur "+infoAnim+" de la session "+nomSession+" à été supprimé.", true);
         selectionnerSession(nomSession, nomConf).getAnimateurs().remove(infoAnim);
+    }
+    
+    public void ajouterAnim(String infoAnim, String nomSession, String nomConf){
+        this.ihm.informerUtilisateur("L'animateur "+infoAnim+" de la session "+nomSession+" à été ajouté.", true);
+        selectionnerSession(nomSession, nomConf).getAnimateurs().put(infoAnim, this.genconf.getUsers().get(infoAnim));
+    }
+    
+    public boolean freeEmail(String email){
+        return !this.genconf.getUsers().containsKey(email);
     }
 }

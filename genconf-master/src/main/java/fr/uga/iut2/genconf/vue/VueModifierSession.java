@@ -20,7 +20,7 @@ import java.util.Iterator;
  *
  * @author hippo
  */
-public class VueModifierSession extends javax.swing.JFrame {
+public class VueModifierSession extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> sessionsExistantes;
     private boolean valideSess;
@@ -273,15 +273,15 @@ public class VueModifierSession extends javax.swing.JFrame {
     }//GEN-LAST:event_validerActionPerformed
 
     private void buttonSupAnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupAnimActionPerformed
-        
+        this.gui.toSupprimerAnimateur(this.session.getNom(), this.conf.getNom());
     }//GEN-LAST:event_buttonSupAnimActionPerformed
 
     private void buttonAddAnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddAnimActionPerformed
-        
+        this.gui.toAjouterAnimateur(this.session.getNom(), this.conf.getNom());
     }//GEN-LAST:event_buttonAddAnimActionPerformed
 
     private void verificationSession(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationSession
-        this.valideSess = !sessionsExistantes.contains(textFieldNom.getText()) || (textFieldNom.getText() == this.session.getNom());
+        this.valideSess = !sessionsExistantes.contains(textFieldNom.getText().trim()) || (textFieldNom.getText().trim() == this.session.getNom());
         this.textFieldNom.setForeground(this.valideSess ? Color.black : Color.red);
         this.valider.setEnabled(valideSess);
     }//GEN-LAST:event_verificationSession

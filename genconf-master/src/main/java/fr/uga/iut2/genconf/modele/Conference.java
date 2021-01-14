@@ -11,10 +11,10 @@ public class Conference implements Serializable, Comparable<Conference> {
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
     private final GenConf genconf;
-    private final String nom;
+    private String nom;
     private LocalDate dateDebut;
     private LocalDate dateFin;
-    private final Map<String, Utilisateur> administrateurs;  // association qualifiée par l'email
+    private Utilisateur administrateur;  // association qualifiée par l'email
     private final Map<String, Utilisateur> inscrits;//associattion qualifié par l'email
     private final Map<String, Session> sessions;//association qualifié par les noms
     private Programme programme;
@@ -36,7 +36,6 @@ public class Conference implements Serializable, Comparable<Conference> {
         this.nom = nom;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.administrateurs = new HashMap<>();
         this.inscrits = new HashMap<>();
         this.sessions = new HashMap<>();
         definirProgramme();
@@ -45,7 +44,15 @@ public class Conference implements Serializable, Comparable<Conference> {
     public String getNom() {
         return this.nom;
     }
-
+    
+    public void setNom(String nomConf){
+        this.nom = nomConf;
+    }
+    
+    public Utilisateur getAdmin(){
+        return this.administrateur;
+    }
+    
     public LocalDate getDateDebut() {
         return dateDebut;
     }
@@ -65,8 +72,8 @@ public class Conference implements Serializable, Comparable<Conference> {
     }
 
     public void ajouteAdministrateur(Utilisateur admin) {
-        assert !this.administrateurs.containsKey(admin.getEmail());
-        this.administrateurs.put(admin.getEmail(), admin);
+        assert !this.administrateur.equals(null);
+        this.administrateur = admin;
         admin.addConferenceAdministree(this);
     }
 

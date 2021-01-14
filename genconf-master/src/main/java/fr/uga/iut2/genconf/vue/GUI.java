@@ -2,7 +2,7 @@ package fr.uga.iut2.genconf.vue;
 
 import fr.uga.iut2.genconf.controleur.Commande;
 import fr.uga.iut2.genconf.controleur.Controleur;
-import fr.uga.iut2.genconf.modele.Conference;
+import fr.uga.iut2.genconf.modele.*;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
@@ -23,6 +23,8 @@ public class GUI extends IHM {
     private final VueModifierConference vueModifierConf;
     private final VueModifierCommunication vueModifierCom;
     private final VueModifierSession vueModifierSession;
+    private final VueAjouterAnimateur vueAjouterAnim;
+    private final VueSupprimerAnimateur vueSupprimerAnim;
     private final VueEtat vueEtat;
 
     // identifiants uniques pour les vues composant la vue principale
@@ -37,6 +39,8 @@ public class GUI extends IHM {
     private static final String VUE_MODIFIER_CONFERENCE = "modifier_une_conf";
     private static final String VUE_MODIFIER_COMMUNICATION = "modifier_une_com";
     private static final String VUE_MODIFIER_SESSION = "modifier_une_session";
+    private static final String VUE_AJOUTER_ANIMATEUR = "ajouter_un_animateur";
+    private static final String VUE_SUPPRIMER_ANIMATEUR = "supprimer_un_animateur";
 
     public GUI(Controleur controleur) {
         this.controleur = controleur;
@@ -57,6 +61,8 @@ public class GUI extends IHM {
         this.vueModifierConf = new VueModifierConference(this);
         this.vueModifierCom = new VueModifierCommunication(this);
         this.vueModifierSession = new VueModifierSession(this);
+        this.vueAjouterAnim = new VueAjouterAnimateur(this);
+        this.vueSupprimerAnim = new VueSupprimerAnimateur(this);
 
         this.vuePrincipale = new VuePrincipale(this);
         this.vuePrincipale.ajouterVue(this.vueEtat, GUI.VUE_ETAT);
@@ -69,6 +75,8 @@ public class GUI extends IHM {
         this.vuePrincipale.ajouterVue(this.vueModifierCom, GUI.VUE_MODIFIER_COMMUNICATION);
         this.vuePrincipale.ajouterVue(this.vueCommunication, GUI.VUE_COMS);
         this.vuePrincipale.ajouterVue(this.vueModifierSession, GUI.VUE_MODIFIER_SESSION);
+        this.vuePrincipale.ajouterVue(vueAjouterAnim, GUI.VUE_AJOUTER_ANIMATEUR);
+        this.vuePrincipale.ajouterVue(vueSupprimerAnim, GUI.VUE_SUPPRIMER_ANIMATEUR);
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
     }
 
@@ -106,20 +114,18 @@ public class GUI extends IHM {
         );
     }
     
-    protected void modifierConference(Optional<InfosConference> conf){
+    protected void modifierConference(Optional<InfosConference> conf, String nomConf){
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         conf.ifPresentOrElse(
-                infos -> this.controleur.modifierConference(infos),
+                infos -> this.controleur.modifierConference(infos, nomConf),
                 () -> this.vueEtat.setEtat("")
         );
     }
     
     protected void toModifierConference(String nomConf){
-        this.vuePrincipale.afficherVue(GUI.VUE_MODIFIER_CONFERENCE);        
-    }
-    
-    protected void returnVueConference(){
-        
+        this.vueModifierConf.setConfsExistantes(this.controleur.getListeConferences());
+        this.vueModifierConf.setConf(selectionnerConference(nomConf));
+        this.vuePrincipale.afficherVue(GUI.VUE_MODIFIER_CONFERENCE);         
     }
     
     protected void supprimerConference(String nomConf){
@@ -144,7 +150,7 @@ public class GUI extends IHM {
         );
     }
     
-    protected Conference selectionnerConference ( String nomConf){
+    protected Conference selectionnerConference (String nomConf){
         return this.controleur.selectionnerConference(nomConf);
     }
     
@@ -193,7 +199,6 @@ public class GUI extends IHM {
         this.vueSession.setSessionsExistantes(this.controleur.getListeSessions(nomConf));   
         this.vueSession.setConf(nomConf);
         this.vuePrincipale.afficherVue(GUI.VUE_SESSIONS);
-//        this.controleur.voirPlusConference(nomConf);
     }
     
     protected void supprimerSession(String nomConf){
@@ -201,13 +206,32 @@ public class GUI extends IHM {
         this.controleur.supprimerSession(nomConf);
     }
     
+    protected void toAjouterAnimateur(String nomSession, String nomConf){
+        this.vueAjouterAnim.setSession(selectionnerSession(nomSession, nomConf));
+        this.vuePrincipale.afficherVue(GUI.VUE_AJOUTER_ANIMATEUR);        
+    }
+    
+    protected void toSupprimerAnimateur(String nomSession, String nomConf){
+        this.vueSupprimerAnim.setAnimsExistants(selectionnerSession(nomSession, nomConf));
+        this.vueSupprimerAnim.setSession(selectionnerSession(nomSession, nomConf));
+        this.vuePrincipale.afficherVue(GUI.VUE_SUPPRIMER_ANIMATEUR);        
+    }
     protected void supprimerAnimSession(String infosAnim, String nomSession, String nomConf){
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         this.controleur.supprimerAnimSession(infosAnim, nomSession, nomConf);         
     }
     
+    protected void ajouterAnim(String infosAnim, String nomSession, String nomConf){
+        this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
+        this.controleur.ajouterAnim(infosAnim, nomSession, nomConf);
+    }
+    
     protected void toVoirPlusCommunications(String nomSession){
         this.vueCommunication.setComsExistantes(this.controleur.getListeCommunications(nomSession));
+    }
+    
+    protected boolean freeEmail(String email){
+        return this.controleur.freeEmail(email);
     }
 
 //-----  Implémentation des méthodes abstraites  -------------------------------

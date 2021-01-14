@@ -5,7 +5,9 @@
  */
 package fr.uga.iut2.genconf.vue;
 
+import fr.uga.iut2.genconf.modele.*;
 import java.awt.Color;
+import java.util.Optional;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
@@ -14,6 +16,7 @@ import org.apache.commons.validator.routines.EmailValidator;
  */
 public class VueAjouterAnimateur extends javax.swing.JPanel {
     private final GUI gui;
+    private Session s;
     /**
      * Creates new form VueAnimateur
      */
@@ -21,9 +24,13 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
         this.gui = gui;
         
         initComponents();
-        this.email.setForeground(Color.red);
+        this.valider.setEnabled(false);
+        this.textFieldEmailAnim.setForeground(Color.red);
     }
 
+    public void setSession(Session s){
+        this.s = s;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,26 +181,27 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
 
         nom = this.textFieldNomAnim.getText().trim();
         prenom = this.textFieldPrenomAnim.getText().trim();
-        validEmail = validator.isValid(this.textFieldEmailAnim.getText().trim().toLowerCase());
+        validEmail = validator.isValid(this.textFieldEmailAnim.getText().trim().toLowerCase())
+                && !s.getAnimateurs().containsKey(this.textFieldEmailAnim.getText().trim().toLowerCase());
         this.textFieldEmailAnim.setForeground(validEmail ? Color.black : Color.red);
 
         valide = validEmail
-                 && (nom != null) && (nom.length() > 0)
-                 && (prenom != null) && (prenom.length() > 0);
+                && (nom != null) && (nom.length() > 0)
+                && (prenom != null) && (prenom.length() > 0);
 
         this.valider.setEnabled(valide);
     }//GEN-LAST:event_verificationAnim
 
     private void precedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentActionPerformed
-        // TODO add your handling code here:
+       this.gui.toModifierSession(s.getNom(), s.getNomConf());
     }//GEN-LAST:event_precedentActionPerformed
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
-        // TODO add your handling code here:
+        this.gui.modifierSession(Optional.empty(), s.getNom());
     }//GEN-LAST:event_annulerActionPerformed
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
-        // TODO add your handling code here:
+        this.gui.ajouterAnim(this.textFieldEmailAnim.getText().trim().toLowerCase(), s.getNom(), s.getNomConf());
     }//GEN-LAST:event_validerActionPerformed
 
 
