@@ -286,7 +286,6 @@ public class VueModifierSession extends javax.swing.JPanel {
         this.valider.setEnabled(valideSess);
     }//GEN-LAST:event_verificationSession
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private java.awt.Button buttonAddAnim;

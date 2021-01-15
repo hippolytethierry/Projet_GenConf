@@ -30,13 +30,13 @@ public class GUI extends IHM {
     // identifiants uniques pour les vues composant la vue principale
     private static final String VUE_ETAT = "etat";
     private static final String VUE_CREATION_CONF = "creation_conf";
-    private static final String VUE_CREATION_COM = "creation_com";
     private static final String VUE_CREATION_SESSION = "creation_session";
     private static final String VUE_CREATION_USER = "creation_user";
     private static final String VUE_CONFS = "liste_des_conferences";
     private static final String VUE_SESSIONS = "liste_des_sessions";
     private static final String VUE_COMS = "liste_des_communications";
     private static final String VUE_MODIFIER_CONFERENCE = "modifier_une_conf";
+    private static final String VUE_CREATION_COMMUNICATION = "creation_communication";
     private static final String VUE_MODIFIER_COMMUNICATION = "modifier_une_com";
     private static final String VUE_MODIFIER_SESSION = "modifier_une_session";
     private static final String VUE_AJOUTER_ANIMATEUR = "ajouter_un_animateur";
@@ -72,11 +72,12 @@ public class GUI extends IHM {
         this.vuePrincipale.ajouterVue(this.vueConf, GUI.VUE_CONFS);
         this.vuePrincipale.ajouterVue(this.vueSession, GUI.VUE_SESSIONS);
         this.vuePrincipale.ajouterVue(this.vueModifierConf, GUI.VUE_MODIFIER_CONFERENCE);
+        this.vuePrincipale.ajouterVue(this.vueCreationCom, GUI.VUE_CREATION_COMMUNICATION);
         this.vuePrincipale.ajouterVue(this.vueModifierCom, GUI.VUE_MODIFIER_COMMUNICATION);
         this.vuePrincipale.ajouterVue(this.vueCommunication, GUI.VUE_COMS);
         this.vuePrincipale.ajouterVue(this.vueModifierSession, GUI.VUE_MODIFIER_SESSION);
-        this.vuePrincipale.ajouterVue(vueAjouterAnim, GUI.VUE_AJOUTER_ANIMATEUR);
-        this.vuePrincipale.ajouterVue(vueSupprimerAnim, GUI.VUE_SUPPRIMER_ANIMATEUR);
+        this.vuePrincipale.ajouterVue(this.vueAjouterAnim, GUI.VUE_AJOUTER_ANIMATEUR);
+        this.vuePrincipale.ajouterVue(this.vueSupprimerAnim, GUI.VUE_SUPPRIMER_ANIMATEUR);
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
     }
 

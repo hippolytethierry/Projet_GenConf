@@ -5,30 +5,36 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import javax.swing.JSpinner;
 import org.apache.commons.validator.routines.EmailValidator;
-import fr.uga.iut2.genconf.util.Type;
+import fr.uga.iut2.genconf.modele.*;
+import fr.uga.iut2.genconf.util.DateUtils;
 
 
 public class VueCreationSession extends javax.swing.JPanel {
     private final GUI gui;
-    private Set<String> nomsExistants;
+    private Set<String> sessionExistantes;
     private boolean valideAnim, valideSess;
+    private Conference conf;
 
     /**
      * Creates new form VueCreationConference
      */
     public VueCreationSession(GUI gui) {
         this.gui = gui;
-        this.nomsExistants = new HashSet<>();
+        this.sessionExistantes = new HashSet<>();
         this.valideAnim = false;
         this.valideSess = false;
+        
 
         // création de l'interface générée
         this.initComponents();
+        
+        this.dateDebut.setModel(new javax.swing.SpinnerDateModel(DateUtils.asDate(conf.getDateDebut()), DateUtils.asDate(conf.getDateDebut()), DateUtils.asDate(conf.getDateFin()), java.util.Calendar.DAY_OF_MONTH));
 
         // configuration des composants de l'interface (à faire après la création de l'interface)
         // format de date
@@ -40,10 +46,16 @@ public class VueCreationSession extends javax.swing.JPanel {
         // désactivation du bouton de création
         this.creerButton.setEnabled(false);
     }
+    
+    
 
-    public void setNomsExistants(final Set<String> nomsExistants) {
-        assert nomsExistants != null;
-        this.nomsExistants = nomsExistants;
+    public void setSessionsExistantes(final Set<String> sessionExistantes) {
+        assert sessionExistantes != null;
+        this.sessionExistantes = sessionExistantes;
+    }
+    
+    public void setConf(Conference conf){
+        this.conf = conf;
     }
 
     /**
@@ -90,7 +102,7 @@ public class VueCreationSession extends javax.swing.JPanel {
         });
         nomSess.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                verificationConference(evt);
+                verificationSession(evt);
             }
         });
 
@@ -100,7 +112,7 @@ public class VueCreationSession extends javax.swing.JPanel {
 
         nbJours.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
-        dateDebut.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(), null, java.util.Calendar.DAY_OF_MONTH));
+        dateDebut.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1610974200000L), new java.util.Date(1610974200000L), new java.util.Date(1611838200000L), java.util.Calendar.DAY_OF_MONTH));
 
         typeSess.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "keynote", "atelier", "article" }));
 
@@ -285,7 +297,8 @@ public class VueCreationSession extends javax.swing.JPanel {
                  this.typeSess.getActionCommand(),
                  dateDebut,
                  dateFin,
-                 anim
+                 anim,
+                 conf
          );
 
          this.gui.creerSession(Optional.of(nlleSess));
@@ -308,20 +321,25 @@ public class VueCreationSession extends javax.swing.JPanel {
         this.creerButton.setEnabled(this.valideAnim&& this.valideSess);
     }//GEN-LAST:event_verificationAdmin
 
-    private void verificationConference(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationConference
-         this.valideSess = !nomsExistants.contains(nomSess.getText());
+    private void verificationSession(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationSession
+         this.valideSess = !sessionExistantes.contains(nomSess.getText());
          this.nomSess.setForeground(this.valideSess ? Color.black : Color.red);
          this.creerButton.setEnabled(this.valideAnim && this.valideSess);
-    }//GEN-LAST:event_verificationConference
+         
+    }//GEN-LAST:event_verificationSession
 
     private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerButtonActionPerformed
-        this.gui.creerConference(Optional.empty());
+        this.gui.creerSession(Optional.empty());
     }//GEN-LAST:event_annulerButtonActionPerformed
 
     private void nomSessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSessActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomSessActionPerformed
-
+    
+    private void precedentButtonActionPerformed(java.awt.event.ActionEvent evt){
+        this.gui.toVoirPlusSession(conf.getNom());
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Session;
     private javax.swing.JTextField animEmail;

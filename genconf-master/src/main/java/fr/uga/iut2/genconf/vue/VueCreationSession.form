@@ -146,7 +146,7 @@
         <Component class="javax.swing.JTextField" name="nomSess">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomSessActionPerformed"/>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificationConference"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificationSession"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -169,7 +169,7 @@
         <Component class="javax.swing.JSpinner" name="dateDebut">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="now" minimum="now" stepSize="5" type="date"/>
+              <SpinnerModel initial="1610974200000" maximum="1611838200000" minimum="1610974200000" stepSize="5" type="date"/>
             </Property>
           </Properties>
         </Component>

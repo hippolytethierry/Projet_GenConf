@@ -246,7 +246,6 @@ public class VueModifierConference extends javax.swing.JPanel {
         this.gui.choisirConference(confsExistantes);
     }//GEN-LAST:event_precedentActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private javax.swing.JPanel jPanel1;
