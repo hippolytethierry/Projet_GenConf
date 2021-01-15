@@ -5,7 +5,6 @@ import java.util.Set;
 import fr.uga.iut2.genconf.util.Type;
 import fr.uga.iut2.genconf.modele.*;
 
-
 public abstract class IHM {
     /**
      * Classe conteneur pour les informations saisies à propos d'un
@@ -80,20 +79,18 @@ public abstract class IHM {
     
     public static class InfosCommunication {
         public final String nom;
-        /*public final LocalDate dateDebut;
-        public final LocalDate dateFin;*/
         public final InfosUtilisateur correspondant;
         public final Type type;
         public final Session sess;
         
-        public InfosCommunication(final String nom, final String type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur correspondant, final Session sess){
-            assert !dateDebut.isAfter(dateFin);
+        public InfosCommunication(final String nom, final String type, final InfosUtilisateur correspondant, final Session sess){
             this.nom = nom;
             this.type = Type.setType(type);
             this.correspondant = correspondant;
             this.sess = sess;
         }        
-    }    
+    }   
+  
     /**
      * Rend actif l'interface Humain-machine.
      *
@@ -135,4 +132,11 @@ public abstract class IHM {
      *
      */
     public abstract void saisirNouvelleConference(final Set<String> nomsExistants);
+    
+    public abstract void saisirNouvelleCommunication(String nomSession, String nomConf);
+    
+    public abstract void choisirConference(final Set<String> nomsConfsExistantes);
+    
+    public abstract void saisirNouvelleSession(final String nomConf); 
+    
 }

@@ -23,7 +23,7 @@ public class Programme {
     public class durée{
         private int durée;
 
-<<<<<<< HEAD
+
         public durée(int durée) {
             this.durée = durée;
         }
@@ -41,12 +41,7 @@ public class Programme {
         for ( Session s : this.conf.getSessions().values()){
             this.planning.add(s.getDateDebut());
             this.planning.add(s.getDateFin());
-=======
-    public Programme(Conference conf) {
-        this.conf = conf;
-        String s = ("Quelle date horaire voulez vous pour le dejeuner ?");
-        // CLI.informerUtilisateur(s, true);
-    }
+
 
     protected void update(){
         for (LocalDate pause : this.planning){
@@ -58,11 +53,11 @@ public class Programme {
                 //demande de rentrer la nouvelle heure voulu pour la pause s�lection�
                 //mofifier en cons�quence
        // }
->>>>>>> fa0d356dcfc5b1516a162abd4e2ac14aee931752
+
         }
                 
     }
-<<<<<<< HEAD
+
        
     public void addPause(LocalDate dateDebut, LocalDate dateFin){
         
@@ -81,14 +76,15 @@ public class Programme {
     }
 
     public Set<LocalDate> getPlanning() {
-=======
+
+    }
     
     public void addPause(LocalDate date){
         this.planning.add(date);
     }
 
     public Set<LocalDate> getPauses() {
->>>>>>> fa0d356dcfc5b1516a162abd4e2ac14aee931752
+
         return planning;
     }
     

@@ -22,7 +22,7 @@ public class Session implements Serializable, Comparable<Session>{
     private LocalDate dateDebut; 
     private LocalDate dateFin;
     private Type type;
-    private Map<String, Utilisateur> animateurs;
+    private Utilisateur animateur;
     private Map<String, Communication> communications;
     private Conference conf;
     
@@ -47,8 +47,8 @@ public class Session implements Serializable, Comparable<Session>{
         this.conf.getSessions().put(nom, s);
     }
     
-    private Map<String, Utilisateur> getAnimateurs(){
-        return this.animateurs;
+    public Utilisateur getAnimateurs(){
+        return this.animateur;
     }
     
     public String getNom() {
@@ -93,10 +93,6 @@ public class Session implements Serializable, Comparable<Session>{
         assert !getAnimateurs().containsKey(anim.getEmail());
         getAnimateurs().put(anim.getEmail(), anim);
         anim.addSessionAnimee(this);
-    }
-    
-    protected void update(Session s){
-        
     }
     
     @Override

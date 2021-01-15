@@ -44,14 +44,15 @@
                       <Component id="jPanel1" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="precedent" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="annuler" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="valider" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,12 +61,13 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="label1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="annuler" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="valider" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="precedent" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -85,9 +87,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Conf&#xe9;rence">
-              <Color PropertyName="color" blue="0" green="0" red="0" type="rgb"/>
-            </TitledBorder>
+            <TitledBorder title="Conf&#xe9;rence"/>
           </Border>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Modifier"/>
@@ -105,25 +105,21 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="label4" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="label5" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="label6" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="label3" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jSpinner2" min="-2" pref="197" max="-2" attributes="0"/>
-                              <Component id="jSpinner3" min="-2" pref="51" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jSpinnerDateFin" min="-2" pref="197" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jSpinner1" min="-2" pref="197" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="65" max="32767" attributes="0"/>
+                                  <Component id="jSpinnerDateDebut" min="-2" pref="197" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="textField1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="textFieldNomConf" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -135,26 +131,21 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="label3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textField1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="label3" max="32767" attributes="0"/>
+                      <Component id="textFieldNomConf" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="label4" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSpinnerDateDebut" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="label5" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSpinner2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSpinnerDateFin" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="label6" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSpinner3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace pref="50" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -168,14 +159,14 @@
             <Property name="text" type="java.lang.String" value="Nom :"/>
           </Properties>
         </Component>
-        <Component class="java.awt.TextField" name="textField1">
+        <Component class="java.awt.TextField" name="textFieldNomConf">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField1ActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificationConf"/>
           </Events>
         </Component>
         <Component class="java.awt.Label" name="label4">
@@ -186,7 +177,7 @@
             <Property name="text" type="java.lang.String" value="Date de d&#xe9;but : "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinner1">
+        <Component class="javax.swing.JSpinner" name="jSpinnerDateDebut">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="now" stepSize="5" type="date"/>
@@ -204,7 +195,7 @@
             <Property name="text" type="java.lang.String" value="Date de fin : "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinner2">
+        <Component class="javax.swing.JSpinner" name="jSpinnerDateFin">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="now" stepSize="5" type="date"/>
@@ -214,38 +205,30 @@
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="liste date fin"/>
           </AccessibilityProperties>
         </Component>
-        <Component class="java.awt.Label" name="label6">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="12" style="1"/>
-            </Property>
-            <Property name="name" type="java.lang.String" value="" noResource="true"/>
-            <Property name="text" type="java.lang.String" value="Dur&#xe9;e : "/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinner3">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
-            </Property>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="annuler">
       <Properties>
         <Property name="text" type="java.lang.String" value="Annuler"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="annulerActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="valider">
       <Properties>
         <Property name="text" type="java.lang.String" value="Valider"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="validerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="precedent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Precedent"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="precedentActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

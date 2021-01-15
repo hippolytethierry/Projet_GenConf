@@ -5,19 +5,32 @@
  */
 package fr.uga.iut2.genconf.vue;
 
+import fr.uga.iut2.genconf.modele.*;
+import java.awt.Color;
+import java.util.Optional;
+import org.apache.commons.validator.routines.EmailValidator;
+
 /**
  *
  * @author sylvains
  */
-public class VueAjouterAnimateur extends javax.swing.JFrame {
-
+public class VueAjouterAnimateur extends javax.swing.JPanel {
+    private final GUI gui;
+    private Session s;
     /**
      * Creates new form VueAnimateur
      */
-    public VueAjouterAnimateur() {
+    public VueAjouterAnimateur(GUI gui) {
+        this.gui = gui;
+        
         initComponents();
+        this.valider.setEnabled(false);
+        this.textFieldEmailAnim.setForeground(Color.red);
     }
 
+    public void setSession(Session s){
+        this.s = s;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,15 +42,15 @@ public class VueAjouterAnimateur extends javax.swing.JFrame {
 
         label1 = new java.awt.Label();
         jPanel1 = new javax.swing.JPanel();
-        textField1 = new java.awt.TextField();
+        textFieldNomAnim = new java.awt.TextField();
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         label4 = new java.awt.Label();
-        textField2 = new java.awt.TextField();
-        textField3 = new java.awt.TextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        textFieldEmailAnim = new java.awt.TextField();
+        textFieldPrenomAnim = new java.awt.TextField();
+        precedent = new javax.swing.JButton();
+        valider = new javax.swing.JButton();
+        annuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,7 +59,7 @@ public class VueAjouterAnimateur extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Animateur"));
 
-        textField1.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldNomAnim.setBackground(new java.awt.Color(255, 255, 255));
 
         label2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label2.setText("Email :");
@@ -57,9 +70,14 @@ public class VueAjouterAnimateur extends javax.swing.JFrame {
         label4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label4.setText("Nom :");
 
-        textField2.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldEmailAnim.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldEmailAnim.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                verificationAnim(evt);
+            }
+        });
 
-        textField3.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldPrenomAnim.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,9 +91,9 @@ public class VueAjouterAnimateur extends javax.swing.JFrame {
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(textFieldEmailAnim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textFieldPrenomAnim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textFieldNomAnim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -83,23 +101,37 @@ public class VueAjouterAnimateur extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldNomAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldPrenomAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldEmailAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        precedent.setText("Precedent");
+        precedent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precedentActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Precedent");
+        valider.setText("Valider");
+        valider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Valider");
-
-        jButton4.setText("Annuler");
+        annuler.setText("Annuler");
+        annuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annulerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,11 +145,11 @@ public class VueAjouterAnimateur extends javax.swing.JFrame {
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(precedent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(annuler)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
+                        .addComponent(valider)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,9 +161,9 @@ public class VueAjouterAnimateur extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(precedent)
+                    .addComponent(valider)
+                    .addComponent(annuler))
                 .addContainerGap())
         );
 
@@ -140,19 +172,49 @@ public class VueAjouterAnimateur extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void verificationAnim(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationAnim
+        boolean valide;
+        boolean validEmail;
+        String nom, prenom;
+        EmailValidator validator = EmailValidator.getInstance(false, false);
+
+        nom = this.textFieldNomAnim.getText().trim();
+        prenom = this.textFieldPrenomAnim.getText().trim();
+        validEmail = validator.isValid(this.textFieldEmailAnim.getText().trim().toLowerCase())
+                && !s.getAnimateurs().containsKey(this.textFieldEmailAnim.getText().trim().toLowerCase());
+        this.textFieldEmailAnim.setForeground(validEmail ? Color.black : Color.red);
+
+        valide = validEmail
+                && (nom != null) && (nom.length() > 0)
+                && (prenom != null) && (prenom.length() > 0);
+
+        this.valider.setEnabled(valide);
+    }//GEN-LAST:event_verificationAnim
+
+    private void precedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentActionPerformed
+       this.gui.toModifierSession(s.getNom(), s.getNomConf());
+    }//GEN-LAST:event_precedentActionPerformed
+
+    private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
+        this.gui.modifierSession(Optional.empty(), s.getNom());
+    }//GEN-LAST:event_annulerActionPerformed
+
+    private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
+        this.gui.ajouterAnim(this.textFieldEmailAnim.getText().trim().toLowerCase(), s.getNom(), s.getNomConf());
+    }//GEN-LAST:event_validerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton annuler;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
-    private java.awt.TextField textField1;
-    private java.awt.TextField textField2;
-    private java.awt.TextField textField3;
+    private javax.swing.JButton precedent;
+    private java.awt.TextField textFieldEmailAnim;
+    private java.awt.TextField textFieldNomAnim;
+    private java.awt.TextField textFieldPrenomAnim;
+    private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables
 }
