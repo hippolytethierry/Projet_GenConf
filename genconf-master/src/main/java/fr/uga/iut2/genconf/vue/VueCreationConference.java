@@ -289,7 +289,7 @@ public class VueCreationConference extends javax.swing.JPanel {
     }//GEN-LAST:event_verificationAdmin
 
     private void verificationConference(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationConference
-         this.valideConf = !nomsExistants.contains(nomConference.getText());
+         this.valideConf = !nomsExistants.contains(nomConference.getText().trim());
          this.nomConference.setForeground(this.valideConf ? Color.black : Color.red);
          this.creerButton.setEnabled(this.valideAdmin && this.valideConf);
     }//GEN-LAST:event_verificationConference

@@ -28,15 +28,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="label1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="244" max="32767" attributes="0"/>
+                      <Component id="labelCommunication" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="255" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="precedentButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="precedent" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="annulerButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="annuler" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="validerButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="valider" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -49,14 +49,14 @@
               <EmptySpace pref="22" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="label1" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelCommunication" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="precedentButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="precedent" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="validerButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="annulerButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="valider" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="annuler" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -64,13 +64,16 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="java.awt.Label" name="label1">
+    <Component class="java.awt.Label" name="labelCommunication">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Modifier une communication"/>
+        <Property name="text" type="java.lang.String" value="Modifier la communication"/>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Modifier la communication"/>
+      </AccessibilityProperties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
@@ -90,7 +93,7 @@
                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="modifCorres" min="-2" max="-2" attributes="0"/>
+                          <Component id="modifCorrespondant" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Component id="nomComm" max="32767" attributes="0"/>
@@ -107,7 +110,7 @@
                       <Component id="nomComm" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="modifCorres" min="-2" max="-2" attributes="0"/>
+                  <Component id="modifCorrespondant" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -129,31 +132,40 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="java.awt.Button" name="modifCorres">
+        <Component class="java.awt.Button" name="modifCorrespondant">
           <Properties>
             <Property name="actionCommand" type="java.lang.String" value="Modifier correspondant"/>
             <Property name="label" type="java.lang.String" value="Modifier correspondant"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifCorrespondantActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="precedentButton">
+    <Component class="javax.swing.JButton" name="precedent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Precedent"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="precedentActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="annulerButton">
+    <Component class="javax.swing.JButton" name="annuler">
       <Properties>
         <Property name="text" type="java.lang.String" value="Annuler"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="annulerButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="annulerActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="validerButton">
+    <Component class="javax.swing.JButton" name="valider">
       <Properties>
         <Property name="text" type="java.lang.String" value="Valider"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="validerActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

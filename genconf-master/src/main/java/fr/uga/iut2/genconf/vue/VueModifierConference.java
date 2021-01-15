@@ -33,6 +33,8 @@ public class VueModifierConference extends javax.swing.JPanel {
         this.valideConf = false;
         
         initComponents();
+        this.labelConf.setText(this.labelConf.getText()+this.conf.getNom());
+        this.valider.setEnabled(false);
     }
     
     public void setConf(Conference conf){
@@ -53,7 +55,7 @@ public class VueModifierConference extends javax.swing.JPanel {
     private void initComponents() {
 
         textField2 = new java.awt.TextField();
-        label1 = new java.awt.Label();
+        labelConf = new java.awt.Label();
         jPanel1 = new javax.swing.JPanel();
         label3 = new java.awt.Label();
         textFieldNomConf = new java.awt.TextField();
@@ -67,11 +69,10 @@ public class VueModifierConference extends javax.swing.JPanel {
 
         textField2.setText("textField2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 360));
 
-        label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label1.setText("Modifier une conférence");
+        labelConf.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelConf.setText("Modifier la conférence");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Conférence"));
         jPanel1.setToolTipText("Modifier");
@@ -162,16 +163,16 @@ public class VueModifierConference extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 265, Short.MAX_VALUE))
+                        .addComponent(labelConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 259, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
@@ -187,7 +188,7 @@ public class VueModifierConference extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -195,12 +196,11 @@ public class VueModifierConference extends javax.swing.JPanel {
                     .addComponent(annuler)
                     .addComponent(valider)
                     .addComponent(precedent))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
+        labelConf.getAccessibleContext().setAccessibleName("Modifier la conférence");
         jPanel1.getAccessibleContext().setAccessibleName("Modifier");
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
@@ -251,10 +251,10 @@ public class VueModifierConference extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSpinner jSpinnerDateDebut;
     private javax.swing.JSpinner jSpinnerDateFin;
-    private java.awt.Label label1;
     private java.awt.Label label3;
     private java.awt.Label label4;
     private java.awt.Label label5;
+    private java.awt.Label labelConf;
     private javax.swing.JButton precedent;
     private java.awt.TextField textField2;
     private java.awt.TextField textFieldNomConf;

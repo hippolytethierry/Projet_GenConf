@@ -53,8 +53,7 @@ public class GUI extends IHM {
         this.vueCreationConf = new VueCreationConference(this);
         this.vueCreationCom = new VueCreationCommunication(this);
         this.vueCreationUser = new VueCreationUtilisateur(this);
-        this.vueCreationSession = new VueCreationSession(this);
-        this.vueCreationUser = new VueCreationUtilisateur(this);        
+        this.vueCreationSession = new VueCreationSession(this);       
         this.vueConf = new VueConference(this);
         this.vueSession = new VueSession(this);
         this.vueCommunication = new VueCommunication(this);
@@ -132,8 +131,7 @@ public class GUI extends IHM {
     protected void supprimerConference(String nomConf){
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         this.controleur.supprimerConference(nomConf);
-    }
-    
+    }   
 
     protected void creerCommunication(Optional<InfosCommunication> nlleComm) {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
@@ -143,10 +141,10 @@ public class GUI extends IHM {
         );
     }
     
-    protected void modifierCommunication(Optional<InfosConference> com){
+    protected void modifierCommunication(Optional<InfosCommunication> com, String nomCom){
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         com.ifPresentOrElse(
-                infos -> this.controleur.modifierCommunication(infos),
+                infos -> this.controleur.modifierCommunication(infos, nomCom),
                 () -> this.vueEtat.setEtat("")
         );
     }
@@ -155,13 +153,15 @@ public class GUI extends IHM {
         return this.controleur.selectionnerConference(nomConf);
     }
     
-    protected void toModifierCommunication(String nomConf){
-        this.vueCommunication.setComsExistantes(comsExistantes);
+    protected void toModifierCommunication(String nomSession, String nomConf, String nomCom){
+        this.vueModifierCom.setCommunication(selectionnerCommunication(nomCom, nomSession, nomConf));
+        this.vueModifierCom.setSession(selectionnerSession(nomSession, nomConf));
+        this.vueModifierCom.setComsExistantes(this.controleur.getListeCommunications(nomSession, nomConf));
         this.vuePrincipale.afficherVue(GUI.VUE_MODIFIER_COMMUNICATION);        
     }
     
-    protected Communication selectionnerCommunication ( String nomCom, String nomSession, Conference conf){
-       return conf.getSessions().get(nomSession).getCommunications().get(nomCom);
+    protected Communication selectionnerCommunication (String nomCom, String nomSession, String nomConf){
+       return this.controleur.selectionnerCommunication(nomCom, nomSession, nomConf);
     }
 
     protected void supprimerCommunication(String nomCom){
@@ -202,9 +202,9 @@ public class GUI extends IHM {
         this.vuePrincipale.afficherVue(GUI.VUE_SESSIONS);
     }
     
-    protected void supprimerSession(String nomConf){
+    protected void supprimerSession(String nomSession, String nomConf){
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
-        this.controleur.supprimerSession(nomConf);
+        this.controleur.supprimerSession(nomSession, nomConf);
     }
     
     protected void toAjouterAnimateur(String nomSession, String nomConf){
@@ -227,8 +227,10 @@ public class GUI extends IHM {
         this.controleur.ajouterAnim(infosAnim, nomSession, nomConf);
     }
     
-    protected void toVoirPlusCommunications(String nomSession){
-        this.vueCommunication.setComsExistantes(this.controleur.getListeCommunications(nomSession));
+    protected void toVoirPlusCommunications(String nomSession, String nomConf){
+        this.vueCommunication.setSession(selectionnerSession(nomSession, nomConf));
+        this.vueCommunication.setComsExistantes(this.controleur.getListeCommunications(nomSession, nomConf));
+        this.vuePrincipale.afficherVue(GUI.VUE_COMS);
     }
     
     protected boolean freeEmail(String email){
@@ -284,14 +286,15 @@ public class GUI extends IHM {
     
     @Override
     public void saisirNouvelleCommunication(String nomSession, String nomConf) {
-        this.vueCreationCom.setComsExistantes(controleur.getListeCommunications(nomSession, nomConf));
-        this.vuePrincipale.afficherVue(GUI.VUE_CREATION_COM);
+        this.vueCreationCom.setComsExistantes(this.controleur.getListeCommunications(nomSession, nomConf));
+        this.vueCreationCom.setSession(this.controleur.selectionnerSession(nomSession, nomConf));
+        this.vuePrincipale.afficherVue(GUI.VUE_CREATION_COMMUNICATION);
     }
 
     @Override
     public void saisirNouvelleSession(String nomConf) {
         this.vueCreationSession.setSessionsExistantes(this.controleur.getListeSessions(nomConf));
-        this.vueCreationSession.setConf(this.controleur.transform(nomConf));
+        this.vueCreationSession.setConf(this.controleur.selectionnerConference(nomConf));
         this.vuePrincipale.afficherVue(GUI.VUE_CREATION_SESSION);
     }
 }

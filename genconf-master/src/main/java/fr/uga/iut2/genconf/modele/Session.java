@@ -22,7 +22,7 @@ public class Session implements Serializable, Comparable<Session>{
     private LocalDate dateDebut; 
     private LocalDate dateFin;
     private Type type;
-    private Utilisateur animateur;
+    private Map<String, Utilisateur> animateurs;
     private Map<String, Communication> communications;
     private Conference conf;
     
@@ -47,14 +47,18 @@ public class Session implements Serializable, Comparable<Session>{
         this.conf.getSessions().put(nom, s);
     }
     
-    public Utilisateur getAnimateurs(){
-        return this.animateur;
+    public Map<String, Utilisateur> getAnimateurs(){
+        return this.animateurs;
     }
     
     public String getNom() {
         return nom;
     }
 
+    public String getNomConf(){
+        return this.conf.getNom();
+    }
+    
     public void setNom(String nom) {
         this.nom = nom.toLowerCase();
     }

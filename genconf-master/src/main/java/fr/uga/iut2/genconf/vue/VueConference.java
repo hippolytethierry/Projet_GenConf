@@ -41,6 +41,7 @@ public class VueConference extends javax.swing.JPanel {
         assert confsExistantes != null;
         this.confsExistantes = confsExistantes;
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,7 +132,7 @@ public class VueConference extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
-        this.gui.modifierConference(Optional.empty());
+        this.gui.modifierConference(Optional.empty(), "");
     }//GEN-LAST:event_annulerActionPerformed
 
     private void modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierActionPerformed

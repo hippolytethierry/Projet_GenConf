@@ -39,11 +39,11 @@
                   <Component id="correspondant" alignment="1" max="32767" attributes="0"/>
                   <Component id="communication" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="creerCom" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelCom" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="precedentButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="precedent" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="annulerButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -58,14 +58,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="creerCom" min="-2" max="-2" attributes="0"/>
+              <Component id="labelCom" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="communication" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="correspondant" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="precedentButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="precedent" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="annulerButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="creerButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -89,22 +89,19 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="label1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="nomCommunication" pref="299" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                          <Component id="nomCommunication" pref="298" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="typeComm" min="-2" pref="147" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -133,13 +130,13 @@
         </Component>
         <Component class="javax.swing.JTextField" name="nomCommunication">
           <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificationConference"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verifCom"/>
           </Events>
         </Component>
         <Component class="java.awt.Label" name="label1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="12" style="1"/>
+              <Font name="Tahoma" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Type communication :"/>
           </Properties>
@@ -235,18 +232,12 @@
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="corresNom"/>
           </AccessibilityProperties>
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificationAdmin"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="corresPrenom">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificationAdmin"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="corresEmail">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificationAdmin"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificationCorres"/>
           </Events>
         </Component>
       </SubComponents>
@@ -267,15 +258,18 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="annulerButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="creerCom">
+    <Component class="javax.swing.JLabel" name="labelCom">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cr&#xe9;er une communication"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="precedentButton">
+    <Component class="javax.swing.JButton" name="precedent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Precedent"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="precedentActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

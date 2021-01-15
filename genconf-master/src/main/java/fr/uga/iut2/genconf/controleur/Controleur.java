@@ -37,8 +37,8 @@ public class Controleur {
             case CREER_CONFERENCE:
                 this.ihm.saisirNouvelleConference(this.genconf.getConferences().keySet());
                 break;
-            case CREER_SESSION:
-                this.ihm.saisirNouvelleSession(this.genconf.getConferences());
+//            case CREER_SESSION:
+//                this.ihm.saisirNouvelleSession(this.genconf.getConferences());
             case MODIFIER_CONFERENCE:
                 this.ihm.choisirConference(this.genconf.getConferences().keySet());
             default:
@@ -103,8 +103,8 @@ public class Controleur {
         this.genconf.getConferences().remove(nomConf);
     }
     
-    public void toModifierConf(String nomConf){
-        
+    public Communication selectionnerCommunication(String nomCom, String nomSession, String nomConf){
+        return this.genconf.getConferences().get(nomConf).getSessions().get(nomSession).getCommunications().get(nomCom);
     }
     
     public Conference selectionnerConference (String nomConf){
@@ -149,30 +149,31 @@ public class Controleur {
     }
         
         public void creerCommunication(IHM.InfosCommunication infos) {
-        // création d'un Utilisateur si nécessaire
-        boolean nouvelUtilisateur = this.genconf.ajouteUtilisateur(
-                infos.correspondant.email,
-                infos.correspondant.nom,
-                infos.correspondant.prenom
-        );
-        if (nouvelUtilisateur) {
-            this.ihm.informerUtilisateur("Nouve·au/lle correspondant·e : " + infos.correspondant.prenom + " " + infos.correspondant.nom + " <" + infos.correspondant.email + ">",
+            // création d'un Utilisateur si nécessaire
+            boolean nouvelUtilisateur = this.genconf.ajouteUtilisateur(
+                    infos.correspondant.email,
+                    infos.correspondant.nom,
+                    infos.correspondant.prenom
+            );
+            if (nouvelUtilisateur) {
+                this.ihm.informerUtilisateur("Nouve·au/lle correspondant·e : " + infos.correspondant.prenom + " " + infos.correspondant.nom + " <" + infos.correspondant.email + ">",
+                        true
+                );
+            }
+
+            Communication.initialiseCommunication(
+                    infos.nom,
+                    infos.type,
+                    /*infos.dateDebut,
+                    infos.dateFin,*/
+                    this.genconf.getUsers().get(infos.correspondant.email),
+                    infos.sess
+            );
+            this.ihm.informerUtilisateur(
+                    "Nouvelle session : " + infos.nom + ", animée par " + infos.correspondant.email,
                     true
             );
         }
-        
-        Communication.initialiseCommunication(
-                infos.nom,
-                infos.type,
-                /*infos.dateDebut,
-                infos.dateFin,*/
-                this.genconf.getUsers().get(infos.correspondant.email),
-                infos.sess
-        );
-        this.ihm.informerUtilisateur(
-                "Nouvelle session : " + infos.nom + ", animée par " + infos.anim.email,
-                true
-        );
 
     public void modifierSession(IHM.InfosSession infos, String nomSession){
         Session s = this.genconf.getConferences().get(infos.conf.getNom()).getSessions().get(nomSession);
@@ -186,8 +187,10 @@ public class Controleur {
        return this.genconf.getConferences().get(nomConf).getSessions().get(nomSession);
     }
     
-    public void modifierCommunication(IHM.InfosConference infos){
-        
+    public void modifierCommunication(IHM.InfosCommunication infos, String nomCom){
+        Communication c = this.genconf.getConferences().get(infos.sess.getNomConf()).getSessions().get(infos.sess.getNom()).getCommunications().get(nomCom);
+        c.setTitre(infos.nom);
+        this.ihm.informerUtilisateur("La communication "+nomCom+" à été modifié; Nom = "+infos.nom, true);
     }
     
     public void supprimerCommunication(String nomCom) {
@@ -200,13 +203,9 @@ public class Controleur {
         return sessionSelectionne.getCommunications().keySet();
     }
         
-    public void toModifierCommunication(String nomCom){
-        
-    }
-
-    public void supprimerSession(String nomSession) {
-        this.ihm.informerUtilisateur("La session "+nomSession+" à été supprimé.", true);        
-        this.genconf.getConferences().remove(nomSession);
+    public void supprimerSession(String nomSession, String nomConf) {
+        this.ihm.informerUtilisateur("La session "+nomSession+"de la conférence "+nomConf+" à été supprimé.", true);        
+        this.genconf.getConferences().get(nomConf).getSessions().remove(nomSession);
     }    
     
     public void supprimerAnimSession(String infoAnim, String nomSession, String nomConf){

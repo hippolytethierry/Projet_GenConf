@@ -35,6 +35,7 @@ public class VueModifierSession extends javax.swing.JPanel {
         this.valideSess = false;
         
         initComponents();
+        this.labelSession.setText(this.labelSession.getText()+this.session.getNom());
     }
     
     public void setSessionsExistantes(final Set<String> sessionsExistantes) {
@@ -69,10 +70,8 @@ public class VueModifierSession extends javax.swing.JPanel {
         precedent = new javax.swing.JButton();
         valider = new javax.swing.JButton();
         annuler = new javax.swing.JButton();
-        buttonSupAnim = new java.awt.Button();
+        buttonSupprAnim = new java.awt.Button();
         buttonAddAnim = new java.awt.Button();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPaneSession.setBorder(javax.swing.BorderFactory.createTitledBorder("Session"));
 
@@ -139,7 +138,7 @@ public class VueModifierSession extends javax.swing.JPanel {
         labelDateFin.getAccessibleContext().setAccessibleName("date de fin :");
 
         labelSession.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        labelSession.setText("Modifier une session");
+        labelSession.setText("Modifier la session");
 
         precedent.setText("Precedent");
         precedent.addActionListener(new java.awt.event.ActionListener() {
@@ -162,10 +161,10 @@ public class VueModifierSession extends javax.swing.JPanel {
             }
         });
 
-        buttonSupAnim.setLabel("Supprimer animateur");
-        buttonSupAnim.addActionListener(new java.awt.event.ActionListener() {
+        buttonSupprAnim.setLabel("Supprimer animateur");
+        buttonSupprAnim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSupAnimActionPerformed(evt);
+                buttonSupprAnimActionPerformed(evt);
             }
         });
 
@@ -176,8 +175,8 @@ public class VueModifierSession extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -197,7 +196,7 @@ public class VueModifierSession extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(buttonSupAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonSupprAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonAddAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71))))
@@ -211,7 +210,7 @@ public class VueModifierSession extends javax.swing.JPanel {
                 .addComponent(jPaneSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonSupAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSupprAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonAddAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
@@ -222,7 +221,7 @@ public class VueModifierSession extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pack();
+        labelSession.getAccessibleContext().setAccessibleName("Modifier la session");
     }// </editor-fold>//GEN-END:initComponents
 
     private void precedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentActionPerformed
@@ -272,9 +271,9 @@ public class VueModifierSession extends javax.swing.JPanel {
         this.gui.modifierSession(Optional.of(session), this.session.getNom());
     }//GEN-LAST:event_validerActionPerformed
 
-    private void buttonSupAnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupAnimActionPerformed
+    private void buttonSupprAnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupprAnimActionPerformed
         this.gui.toSupprimerAnimateur(this.session.getNom(), this.conf.getNom());
-    }//GEN-LAST:event_buttonSupAnimActionPerformed
+    }//GEN-LAST:event_buttonSupprAnimActionPerformed
 
     private void buttonAddAnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddAnimActionPerformed
         this.gui.toAjouterAnimateur(this.session.getNom(), this.conf.getNom());
@@ -289,7 +288,7 @@ public class VueModifierSession extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private java.awt.Button buttonAddAnim;
-    private java.awt.Button buttonSupAnim;
+    private java.awt.Button buttonSupprAnim;
     private javax.swing.JPanel jPaneSession;
     private javax.swing.JSpinner jSpinnerDateDebut;
     private javax.swing.JSpinner jSpinnerDateFin;

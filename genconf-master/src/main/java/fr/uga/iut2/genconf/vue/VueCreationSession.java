@@ -95,11 +95,6 @@ public class VueCreationSession extends javax.swing.JPanel {
 
         jLabel1.setText("Nom de la session :");
 
-        nomSess.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomSessActionPerformed(evt);
-            }
-        });
         nomSess.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 verificationSession(evt);
@@ -331,10 +326,6 @@ public class VueCreationSession extends javax.swing.JPanel {
     private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerButtonActionPerformed
         this.gui.creerSession(Optional.empty());
     }//GEN-LAST:event_annulerButtonActionPerformed
-
-    private void nomSessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSessActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomSessActionPerformed
     
     private void precedentButtonActionPerformed(java.awt.event.ActionEvent evt){
         this.gui.toVoirPlusSession(conf.getNom());

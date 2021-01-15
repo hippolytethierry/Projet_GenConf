@@ -1,10 +1,6 @@
 package fr.uga.iut2.genconf.vue;
 
 import java.awt.Color;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -30,18 +26,21 @@ public class VueCreationCommunication extends javax.swing.JPanel {
 
         // création de l'interface générée
         this.initComponents();
-
+        this.labelCom.setText(this.labelCom.getText()+" dans la session "+this.sess.getNom());
         // configuration des composants de l'interface (à faire après la création de l'interface)
         // format de date
         // désactivation du bouton de création
         this.creerButton.setEnabled(false);
     }
 
-    public void setCommunicationsExistantes(final Set<String> communicationsExistantes) {
+    public void setComsExistantes(final Set<String> communicationsExistantes) {
         assert communicationsExistantes != null;
         this.communicationsExistantes = communicationsExistantes;
     }
-
+    
+    public void setSession(Session s){
+        this.sess = s;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,8 +65,8 @@ public class VueCreationCommunication extends javax.swing.JPanel {
         corresEmail = new javax.swing.JTextField();
         creerButton = new javax.swing.JButton();
         annulerButton = new javax.swing.JButton();
-        creerCom = new javax.swing.JLabel();
-        precedentButton = new javax.swing.JButton();
+        labelCom = new javax.swing.JLabel();
+        precedent = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -77,11 +76,11 @@ public class VueCreationCommunication extends javax.swing.JPanel {
 
         nomCommunication.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                verificationConference(evt);
+                verifCom(evt);
             }
         });
 
-        label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        label1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         label1.setText("Type communication :");
 
         typeComm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "keynote", "atelier", "article" }));
@@ -92,18 +91,16 @@ public class VueCreationCommunication extends javax.swing.JPanel {
             communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(communicationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
                 .addGroup(communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nomCommunication, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                     .addGroup(communicationLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(nomCommunication, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(communicationLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(typeComm, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         communicationLayout.setVerticalGroup(
             communicationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,21 +124,10 @@ public class VueCreationCommunication extends javax.swing.JPanel {
         jLabel6.setText("Email :");
 
         corresNom.setName(""); // NOI18N
-        corresNom.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                verificationAdmin(evt);
-            }
-        });
-
-        corresPrenom.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                verificationAdmin(evt);
-            }
-        });
 
         corresEmail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                verificationAdmin(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                verificationCorres(evt);
             }
         });
 
@@ -196,9 +182,14 @@ public class VueCreationCommunication extends javax.swing.JPanel {
             }
         });
 
-        creerCom.setText("Créer une communication");
+        labelCom.setText("Créer une communication");
 
-        precedentButton.setText("Precedent");
+        precedent.setText("Precedent");
+        precedent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precedentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -210,10 +201,10 @@ public class VueCreationCommunication extends javax.swing.JPanel {
                     .addComponent(correspondant, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(communication, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(creerCom)
+                        .addComponent(labelCom)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(precedentButton)
+                        .addComponent(precedent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(annulerButton)
                         .addGap(18, 18, 18)
@@ -224,14 +215,14 @@ public class VueCreationCommunication extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(creerCom)
+                .addComponent(labelCom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(communication, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(correspondant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(precedentButton)
+                    .addComponent(precedent)
                     .addComponent(annulerButton)
                     .addComponent(creerButton))
                 .addContainerGap())
@@ -250,8 +241,6 @@ public class VueCreationCommunication extends javax.swing.JPanel {
          IHM.InfosCommunication nlleComm = new IHM.InfosCommunication(
                  this.nomCommunication.getText(),
                  this.typeComm.getActionCommand(),
-                 sess.getDateDebut(),
-                 sess.getDateFin(),
                  corres,
                  sess
          );
@@ -259,35 +248,40 @@ public class VueCreationCommunication extends javax.swing.JPanel {
          this.gui.creerCommunication(Optional.of(nlleComm));
     }//GEN-LAST:event_creerButtonActionPerformed
 
-    private void verificationCorres(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationAdmin
+    private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerButtonActionPerformed
+        this.gui.creerCommunication(Optional.empty());
+    }//GEN-LAST:event_annulerButtonActionPerformed
+
+    private void precedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentActionPerformed
+        this.gui.toVoirPlusCommunications(sess.getNom(), sess.getNomConf());
+    }//GEN-LAST:event_precedentActionPerformed
+
+    private void verificationCorres(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationCorres
         boolean validEmail;
         String nom, prenom;
         EmailValidator validator = EmailValidator.getInstance(false, false);
 
         nom = this.corresNom.getText().trim();
         prenom = this.corresPrenom.getText().trim();
-        validEmail = validator.isValid(this.corresEmail.getText().trim().toLowerCase());
-        this.corresEmail.setForeground(validEmail ? Color.black : Color.red);
+        validEmail = validator.isValid(this.corresEmail.getText().trim().toLowerCase())
+                && !freeEmail(this.corresEmail.getText().trim().toLowerCase());
+        this.corresPrenom.setForeground(validEmail ? Color.black : Color.red);
 
         this.valideCorres = validEmail
                  && (nom != null) && (nom.length() > 0)
                  && (prenom != null) && (prenom.length() > 0);
 
-        this.creerButton.setEnabled(this.valideCorres && this.valideComm);
-    }//GEN-LAST:event_verificationAdmin
+        this.creerButton.setEnabled(this.valideCorres&&this.valideComm);
+    }//GEN-LAST:event_verificationCorres
 
-    private void verificationCommunication(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationConference
-         this.valideComm = !communicationsExistantes.contains(nomCommunication.getText());
-         this.nomCommunication.setForeground(this.valideComm ? Color.black : Color.red);
-         this.creerButton.setEnabled(this.valideCorres && this.valideComm);
-    }//GEN-LAST:event_verificationConference
-
-    private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerButtonActionPerformed
-        this.gui.creerCommunication(Optional.empty());
-    }//GEN-LAST:event_annulerButtonActionPerformed
+    private void verifCom(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verifCom
+        this.valideComm = !this.communicationsExistantes.contains(this.nomCommunication.getText().trim());
+        this.nomCommunication.setForeground(this.valideComm ? Color.black : Color.red);
+        this.creerButton.setEnabled(this.valideCorres&&this.valideComm);
+    }//GEN-LAST:event_verifCom
     
-    private void precedentButtonActionPerformed(java.awt.event.ActionEvent evt){
-        this.gui.toVoirPlusCommunication(sess.getNom());
+    private boolean freeEmail(String email){
+        return this.gui.freeEmail(email);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -298,15 +292,15 @@ public class VueCreationCommunication extends javax.swing.JPanel {
     private javax.swing.JTextField corresPrenom;
     private javax.swing.JPanel correspondant;
     private javax.swing.JButton creerButton;
-    private javax.swing.JLabel creerCom;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private java.awt.Label label1;
+    private javax.swing.JLabel labelCom;
     private javax.swing.JTextField nomCommunication;
-    private javax.swing.JButton precedentButton;
+    private javax.swing.JButton precedent;
     private javax.swing.JComboBox<String> typeComm;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,10 +10,7 @@ import java.awt.Color;
 import java.util.Optional;
 import org.apache.commons.validator.routines.EmailValidator;
 
-/**
- *
- * @author sylvains
- */
+
 public class VueAjouterAnimateur extends javax.swing.JPanel {
     private final GUI gui;
     private Session s;
@@ -40,7 +37,7 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label1 = new java.awt.Label();
+        labelAnimateur = new java.awt.Label();
         jPanel1 = new javax.swing.JPanel();
         textFieldNomAnim = new java.awt.TextField();
         label2 = new java.awt.Label();
@@ -52,10 +49,8 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
         valider = new javax.swing.JButton();
         annuler = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label1.setText("Ajouter un animateur");
+        labelAnimateur.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelAnimateur.setText("Ajouter un animateur");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Animateur"));
 
@@ -112,6 +107,7 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
         precedent.setText("Precedent");
         precedent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,8 +129,8 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -142,7 +138,7 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelAnimateur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(precedent)
@@ -156,7 +152,7 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelAnimateur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
@@ -167,9 +163,7 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        label1.getAccessibleContext().setAccessibleName("Ajouter animateur");
-
-        pack();
+        labelAnimateur.getAccessibleContext().setAccessibleName("Ajouter animateur");
     }// </editor-fold>//GEN-END:initComponents
 
     private void verificationAnim(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationAnim
@@ -203,14 +197,13 @@ public class VueAjouterAnimateur extends javax.swing.JPanel {
         this.gui.ajouterAnim(this.textFieldEmailAnim.getText().trim().toLowerCase(), s.getNom(), s.getNomConf());
     }//GEN-LAST:event_validerActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private java.awt.Label label4;
+    private java.awt.Label labelAnimateur;
     private javax.swing.JButton precedent;
     private java.awt.TextField textFieldEmailAnim;
     private java.awt.TextField textFieldNomAnim;

@@ -6,24 +6,19 @@
 package fr.uga.iut2.genconf.vue;
 
 import java.awt.Color;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Optional;
 import fr.uga.iut2.genconf.modele.*;
-import java.util.Iterator;
 
 /**
  *
  * @author hippo
  */
-public class VueModifierCommunication extends javax.swing.JFrame {
+public class VueModifierCommunication extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> communicationsExistantes;
-    private boolean valideCom;
+    private boolean valideComm;
     private Session sess;
     private Communication comm;
     /**
@@ -32,20 +27,22 @@ public class VueModifierCommunication extends javax.swing.JFrame {
     public VueModifierCommunication(GUI gui) {
         this.gui = gui;
         this.communicationsExistantes = new HashSet();
-        this.valideCom = false;
-        
+        this.valideComm = false;
+
         initComponents();
+        this.labelCommunication.setText(this.labelCommunication.getText()+comm.getTitre()+" de la session "+sess.getNom());
+        this.valider.setEnabled(false);
     }
-    
-    public void setCommunicationsExistantes(final Set<String> communicationsExistantes){
+
+    public void setComsExistantes(final Set<String> communicationsExistantes){
         assert communicationsExistantes != null;
         this.communicationsExistantes = communicationsExistantes;
     }
-    
+
     public void setSession(Session sess){
         this.sess = sess;
     }
-    
+
     public void setCommunication(Communication comm){
         this.comm = comm;
     }
@@ -59,19 +56,19 @@ public class VueModifierCommunication extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label1 = new java.awt.Label();
+        labelCommunication = new java.awt.Label();
         jPanel1 = new javax.swing.JPanel();
         label2 = new java.awt.Label();
         nomComm = new java.awt.TextField();
-        modifCorres = new java.awt.Button();
-        precedentButton = new javax.swing.JButton();
-        annulerButton = new javax.swing.JButton();
-        validerButton = new javax.swing.JButton();
+        modifCorrespondant = new java.awt.Button();
+        precedent = new javax.swing.JButton();
+        annuler = new javax.swing.JButton();
+        valider = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label1.setText("Modifier une communication");
+        labelCommunication.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelCommunication.setText("Modifier la communication");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Communication"));
 
@@ -80,8 +77,13 @@ public class VueModifierCommunication extends javax.swing.JFrame {
 
         nomComm.setBackground(new java.awt.Color(255, 255, 255));
 
-        modifCorres.setActionCommand("Modifier correspondant");
-        modifCorres.setLabel("Modifier correspondant");
+        modifCorrespondant.setActionCommand("Modifier correspondant");
+        modifCorrespondant.setLabel("Modifier correspondant");
+        modifCorrespondant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifCorrespondantActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,7 +95,7 @@ public class VueModifierCommunication extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(modifCorres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(modifCorrespondant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(nomComm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -105,20 +107,30 @@ public class VueModifierCommunication extends javax.swing.JFrame {
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nomComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
-                .addComponent(modifCorres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(modifCorrespondant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        precedentButton.setText("Precedent");
-
-        annulerButton.setText("Annuler");
-        annulerButton.addActionListener(new java.awt.event.ActionListener() {
+        precedent.setText("Precedent");
+        precedent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                annulerButtonActionPerformed(evt);
+                precedentActionPerformed(evt);
             }
         });
 
-        validerButton.setText("Valider");
+        annuler.setText("Annuler");
+        annuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annulerActionPerformed(evt);
+            }
+        });
+
+        valider.setText("Valider");
+        valider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,14 +141,14 @@ public class VueModifierCommunication extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 244, Short.MAX_VALUE))
+                        .addComponent(labelCommunication, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 255, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(precedentButton)
+                        .addComponent(precedent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(annulerButton)
+                        .addComponent(annuler)
                         .addGap(18, 18, 18)
-                        .addComponent(validerButton)))
+                        .addComponent(valider)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -145,33 +157,73 @@ public class VueModifierCommunication extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelCommunication, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(precedentButton))
-                    .addComponent(validerButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(annulerButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(precedent))
+                    .addComponent(valider, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(annuler, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
+
+        labelCommunication.getAccessibleContext().setAccessibleName("Modifier la communication");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerButtonActionPerformed
+    private void precedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentActionPerformed
+        this.gui.toVoirPlusCommunications(this.sess.getNom(), this.sess.getNomConf());
+    }//GEN-LAST:event_precedentActionPerformed
+
+    private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
+        this.gui.modifierCommunication(Optional.empty(), this.comm.getTitre());
+    }//GEN-LAST:event_annulerActionPerformed
+
+    private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
+        IHM.InfosUtilisateur corres = new IHM.InfosUtilisateur(
+                comm.getCorrespondant().getEmail(),
+                comm.getCorrespondant().getNom(),
+                comm.getCorrespondant().getPrenom()
+        );
+
+        // Infos sur la nouvelle conference
+        IHM.InfosCommunication communication = new IHM.InfosCommunication(
+                this.nomComm.getText(),
+                this.sess.getType().toString(),
+                corres,
+                sess
+        );
+
+        this.gui.modifierCommunication(Optional.of(communication), this.comm.getTitre());
+    }//GEN-LAST:event_validerActionPerformed
+
+    private void buttonSupAnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupAnimActionPerformed
+
+    }//GEN-LAST:event_buttonSupAnimActionPerformed
+
+    private void buttonAddAnimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddAnimActionPerformed
+
+    }//GEN-LAST:event_buttonAddAnimActionPerformed
+
+    private void verificationSession(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationSession
+        this.valideComm = !communicationsExistantes.contains(nomComm.getText()) || (nomComm.getText() == this.comm.getTitre());
+        this.nomComm.setForeground(this.valideComm ? Color.black : Color.red);
+        this.valider.setEnabled(valideComm);
+    }//GEN-LAST:event_verificationSession
+
+    private void modifCorrespondantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifCorrespondantActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_annulerButtonActionPerformed
-
-
+    }//GEN-LAST:event_modifCorrespondantActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton annulerButton;
+    private javax.swing.JButton annuler;
     private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
     private java.awt.Label label2;
-    private java.awt.Button modifCorres;
+    private java.awt.Label labelCommunication;
+    private java.awt.Button modifCorrespondant;
     private java.awt.TextField nomComm;
-    private javax.swing.JButton precedentButton;
-    private javax.swing.JButton validerButton;
+    private javax.swing.JButton precedent;
+    private javax.swing.JButton valider;
     // End of variables declaration//GEN-END:variables
 }

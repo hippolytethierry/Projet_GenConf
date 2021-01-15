@@ -15,6 +15,7 @@ import java.util.Optional;
 public class VueSupprimerAnimateur extends javax.swing.JPanel {
     private final GUI gui;
     private Session s;
+    private String[] listeAnimateurs = new String[] { "" };
     /**
      * Creates new form VueSupprimerAnimateur
      */
@@ -22,14 +23,16 @@ public class VueSupprimerAnimateur extends javax.swing.JPanel {
         this.gui = gui;
         
         initComponents();
+        this.labelAnim.setText(this.labelAnim.getText()+" de la session "+this.s.getNom());
+        listeAnims.setModel(new javax.swing.DefaultComboBoxModel<>(listeAnimateurs));
         setAnimsExistants(this.s);
     }
 
     
-    public void setAnimsExistants(Session s){
+    public void setAnimsExistants(Session s){        
         for (Utilisateur unAnim : s.getAnimateurs().values()){
             listeAnims.addItem(unAnim.getNom().toUpperCase());
-        }
+        }        
     }
     
     public void setSession(Session s){
@@ -55,7 +58,7 @@ public class VueSupprimerAnimateur extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label1 = new java.awt.Label();
+        labelAnim = new java.awt.Label();
         jPanel1 = new javax.swing.JPanel();
         label2 = new java.awt.Label();
         listeAnims = new javax.swing.JComboBox<>();
@@ -66,15 +69,13 @@ public class VueSupprimerAnimateur extends javax.swing.JPanel {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label1.setText("Supprimer un animateur");
+        labelAnim.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        labelAnim.setText("Supprimer un animateur");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Anima·teur/trice"));
 
         label2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label2.setText("liste anima·teur/trice :");
-
-        listeAnims.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         label3.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         label3.setText("Veuillez séléctionner un nom de la liste afin de supprimer un/une anima·teur/trice");
@@ -135,7 +136,7 @@ public class VueSupprimerAnimateur extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(precedent)
@@ -150,7 +151,7 @@ public class VueSupprimerAnimateur extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelAnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -179,9 +180,9 @@ public class VueSupprimerAnimateur extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
+    private java.awt.Label labelAnim;
     private javax.swing.JComboBox<String> listeAnims;
     private javax.swing.JButton precedent;
     private javax.swing.JButton valider;

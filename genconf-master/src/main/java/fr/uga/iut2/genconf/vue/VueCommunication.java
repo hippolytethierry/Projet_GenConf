@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
+import fr.uga.iut2.genconf.modele.*;
 
 /**
  *
@@ -18,19 +19,20 @@ import javax.swing.JRadioButton;
 public class VueCommunication extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> comsExistantes;
-    JRadioButton [] boutonsComs;
-    private Conference conf;
+    private JRadioButton [] boutonsComs;
+    private Session s;
 
     /**
      * Creates new form VueConference
      */
     public VueCommunication(GUI gui) {
         this.gui = gui;
-        this.comsExistantes = new HashSet<>();
-        
+        this.comsExistantes = new HashSet<>();        
         
         initComponents();
         contentPane(comsExistantes);
+        this.labelConf.setText(this.labelConf.getText()+this.s.getNomConf());
+        this.labelSession.setText(this.labelSession.getText()+this.s.getNom());
     }
         
     public void setComsExistantes(final Set<String> comsExistantes) {
@@ -38,11 +40,9 @@ public class VueCommunication extends javax.swing.JPanel {
         this.comsExistantes = comsExistantes;    
     }
 
-    public void setConf(Conference conf) {
-        this.conf = conf;
-    }
-    
-    
+    public void setSession(Session s) {
+        this.s = s;
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,13 +57,11 @@ public class VueCommunication extends javax.swing.JPanel {
         modifier = new javax.swing.JButton();
         annuler = new javax.swing.JButton();
         comsPane = new javax.swing.JScrollPane();
-        conférence = new javax.swing.JLabel();
+        labelConf = new javax.swing.JLabel();
         CreerCom = new javax.swing.JButton();
         Précedent = new javax.swing.JButton();
-        Session = new javax.swing.JLabel();
+        labelSession = new javax.swing.JLabel();
         supCom = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Communication.setText("Choisir la communication : ");
 
@@ -81,7 +79,7 @@ public class VueCommunication extends javax.swing.JPanel {
             }
         });
 
-        conférence.setText("Pour la conférence .");
+        labelConf.setText("Pour la conférence .");
 
         CreerCom.setText("Creer communication");
         CreerCom.addActionListener(new java.awt.event.ActionListener() {
@@ -91,8 +89,13 @@ public class VueCommunication extends javax.swing.JPanel {
         });
 
         Précedent.setText("Precedent");
+        Précedent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrécedentActionPerformed(evt);
+            }
+        });
 
-        Session.setText("Pour la session .");
+        labelSession.setText("Pour la session .");
 
         supCom.setText("Supprimer communication");
         supCom.addActionListener(new java.awt.event.ActionListener() {
@@ -101,8 +104,8 @@ public class VueCommunication extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -117,8 +120,8 @@ public class VueCommunication extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Communication)
-                            .addComponent(conférence)
-                            .addComponent(Session))
+                            .addComponent(labelConf)
+                            .addComponent(labelSession))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(comsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,9 +135,9 @@ public class VueCommunication extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(conférence)
+                .addComponent(labelConf)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Session)
+                .addComponent(labelSession)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Communication)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -153,25 +156,23 @@ public class VueCommunication extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void annulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerActionPerformed
-        this.gui.modifierCommunication(Optional.empty());
+        this.gui.modifierCommunication(Optional.empty(), "");
     }//GEN-LAST:event_annulerActionPerformed
 
     private void modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierActionPerformed
         for (JRadioButton uneCom : getContentPane()){
             if (uneCom.isSelected()){
-                this.gui.toModifierCommunication(uneCom.getName());
+                this.gui.toModifierCommunication(this.s.getNom(), this.s.getNomConf(), uneCom.getName());
                 break;
             }
         }
     }//GEN-LAST:event_modifierActionPerformed
 
     private void CreerComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreerComActionPerformed
-            this.gui.saisirNouvelleCommunication(this.comsExistantes);            
+            this.gui.saisirNouvelleCommunication(this.s.getNom(), this.s.getNomConf());            
     }//GEN-LAST:event_CreerComActionPerformed
 
     private void supComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supComActionPerformed
@@ -183,18 +184,22 @@ public class VueCommunication extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_supComActionPerformed
 
+    private void PrécedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrécedentActionPerformed
+        this.gui.toVoirPlusSession(this.s.getNomConf());
+    }//GEN-LAST:event_PrécedentActionPerformed
+
     /**
      * @param args the command line arguments
      */
     private void contentPane(Set<String> coms){
         JRadioButton boutonCom;
         boutonsComs = new JRadioButton[coms.size()];
-        ButtonGroup confGroup = new ButtonGroup();
+        ButtonGroup comsGroup = new ButtonGroup();
         int i = 0;
         for (String uneConf : coms){
             boutonCom = new JRadioButton(uneConf);
             boutonsComs[i] = boutonCom;
-            confGroup.add(boutonCom);
+            comsGroup.add(boutonCom);
             comsPane.add(boutonCom);
             i++;
         }        
@@ -209,10 +214,10 @@ public class VueCommunication extends javax.swing.JPanel {
     private javax.swing.JLabel Communication;
     private javax.swing.JButton CreerCom;
     private javax.swing.JButton Précedent;
-    private javax.swing.JLabel Session;
     private javax.swing.JButton annuler;
     private javax.swing.JScrollPane comsPane;
-    private javax.swing.JLabel conférence;
+    private javax.swing.JLabel labelConf;
+    private javax.swing.JLabel labelSession;
     private javax.swing.JButton modifier;
     private javax.swing.JButton supCom;
     // End of variables declaration//GEN-END:variables

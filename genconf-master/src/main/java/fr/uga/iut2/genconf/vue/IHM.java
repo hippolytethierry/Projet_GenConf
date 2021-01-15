@@ -50,10 +50,6 @@ public abstract class IHM {
             this.admin = admin;
             
         }
-        
-        public InfosConference getInfos(String nomConf){
-            
-        }
     }
     
     public static class InfosSession {
