@@ -260,7 +260,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelCom">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cr&#xe9;er une communication"/>
+        <Property name="text" type="java.lang.String" value="Cr&#xe9;er une communication "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="precedent">

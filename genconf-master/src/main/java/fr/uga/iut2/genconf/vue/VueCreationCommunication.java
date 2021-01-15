@@ -26,7 +26,7 @@ public class VueCreationCommunication extends javax.swing.JPanel {
 
         // création de l'interface générée
         this.initComponents();
-        this.labelCom.setText(this.labelCom.getText()+" dans la session "+this.sess.getNom());
+
         // configuration des composants de l'interface (à faire après la création de l'interface)
         // format de date
         // désactivation du bouton de création
@@ -40,6 +40,7 @@ public class VueCreationCommunication extends javax.swing.JPanel {
     
     public void setSession(Session s){
         this.sess = s;
+        this.labelCom.setText(this.labelCom.getText()+" dans la session "+this.sess.getNom());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -182,7 +183,7 @@ public class VueCreationCommunication extends javax.swing.JPanel {
             }
         });
 
-        labelCom.setText("Créer une communication");
+        labelCom.setText("Créer une communication ");
 
         precedent.setText("Precedent");
         precedent.addActionListener(new java.awt.event.ActionListener() {

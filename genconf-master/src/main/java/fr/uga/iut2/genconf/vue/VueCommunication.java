@@ -31,8 +31,7 @@ public class VueCommunication extends javax.swing.JPanel {
         
         initComponents();
         contentPane(comsExistantes);
-        this.labelConf.setText(this.labelConf.getText()+this.s.getNomConf());
-        this.labelSession.setText(this.labelSession.getText()+this.s.getNom());
+
     }
         
     public void setComsExistantes(final Set<String> comsExistantes) {
@@ -42,6 +41,8 @@ public class VueCommunication extends javax.swing.JPanel {
 
     public void setSession(Session s) {
         this.s = s;
+        this.labelConf.setText(this.labelConf.getText()+this.s.getNomConf());
+        this.labelSession.setText(this.labelSession.getText()+this.s.getNom());
     }    
 
     /**

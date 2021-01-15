@@ -33,12 +33,13 @@ public class VueModifierConference extends javax.swing.JPanel {
         this.valideConf = false;
         
         initComponents();
-        this.labelConf.setText(this.labelConf.getText()+this.conf.getNom());
+        
         this.valider.setEnabled(false);
     }
     
     public void setConf(Conference conf){
         this.conf = conf;
+        this.labelConf.setText(this.labelConf.getText()+this.conf.getNom());
     }
     
     public void setConfsExistantes(final Set<String> confsExistantes) {

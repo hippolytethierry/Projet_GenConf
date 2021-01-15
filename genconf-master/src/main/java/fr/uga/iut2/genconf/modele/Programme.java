@@ -42,23 +42,9 @@ public class Programme {
             this.planning.add(s.getDateDebut());
             this.planning.add(s.getDateFin());
 
-
-    protected void update(){
-        for (LocalDate pause : this.planning){
-            System.out.println(pause);
-            
-            //A faire afficher toute les pauses sur une interface graphique et pouvoir r�cuperer une. 
-            
-            //if (bouton selectionn�){
-                //demande de rentrer la nouvelle heure voulu pour la pause s�lection�
-                //mofifier en cons�quence
-       // }
-
         }
-                
     }
-
-       
+    
     public void addPause(LocalDate dateDebut, LocalDate dateFin){
         
         assert (!dateFin.isAfter(this.conf.getDateFin()) && (!dateDebut.isBefore(this.conf.getDateDebut())));
@@ -76,7 +62,7 @@ public class Programme {
     }
 
     public Set<LocalDate> getPlanning() {
-
+        return this.planning;
     }
     
     public void addPause(LocalDate date){

@@ -35,7 +35,7 @@ public class VueModifierSession extends javax.swing.JPanel {
         this.valideSess = false;
         
         initComponents();
-        this.labelSession.setText(this.labelSession.getText()+this.session.getNom());
+        
     }
     
     public void setSessionsExistantes(final Set<String> sessionsExistantes) {
@@ -49,6 +49,7 @@ public class VueModifierSession extends javax.swing.JPanel {
     
     public void setSession(Session s){
         this.session = s;
+        this.labelSession.setText(this.labelSession.getText()+this.session.getNom());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -246,7 +247,7 @@ public class VueModifierSession extends javax.swing.JPanel {
         
         // Iterateur sur les animateurs -> récupérer anim session
         Iterator it = session.getAnimateurs().values().iterator();
-        Utilisateur user;
+        Utilisateur user = new Utilisateur(null, null, null);
         while(it.hasNext()){
             user = (Utilisateur) it.next();
             break;

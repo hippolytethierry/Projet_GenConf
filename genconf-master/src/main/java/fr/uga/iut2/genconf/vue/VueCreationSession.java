@@ -32,10 +32,8 @@ public class VueCreationSession extends javax.swing.JPanel {
         
 
         // création de l'interface générée
-        this.initComponents();
+        this.initComponents();        
         
-        this.dateDebut.setModel(new javax.swing.SpinnerDateModel(DateUtils.asDate(conf.getDateDebut()), DateUtils.asDate(conf.getDateDebut()), DateUtils.asDate(conf.getDateFin()), java.util.Calendar.DAY_OF_MONTH));
-
         // configuration des composants de l'interface (à faire après la création de l'interface)
         // format de date
         JSpinner.DateEditor editor = new JSpinner.DateEditor(
@@ -47,7 +45,9 @@ public class VueCreationSession extends javax.swing.JPanel {
         this.creerButton.setEnabled(false);
     }
     
-    
+    public void setDates(){
+        this.dateDebut.setModel(new javax.swing.SpinnerDateModel(DateUtils.asDate(conf.getDateDebut()), DateUtils.asDate(conf.getDateDebut()), DateUtils.asDate(conf.getDateFin()), java.util.Calendar.DAY_OF_MONTH));
+    }
 
     public void setSessionsExistantes(final Set<String> sessionExistantes) {
         assert sessionExistantes != null;
@@ -56,6 +56,7 @@ public class VueCreationSession extends javax.swing.JPanel {
     
     public void setConf(Conference conf){
         this.conf = conf;
+        setDates();
     }
 
     /**
