@@ -6,6 +6,7 @@
 package fr.uga.iut2.genconf.vue;
 
 import fr.uga.iut2.genconf.modele.Conference;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -21,7 +22,6 @@ public class VueConference extends javax.swing.JPanel {
     private Set<String> confsExistantes;
     JRadioButton [] boutonsConfs;
     
-    
     /**
      * Creates new form VueConference
      */
@@ -29,17 +29,13 @@ public class VueConference extends javax.swing.JPanel {
         this.gui = gui;
         this.confsExistantes = new HashSet<>(); 
         
-        initComponents();
-        contentPane(confsExistantes);
-        
-//        this.modifier.setEnabled(false);
-//        this.voirPlus.setEnabled(false);
-//        this.supConf.setEnabled(false);
+        initComponents();        
     }
 
     public void setConfsExistantes(final Set<String> confsExistantes) {
         assert confsExistantes != null;
         this.confsExistantes = confsExistantes;
+        contentPane(confsExistantes);
     }
     
     /**
@@ -51,12 +47,14 @@ public class VueConference extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         conference = new javax.swing.JLabel();
         modifier = new javax.swing.JButton();
         annuler = new javax.swing.JButton();
         voirPlus = new javax.swing.JButton();
-        confsPane = new javax.swing.JScrollPane();
         supConf = new javax.swing.JButton();
+        confsPane = new javax.swing.JScrollPane();
+        listConfs = new javax.swing.JList<>();
 
         conference.setText("Choisir la conférence : ");
 
@@ -88,6 +86,13 @@ public class VueConference extends javax.swing.JPanel {
             }
         });
 
+        listConfs.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        confsPane.setViewportView(listConfs);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,35 +100,33 @@ public class VueConference extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(conference)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(conference)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(confsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(annuler)
-                                .addGap(18, 18, 18)
-                                .addComponent(modifier))
-                            .addComponent(supConf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(voirPlus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(confsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(supConf, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(voirPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(annuler)
+                        .addGap(18, 18, 18)
+                        .addComponent(modifier)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(conference)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(voirPlus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(supConf)
-                        .addGap(0, 167, Short.MAX_VALUE))
+                        .addGap(0, 108, Short.MAX_VALUE))
                     .addComponent(confsPane))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modifier)
                     .addComponent(annuler))
@@ -136,54 +139,37 @@ public class VueConference extends javax.swing.JPanel {
     }//GEN-LAST:event_annulerActionPerformed
 
     private void modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierActionPerformed
-        for (JRadioButton uneConf : getContentPane()){
-            if (uneConf.isSelected()){
-                this.gui.toModifierConference(uneConf.getName());
-                break;
-            }
-        }            
+//        for (JRadioButton uneConf : getContentPane()){
+//            if (uneConf.isSelected()){
+//                
+//                break;
+//            }
+//        }
+        this.gui.toModifierConference(this.listConfs.getSelectedValue());
     }//GEN-LAST:event_modifierActionPerformed
 
     private void voirPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voirPlusActionPerformed
-        for (JRadioButton uneConf : getContentPane()){
-            if (uneConf.isSelected()){
-                this.gui.toVoirPlusSession(uneConf.getName());
-                break;
-            }
-        }
+        this.gui.toVoirPlusSession(this.listConfs.getSelectedValue());
     }//GEN-LAST:event_voirPlusActionPerformed
 
     private void supConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supConfActionPerformed
-        for (JRadioButton uneConf : getContentPane()){
-            if (uneConf.isSelected()){
-                this.gui.supprimerConference(uneConf.getName());
-                break;
-            }
-        }
+        this.gui.supprimerConference(this.listConfs.getSelectedValue());
     }//GEN-LAST:event_supConfActionPerformed
 
-    private void contentPane(Set<String> confs){
-        JRadioButton boutonConf;
-        boutonsConfs = new JRadioButton[confs.size()];
-        ButtonGroup confGroup = new ButtonGroup();
-        int i = 0;
-        for (String uneConf : confs){
-            boutonConf = new JRadioButton(uneConf);
-            boutonsConfs[i] = boutonConf;
-            confGroup.add(boutonConf);
-            confsPane.add(boutonConf);
-            i++;
-        }        
-    }
-    
-    private JRadioButton[] getContentPane(){
-        return boutonsConfs;
+    private void contentPane(Set<String> confs){  
+        listConfs.setModel(new javax.swing.AbstractListModel<String>() {
+            ArrayList<String> strings = new ArrayList(confs);
+            public int getSize() { return strings.size(); }
+            public String getElementAt(int i) { return strings.get(i); }
+        });      
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel conference;
     private javax.swing.JScrollPane confsPane;
+    private javax.swing.JList<String> listConfs;
     private javax.swing.JButton modifier;
     private javax.swing.JButton supConf;
     private javax.swing.JButton voirPlus;

@@ -89,7 +89,7 @@ public class Controleur {
                 true
         );
     }
-    
+
     public void modifierConference(IHM.InfosConference infos, String nomConf){
         Conference c = this.genconf.getConferences().get(nomConf);
         c.setDateDebut(infos.dateDebut);
