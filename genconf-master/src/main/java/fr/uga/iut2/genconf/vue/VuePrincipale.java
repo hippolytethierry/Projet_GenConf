@@ -29,7 +29,7 @@ public class VuePrincipale extends javax.swing.JFrame {
         cLayout.addLayoutComponent(vue, id);
         this.add(vue);
     }
-
+    
     protected void afficherVue(String id) {
         CardLayout cLayout = (CardLayout) getContentPane().getLayout();
         cLayout.show(this.getContentPane(), id);
@@ -53,6 +53,7 @@ public class VuePrincipale extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        modifierConf = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -79,6 +80,14 @@ public class VuePrincipale extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem3);
+
+        modifierConf.setText("Modifier conférence");
+        modifierConf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifierConfActionPerformed(evt);
+            }
+        });
+        jMenu1.add(modifierConf);
         jMenu1.add(jSeparator2);
 
         jMenuItem4.setText("Quitter");
@@ -108,6 +117,10 @@ public class VuePrincipale extends javax.swing.JFrame {
         this.gui.actionTerminer();
     }//GEN-LAST:event_actionMenuQuitter
 
+    private void modifierConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierConfActionPerformed
+        this.gui.actionModifierConference();
+    }//GEN-LAST:event_modifierConfActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -116,5 +129,6 @@ public class VuePrincipale extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JMenuItem modifierConf;
     // End of variables declaration//GEN-END:variables
 }

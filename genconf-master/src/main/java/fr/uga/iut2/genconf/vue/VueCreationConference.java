@@ -11,7 +11,10 @@ import java.util.Set;
 import javax.swing.JSpinner;
 import org.apache.commons.validator.routines.EmailValidator;
 
-
+/**
+ *
+ * @author hippo
+ */
 public class VueCreationConference extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> nomsExistants;
@@ -99,15 +102,15 @@ public class VueCreationConference extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel3))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(dateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 126, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -165,10 +168,10 @@ public class VueCreationConference extends javax.swing.JPanel {
             saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(saisieAdminPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
+                .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(saisieAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(adminNom, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
@@ -244,8 +247,6 @@ public class VueCreationConference extends javax.swing.JPanel {
                     .addComponent(creerButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        saisieAdminPanel.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
@@ -263,7 +264,7 @@ public class VueCreationConference extends javax.swing.JPanel {
          LocalDate dateFin = dateDebut.plusDays((Integer) nbJours.getValue() - 1);
 
          // Infos sur la nouvelle conference
-         IHM.InfosNouvelleConference nlleConf = new IHM.InfosNouvelleConference(
+         IHM.InfosConference nlleConf = new IHM.InfosConference(
                  this.nomConference.getText(),
                  dateDebut,
                  dateFin,
@@ -291,7 +292,7 @@ public class VueCreationConference extends javax.swing.JPanel {
     }//GEN-LAST:event_verificationAdmin
 
     private void verificationConference(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationConference
-         this.valideConf = !nomsExistants.contains(nomConference.getText());
+         this.valideConf = !nomsExistants.contains(nomConference.getText().trim());
          this.nomConference.setForeground(this.valideConf ? Color.black : Color.red);
          this.creerButton.setEnabled(this.valideAdmin && this.valideConf);
     }//GEN-LAST:event_verificationConference

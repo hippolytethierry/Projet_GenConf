@@ -14,6 +14,7 @@ public enum Commande {
     QUITTER(0, "Quitter"),
     CREER_UTILISATEUR(1, "Créer un nouvel utilisateur"),
     CREER_CONFERENCE(2,"Créer une nouvelle conférence"),
+    MODIFIER_CONFERENCE(3,"Modifier une conférence"),
     ;
 
     private final int code;

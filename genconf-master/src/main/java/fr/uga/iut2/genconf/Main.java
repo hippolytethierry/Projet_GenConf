@@ -26,7 +26,7 @@ public class Main {
         Controleur controleur = new Controleur(genconf);
         // `Controleur.demarrer` garde le contrôle de l'exécution tant que
         // l'utilisa·teur/trice n'a pas saisi la commande QUITTER.
-        controleur.demarrer();
+        controleur.run();
 
         try {
             Persisteur.sauverEtat(genconf);

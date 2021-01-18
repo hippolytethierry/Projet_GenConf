@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.util.Optional;
 import org.apache.commons.validator.routines.EmailValidator;
 
-
+/**
+ *
+ * @author hippo
+ */
 public class VueCreationUtilisateur extends javax.swing.JPanel {
     private final GUI gui;
 
@@ -153,7 +156,7 @@ public class VueCreationUtilisateur extends javax.swing.JPanel {
 
         nom = this.nomUser.getText().trim();
         prenom = this.prenomUser.getText().trim();
-        validEmail = validator.isValid(this.email.getText().trim().toLowerCase());
+        validEmail = validator.isValid(this.email.getText().trim().toLowerCase()) && freeEmail(this.email.getText().trim().toLowerCase());
         this.email.setForeground(validEmail ? Color.black : Color.red);
 
         valide = validEmail
@@ -162,7 +165,11 @@ public class VueCreationUtilisateur extends javax.swing.JPanel {
 
         this.creer.setEnabled(valide);
     }//GEN-LAST:event_validerSaisie
-
+    
+    private boolean freeEmail(String email){
+        return this.gui.freeEmail(email);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;
     private javax.swing.JButton creer;

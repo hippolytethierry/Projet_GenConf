@@ -5,15 +5,22 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class Conference implements Serializable {
+/**
+ *
+ * @author hippo
+ */
+public class Conference implements Serializable, Comparable<Conference> {
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
     private final GenConf genconf;
-    private final String nom;
+    private String nom;
     private LocalDate dateDebut;
     private LocalDate dateFin;
-    private final Map<String, Utilisateur> administrateurs;  // association qualifiée par l'email
+    private Utilisateur administrateur;  // association qualifiée par l'email
+    private final Map<String, Utilisateur> inscrits;//associattion qualifié par l'email
+    private final Map<String, Session> sessions;//association qualifié par les noms
+    private Programme programme;
+            
 
     // Invariant de classe : !dateDebut.isAfter(dateFin)
     //     On utilise la négation ici pour exprimer (dateDebut <= dateFin), ce
@@ -31,13 +38,23 @@ public class Conference implements Serializable {
         this.nom = nom;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.administrateurs = new HashMap<>();
+        this.inscrits = new HashMap<>();
+        this.sessions = new HashMap<>();
+        definirProgramme();
     }
 
     public String getNom() {
         return this.nom;
     }
-
+    
+    public void setNom(String nomConf){
+        this.nom = nomConf;
+    }
+    
+    public Utilisateur getAdmin(){
+        return this.administrateur;
+    }
+    
     public LocalDate getDateDebut() {
         return dateDebut;
     }
@@ -55,10 +72,45 @@ public class Conference implements Serializable {
         assert !this.dateDebut.isAfter(dateFin);
         this.dateFin = dateFin;
     }
-
-    public void ajouteAdministrateur(Utilisateur admin) {
-        assert !this.administrateurs.containsKey(admin.getEmail());
-        this.administrateurs.put(admin.getEmail(), admin);
-        admin.ajouteConferenceAdministree(this);
+    
+    public void modifieAdmin(String ancienNom){
+        getAdmin().getConfs().remove(ancienNom);
+        getAdmin().addConferenceAdministree(this);
     }
+    
+    public void ajouteAdministrateur(Utilisateur admin) {
+        assert !this.administrateur.equals(null);
+        this.administrateur = admin;
+        admin.addConferenceAdministree(this);
+    }
+
+    public Map<String, Utilisateur> getInscrits() {
+        return inscrits;
+    }
+    
+    public void ajouterInscrit(Utilisateur inscrit){
+        getInscrits().put(inscrit.getEmail(), inscrit);
+    }
+
+    public Map<String, Session> getSessions() {
+        return sessions;
+    }    
+
+    public Programme getProgramme() {
+        return programme;
+    }
+    
+    public void definirProgramme(){
+        this.programme = new Programme(this);
+    }
+
+    @Override
+    public int compareTo(Conference conf) {
+        if (this.getDateDebut().isBefore(conf.getDateDebut())){
+            return -1;
+        }else if (this.getDateDebut().isAfter(conf.getDateDebut())){
+            return 1;
+        }else 
+            return 0;
+    }   
 }

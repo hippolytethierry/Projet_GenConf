@@ -2,7 +2,8 @@ package fr.uga.iut2.genconf.vue;
 
 import java.time.LocalDate;
 import java.util.Set;
-
+import fr.uga.iut2.genconf.util.Type;
+import fr.uga.iut2.genconf.modele.*;
 
 public abstract class IHM {
     /**
@@ -35,21 +36,57 @@ public abstract class IHM {
      * <li>Tous les attributs sont `final` pour ne pas être modifiables.</li>
      * </ul>
      */
-    public static class InfosNouvelleConference {
+    public static class InfosConference {
         public final String nom;
         public final LocalDate dateDebut;
         public final LocalDate dateFin;
         public final InfosUtilisateur admin;
 
-        public InfosNouvelleConference(final String nom, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur admin) {
+        public InfosConference(final String nom, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur admin) {
             assert !dateDebut.isAfter(dateFin);
             this.nom = nom;
             this.dateDebut = dateDebut;
             this.dateFin = dateFin;
             this.admin = admin;
+            
         }
     }
+    
+    public static class InfosSession {
+        public final String nom;
+        public final LocalDate dateDebut;
+        public final LocalDate dateFin;
+        public final InfosUtilisateur anim;
+        public final Type type;
+        public final Conference conf;
+        
+        public InfosSession(final String nom, final String type, final LocalDate dateDebut, final LocalDate dateFin, final InfosUtilisateur anim, final Conference conf){
+            assert !dateDebut.isAfter(dateFin);
+            this.nom = nom;
+            this.type=Type.setType(type);
+            this.dateDebut = dateDebut;
+            this.dateFin = dateFin;
+            this.anim = anim;
+            this.conf = conf;
+        }        
+    }
 
+   
+    
+    public static class InfosCommunication {
+        public final String nom;
+        public final InfosUtilisateur correspondant;
+        public final Type type;
+        public final Session sess;
+        
+        public InfosCommunication(final String nom, final String type, final InfosUtilisateur correspondant, final Session sess){
+            this.nom = nom;
+            this.type = Type.setType(type);
+            this.correspondant = correspondant;
+            this.sess = sess;
+        }        
+    }   
+  
     /**
      * Rend actif l'interface Humain-machine.
      *
@@ -91,4 +128,11 @@ public abstract class IHM {
      *
      */
     public abstract void saisirNouvelleConference(final Set<String> nomsExistants);
+    
+    public abstract void saisirNouvelleCommunication(String nomSession, String nomConf);
+    
+    public abstract void choisirConference(final Set<String> nomsConfsExistantes);
+    
+    public abstract void saisirNouvelleSession(final String nomConf); 
+    
 }
