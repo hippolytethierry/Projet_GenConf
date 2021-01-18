@@ -37,8 +37,6 @@ public class Controleur {
             case CREER_CONFERENCE:
                 this.ihm.saisirNouvelleConference(this.genconf.getConferences().keySet());
                 break;
-//            case CREER_SESSION:
-//                this.ihm.saisirNouvelleSession(this.genconf.getConferences());
             case MODIFIER_CONFERENCE:
                 this.ihm.choisirConference(this.genconf.getConferences().keySet());
             default:

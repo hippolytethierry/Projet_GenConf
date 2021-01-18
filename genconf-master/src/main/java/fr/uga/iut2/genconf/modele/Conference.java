@@ -84,14 +84,6 @@ public class Conference implements Serializable, Comparable<Conference> {
         admin.addConferenceAdministree(this);
     }
 
-    public Map<String, Utilisateur> getInscrits() {
-        return inscrits;
-    }
-    
-    public void ajouterInscrit(Utilisateur inscrit){
-        getInscrits().put(inscrit.getEmail(), inscrit);
-    }
-
     public Map<String, Session> getSessions() {
         return sessions;
     }    

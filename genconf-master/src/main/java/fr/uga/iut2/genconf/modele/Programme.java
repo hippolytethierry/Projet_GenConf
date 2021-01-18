@@ -5,7 +5,6 @@
  */
 package fr.uga.iut2.genconf.modele;
 
-import fr.uga.iut2.genconf.vue.CLI;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -64,15 +63,4 @@ public class Programme {
     public Set<LocalDate> getPlanning() {
         return this.planning;
     }
-    
-    public void addPause(LocalDate date){
-        this.planning.add(date);
-    }
-
-    public Set<LocalDate> getPauses() {
-
-        return planning;
-    }
-    
-    
 }
