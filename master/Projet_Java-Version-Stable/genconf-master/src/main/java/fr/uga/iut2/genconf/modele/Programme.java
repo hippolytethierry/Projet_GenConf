@@ -5,7 +5,6 @@
  */
 package fr.uga.iut2.genconf.modele;
 
-import fr.uga.iut2.genconf.vue.CLI;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
