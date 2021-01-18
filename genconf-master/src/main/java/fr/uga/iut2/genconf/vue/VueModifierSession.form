@@ -194,9 +194,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Modifier la session"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Modifier la session"/>
-      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JButton" name="precedent">
       <Properties>

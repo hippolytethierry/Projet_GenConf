@@ -58,7 +58,7 @@ public class CLI extends IHM {
         return new InfosUtilisateur(email, nom, prenom);
     }
 
-    private InfosNouvelleConference dialogueSaisirNouvelleConference(final Set<String> nomsExistants) {
+    private InfosConference dialogueSaisirNouvelleConference(final Set<String> nomsExistants) {
         String nom;
         LocalDate dateDebut, dateFin;
         InfosUtilisateur admin;
@@ -75,7 +75,7 @@ public class CLI extends IHM {
         CLI.afficher("Un·e nouvel·lle utilisa·teur/trice sera créé·e si nécessaire.");
         admin = this.dialogueSaisirUtilisateur();
 
-        return new InfosNouvelleConference(nom, dateDebut, dateFin, admin);
+        return new InfosConference(nom, dateDebut, dateFin, admin);
     }
 
 //-----  Implémentation des méthodes abstraites  -------------------------------
@@ -107,7 +107,7 @@ public class CLI extends IHM {
 
     @Override
     public void saisirNouvelleConference(final Set<String> nomsExistants) {
-        InfosNouvelleConference infos = dialogueSaisirNouvelleConference(nomsExistants);
+        InfosConference infos = dialogueSaisirNouvelleConference(nomsExistants);
         controleur.creerConference(infos);
     }
 
@@ -382,5 +382,20 @@ public class CLI extends IHM {
      */
     private static LocalDate lireDate(final LocalDate apres) {
         return CLI.lireDate(Optional.of(apres));
+    }
+
+    @Override
+    public void saisirNouvelleCommunication(String nomSession, String nomConf) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void choisirConference(Set<String> nomsConfsExistantes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void saisirNouvelleSession(String nomConf) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

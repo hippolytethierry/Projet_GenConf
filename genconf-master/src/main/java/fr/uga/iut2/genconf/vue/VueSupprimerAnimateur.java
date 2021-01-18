@@ -25,24 +25,25 @@ public class VueSupprimerAnimateur extends javax.swing.JPanel {
         
     }
     
-    public void setAnimsExistants(Session s){        
+    public void setAnimsExistants(Session s){
+        this.listeAnims.removeAllItems();
         for (Utilisateur unAnim : s.getAnimateurs().values()){
-            listeAnims.addItem(unAnim.getNom().toUpperCase());
+            listeAnims.addItem(unAnim.getEmail());
         }        
     }
     
     public void setSession(Session s){
         this.s = s;
-        this.labelAnim.setText(this.labelAnim.getText()+" de la session "+this.s.getNom());
-        setAnimsExistants(this.s);
+        this.labelAnim.setText("Supprimer un animateur de la session "+this.s.getNom());        
     }
     
     public String getAnim(){
         String email = "";
         for (Utilisateur unAnim : s.getAnimateurs().values()){
-            if (unAnim.getNom() == listeAnims.getActionCommand()){
+            if (unAnim.getNom().equals(listeAnims.getActionCommand())){
                 email = unAnim.getEmail();
                 break;
+                
             }
         }
         return email;
@@ -167,9 +168,10 @@ public class VueSupprimerAnimateur extends javax.swing.JPanel {
     }//GEN-LAST:event_precedentActionPerformed
 
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerActionPerformed
-        this.gui.supprimerAnimSession(getAnim(), s.getNom(), s.getNomConf());
+        String nomAnim = (String) listeAnims.getSelectedItem();
+        System.out.println(nomAnim);
+        this.gui.supprimerAnimSession(nomAnim, s.getNom(), s.getNomConf());
     }//GEN-LAST:event_validerActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton annuler;

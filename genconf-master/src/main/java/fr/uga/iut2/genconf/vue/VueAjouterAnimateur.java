@@ -10,7 +10,10 @@ import java.awt.Color;
 import java.util.Optional;
 import org.apache.commons.validator.routines.EmailValidator;
 
-
+/**
+ *
+ * @author hippo
+ */
 public class VueAjouterAnimateur extends javax.swing.JPanel {
     private final GUI gui;
     private Session s;

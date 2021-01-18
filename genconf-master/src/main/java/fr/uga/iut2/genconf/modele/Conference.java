@@ -1,12 +1,14 @@
 package fr.uga.iut2.genconf.modele;
 
-import fr.uga.iut2.genconf.util.Type;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ *
+ * @author hippo
+ */
 public class Conference implements Serializable, Comparable<Conference> {
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
@@ -70,7 +72,12 @@ public class Conference implements Serializable, Comparable<Conference> {
         assert !this.dateDebut.isAfter(dateFin);
         this.dateFin = dateFin;
     }
-
+    
+    public void modifieAdmin(String ancienNom){
+        getAdmin().getConfs().remove(ancienNom);
+        getAdmin().addConferenceAdministree(this);
+    }
+    
     public void ajouteAdministrateur(Utilisateur admin) {
         assert !this.administrateur.equals(null);
         this.administrateur = admin;
@@ -87,8 +94,7 @@ public class Conference implements Serializable, Comparable<Conference> {
 
     public Map<String, Session> getSessions() {
         return sessions;
-    }
-    
+    }    
 
     public Programme getProgramme() {
         return programme;
@@ -96,10 +102,6 @@ public class Conference implements Serializable, Comparable<Conference> {
     
     public void definirProgramme(){
         this.programme = new Programme(this);
-    }
-    
-    public void update(){
-        
     }
 
     @Override

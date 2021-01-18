@@ -7,7 +7,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
-
+/**
+ *
+ * @author hippo
+ */
 public class GUI extends IHM {
     private final Controleur controleur;
     private final CountDownLatch eolBarrier;
@@ -102,7 +105,7 @@ public class GUI extends IHM {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         nouvelUtilisateur.ifPresentOrElse(
                 infos -> this.controleur.creerUtilisateur(infos),   // suite a bouton creer
-                () -> this.vueEtat.setEtat("")                      // suite a bouton annuler
+                () -> this.vueEtat.setEtat("Bienvenue dans le programme GenConf !") // suite a bouton annuler
         );
     }
 
@@ -110,7 +113,7 @@ public class GUI extends IHM {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         nlleConf.ifPresentOrElse(
                 infos -> this.controleur.creerConference(infos),    
-                () -> this.vueEtat.setEtat("")                      
+                () -> this.vueEtat.setEtat("Bienvenue dans le programme GenConf !")                      
         );
     }
     
@@ -118,7 +121,7 @@ public class GUI extends IHM {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         conf.ifPresentOrElse(
                 infos -> this.controleur.modifierConference(infos, nomConf),
-                () -> this.vueEtat.setEtat("")
+                () -> this.vueEtat.setEtat("Bienvenue dans le programme GenConf !")
         );
     }
     
@@ -137,7 +140,7 @@ public class GUI extends IHM {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         nlleComm.ifPresentOrElse(
                 infos -> this.controleur.creerCommunication(infos),
-                () -> this.vueEtat.setEtat("")
+                () -> this.vueEtat.setEtat("Bienvenue dans le programme GenConf !")
         );
     }
     
@@ -145,7 +148,7 @@ public class GUI extends IHM {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         com.ifPresentOrElse(
                 infos -> this.controleur.modifierCommunication(infos, nomCom),
-                () -> this.vueEtat.setEtat("")
+                () -> this.vueEtat.setEtat("Bienvenue dans le programme GenConf !")
         );
     }
     
@@ -164,16 +167,16 @@ public class GUI extends IHM {
        return this.controleur.selectionnerCommunication(nomCom, nomSession, nomConf);
     }
 
-    protected void supprimerCommunication(String nomCom){
+    protected void supprimerCommunication(String nomCom, String nomSession, String nomConf){
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
-        this.controleur.supprimerCommunication(nomCom);
+        this.controleur.supprimerCommunication(nomCom, nomSession, nomConf);
     }
     
     protected void creerSession(Optional<InfosSession> nlleSession) {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         nlleSession.ifPresentOrElse(
                 infos -> this.controleur.creerSession(infos),
-                () -> this.vueEtat.setEtat("")
+                () -> this.vueEtat.setEtat("Bienvenue dans le programme GenConf !")
         );
     }
    
@@ -185,7 +188,7 @@ public class GUI extends IHM {
         this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         session.ifPresentOrElse(
                 infos -> this.controleur.modifierSession(infos, nomSession),
-                () -> this.vueEtat.setEtat("")
+                () -> this.vueEtat.setEtat("Bienvenue dans le programme GenConf !")
         );
     }
     
@@ -242,7 +245,8 @@ public class GUI extends IHM {
     @Override
     public void afficherInterface() {
         this.vuePrincipale.afficher();
-
+        this.vueEtat.setEtat("Bienvenue dans le programme GenConf !");
+        this.vuePrincipale.afficherVue(GUI.VUE_ETAT);
         // On attend que GUI ait fini avant de rendre la main au contrôleur
         // (c'est à dire au moment de l'appel de `fermerInterface`)
         try {

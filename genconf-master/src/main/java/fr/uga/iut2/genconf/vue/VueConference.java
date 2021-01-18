@@ -5,13 +5,10 @@
  */
 package fr.uga.iut2.genconf.vue;
 
-import fr.uga.iut2.genconf.modele.Conference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
 
 /**
  *
@@ -20,7 +17,7 @@ import javax.swing.ButtonGroup;
 public class VueConference extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> confsExistantes;
-    JRadioButton [] boutonsConfs;
+    private boolean valide;
     
     /**
      * Creates new form VueConference
@@ -29,7 +26,10 @@ public class VueConference extends javax.swing.JPanel {
         this.gui = gui;
         this.confsExistantes = new HashSet<>(); 
         
-        initComponents();        
+        initComponents();   
+        this.modifier.setEnabled(false);
+        this.voirPlus.setEnabled(false);
+        this.supConf.setEnabled(false);
     }
 
     public void setConfsExistantes(final Set<String> confsExistantes) {
@@ -91,6 +91,11 @@ public class VueConference extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listConfs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listConfsMouseClicked(evt);
+            }
+        });
         confsPane.setViewportView(listConfs);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -139,12 +144,6 @@ public class VueConference extends javax.swing.JPanel {
     }//GEN-LAST:event_annulerActionPerformed
 
     private void modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierActionPerformed
-//        for (JRadioButton uneConf : getContentPane()){
-//            if (uneConf.isSelected()){
-//                
-//                break;
-//            }
-//        }
         this.gui.toModifierConference(this.listConfs.getSelectedValue());
     }//GEN-LAST:event_modifierActionPerformed
 
@@ -155,6 +154,13 @@ public class VueConference extends javax.swing.JPanel {
     private void supConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supConfActionPerformed
         this.gui.supprimerConference(this.listConfs.getSelectedValue());
     }//GEN-LAST:event_supConfActionPerformed
+
+    private void listConfsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listConfsMouseClicked
+        valide = !this.listConfs.isSelectionEmpty();        
+        this.modifier.setEnabled(valide);
+        this.voirPlus.setEnabled(valide);
+        this.supConf.setEnabled(valide);
+    }//GEN-LAST:event_listConfsMouseClicked
 
     private void contentPane(Set<String> confs){  
         listConfs.setModel(new javax.swing.AbstractListModel<String>() {

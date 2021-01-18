@@ -5,11 +5,10 @@
  */
 package fr.uga.iut2.genconf.vue;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javax.swing.ButtonGroup;
-import javax.swing.JRadioButton;
 
 /**
  *
@@ -18,8 +17,8 @@ import javax.swing.JRadioButton;
 public class VueSession extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> sessionsExistantes;
-    private JRadioButton [] boutonsSessions;
     private String nomConf;
+    private boolean valide;
     /**
      * Creates new form VueConference
      */
@@ -28,17 +27,20 @@ public class VueSession extends javax.swing.JPanel {
         this.sessionsExistantes = new HashSet();
         
         initComponents();
-        contentPane(sessionsExistantes);
-        this.labelConf.setText(this.labelConf.getText()+this.nomConf);
+        this.modifier.setEnabled(false);
+        this.voirPlus.setEnabled(false);
+        this.supSession.setEnabled(false);
     }
 
     public void setSessionsExistantes(final Set<String> sessionsExistantes) {
         assert sessionsExistantes != null;
         this.sessionsExistantes = sessionsExistantes;
+        contentPane(sessionsExistantes);        
     }
     
     public void setConf(String nomConf){
         this.nomConf = nomConf;
+        this.labelConf.setText("Pour la conférence : "+this.nomConf);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +56,7 @@ public class VueSession extends javax.swing.JPanel {
         annuler = new javax.swing.JButton();
         voirPlus = new javax.swing.JButton();
         sessionsPane = new javax.swing.JScrollPane();
+        listSessions = new javax.swing.JList<>();
         labelConf = new javax.swing.JLabel();
         creerSession = new javax.swing.JButton();
         precedent = new javax.swing.JButton();
@@ -82,7 +85,14 @@ public class VueSession extends javax.swing.JPanel {
             }
         });
 
-        labelConf.setText("Pour la conférence .");
+        listSessions.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listSessionsMouseClicked(evt);
+            }
+        });
+        sessionsPane.setViewportView(listSessions);
+
+        labelConf.setText("Pour la conférence ");
 
         creerSession.setText("Creer session");
         creerSession.addActionListener(new java.awt.event.ActionListener() {
@@ -164,30 +174,15 @@ public class VueSession extends javax.swing.JPanel {
     }//GEN-LAST:event_annulerActionPerformed
 
     private void modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierActionPerformed
-        for (JRadioButton uneSession : getContentPane()){
-            if (uneSession.isSelected()){
-                this.gui.toModifierSession(uneSession.getName(), this.nomConf);
-                break;
-            }
-        } 
+        this.gui.toModifierSession(this.listSessions.getSelectedValue(), this.nomConf);
     }//GEN-LAST:event_modifierActionPerformed
 
     private void voirPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voirPlusActionPerformed
-        for (JRadioButton uneSession : getContentPane()){
-            if (uneSession.isSelected()){
-                this.gui.toVoirPlusCommunications(uneSession.getName(), this.nomConf);
-                break;
-            }
-        } 
+        this.gui.toVoirPlusCommunications(this.listSessions.getSelectedValue(), this.nomConf);
     }//GEN-LAST:event_voirPlusActionPerformed
 
     private void supSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supSessionActionPerformed
-        for (JRadioButton uneSession : getContentPane()){
-            if (uneSession.isSelected()){
-                this.gui.supprimerSession(uneSession.getName(), this.nomConf);
-                break;
-            }
-        } 
+        this.gui.supprimerSession(this.listSessions.getSelectedValue(), this.nomConf); 
     }//GEN-LAST:event_supSessionActionPerformed
 
     private void creerSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerSessionActionPerformed
@@ -198,22 +193,19 @@ public class VueSession extends javax.swing.JPanel {
         this.gui.actionModifierConference();
     }//GEN-LAST:event_precedentActionPerformed
 
+    private void listSessionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSessionsMouseClicked
+        valide = !this.listSessions.isSelectionEmpty(); 
+        this.modifier.setEnabled(valide);
+        this.voirPlus.setEnabled(valide);
+        this.supSession.setEnabled(valide);
+    }//GEN-LAST:event_listSessionsMouseClicked
+
     private void contentPane(Set<String> sessions){
-        JRadioButton boutonSession;
-        boutonsSessions = new JRadioButton[sessions.size()];
-        ButtonGroup sessionGroup = new ButtonGroup();
-        int i = 0;
-        for (String uneConf : sessions){
-            boutonSession = new JRadioButton(uneConf);
-            boutonsSessions[i] = boutonSession;
-            sessionGroup.add(boutonSession);
-            sessionsPane.add(boutonSession);
-            i++;
-        }        
-    }
-    
-    private JRadioButton[] getContentPane(){
-        return boutonsSessions;
+        listSessions.setModel(new javax.swing.AbstractListModel<String>() {
+            ArrayList<String> strings = new ArrayList(sessions);
+            public int getSize() { return strings.size(); }
+            public String getElementAt(int i) { return strings.get(i); }
+        });         
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -221,6 +213,7 @@ public class VueSession extends javax.swing.JPanel {
     private javax.swing.JButton creerSession;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelConf;
+    private javax.swing.JList<String> listSessions;
     private javax.swing.JButton modifier;
     private javax.swing.JButton precedent;
     private javax.swing.JScrollPane sessionsPane;

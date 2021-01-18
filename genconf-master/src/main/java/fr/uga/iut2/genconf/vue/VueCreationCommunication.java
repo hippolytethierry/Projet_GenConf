@@ -8,7 +8,10 @@ import javax.swing.JSpinner;
 import org.apache.commons.validator.routines.EmailValidator;
 import fr.uga.iut2.genconf.modele.*;
 
-
+/**
+ *
+ * @author hippo
+ */
 public class VueCreationCommunication extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> communicationsExistantes;
@@ -266,7 +269,7 @@ public class VueCreationCommunication extends javax.swing.JPanel {
         prenom = this.corresPrenom.getText().trim();
         validEmail = validator.isValid(this.corresEmail.getText().trim().toLowerCase())
                 && !freeEmail(this.corresEmail.getText().trim().toLowerCase());
-        this.corresPrenom.setForeground(validEmail ? Color.black : Color.red);
+        this.corresEmail.setForeground(validEmail ? Color.black : Color.red);
 
         this.valideCorres = validEmail
                  && (nom != null) && (nom.length() > 0)

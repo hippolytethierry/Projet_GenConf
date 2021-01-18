@@ -34,12 +34,12 @@ public class Session implements Serializable, Comparable<Session>{
         setType(type);
         setDateDebut(dateDebut);
         setDateFin(dateFin);
+        ajouterAnimateur(anim);
     }
     
     public static Session initialiseSession(String nom, Type type, LocalDate dateDebut, LocalDate dateFin, Conference conf, Utilisateur anim){
         Session s = new Session(nom, type, dateDebut, dateFin, conf, anim);  
         s.ajouterSession(nom, s);
-        s.ajouterAnimateur(anim);
         return s;
     } 
     
@@ -60,7 +60,7 @@ public class Session implements Serializable, Comparable<Session>{
     }
     
     public void setNom(String nom) {
-        this.nom = nom.toLowerCase();
+        this.nom = nom;
     }
 
     public LocalDate getDateDebut() {
@@ -91,6 +91,11 @@ public class Session implements Serializable, Comparable<Session>{
     
     public Map<String, Communication> getCommunications(){
         return this.communications;
+    }
+    
+    public void modifieAnim(Utilisateur anim, String ancienNom){
+        getAnimateurs().get(anim.getNom()).getSessions().remove(ancienNom);
+        getAnimateurs().get(anim.getNom()).addSessionAnimee(this);
     }
     
     public void ajouterAnimateur(Utilisateur anim){

@@ -49,7 +49,7 @@ public class VueModifierSession extends javax.swing.JPanel {
     
     public void setSession(Session s){
         this.session = s;
-        this.labelSession.setText(this.labelSession.getText()+this.session.getNom());
+        this.labelSession.setText("Modifier la session : "+this.session.getNom());
     }
     /**
      * This method is called from within the constructor to initialize the form.

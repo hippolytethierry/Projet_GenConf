@@ -24,6 +24,7 @@ public class Communication implements Serializable, Comparable<Communication>{
     public static Communication initialiseCommunication(String titre, Type type, Utilisateur corres, Session session) {
         Communication com = new Communication(titre, type, corres, session);
         com.ajouterCorrespondant(corres);
+        com.ajouterCom(titre, com);
         return com;
     }
 
@@ -33,6 +34,15 @@ public class Communication implements Serializable, Comparable<Communication>{
         this.type = type;
         setCorrespondant(correspondant);
         setSession(session);
+    }
+    
+    public void ajouterCom(String titre, Communication com){
+        this.session.getCommunications().put(titre, com);
+    }
+    
+    public void modifieCorres(String ancienNom){
+        getCorrespondant().getCommunications().remove(ancienNom);
+        getCorrespondant().addCommunications(this);
     }
     
     public void ajouterCorrespondant(Utilisateur corres){
@@ -59,11 +69,7 @@ public class Communication implements Serializable, Comparable<Communication>{
     private void setSession(Session session) {
         this.session = session;
     }
-    
-    protected void update(){
-        
-    }
-    
+
     @Override
     public int compareTo(Communication com) {
         return this.getTitre().compareTo(com.getTitre());

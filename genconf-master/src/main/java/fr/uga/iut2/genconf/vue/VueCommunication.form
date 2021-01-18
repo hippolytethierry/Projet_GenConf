@@ -104,10 +104,25 @@
     <Container class="javax.swing.JScrollPane" name="comsPane">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="listComs">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listComsMouseClicked"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="labelConf">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pour la conf&#xe9;rence ."/>
+        <Property name="text" type="java.lang.String" value="Pour la conf&#xe9;rence "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="CreerCom">
@@ -128,7 +143,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelSession">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pour la session ."/>
+        <Property name="text" type="java.lang.String" value="Pour la session "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="supCom">

@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.validator.routines.EmailValidator;
 
-
-
+/**
+ *
+ * @author hippo
+ */
 public class Utilisateur implements Serializable, Comparable<Utilisateur>{
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation

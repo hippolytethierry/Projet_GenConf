@@ -95,6 +95,9 @@ public class Controleur {
         c.setDateDebut(infos.dateDebut);
         c.setDateFin(infos.dateFin);
         c.setNom(infos.nom);
+        this.genconf.getConferences().remove(nomConf);
+        this.genconf.getConferences().put(c.getNom(), c);
+        c.modifieAdmin(nomConf);
         this.ihm.informerUtilisateur("La conférence "+nomConf+" à été modifié; Nom = "+infos.nom+", date de debut = "+infos.dateDebut+", date de fin = "+infos.dateFin, true);
     }
     
@@ -142,6 +145,7 @@ public class Controleur {
                 infos.conf,
                 this.genconf.getUsers().get(infos.anim.email)
         );
+        
         this.ihm.informerUtilisateur(
                 "Nouvelle session : " + infos.nom + ", animée par " + infos.anim.email,
                 true
@@ -164,8 +168,6 @@ public class Controleur {
             Communication.initialiseCommunication(
                     infos.nom,
                     infos.type,
-                    /*infos.dateDebut,
-                    infos.dateFin,*/
                     this.genconf.getUsers().get(infos.correspondant.email),
                     infos.sess
             );
@@ -180,6 +182,9 @@ public class Controleur {
         s.setNom(infos.nom);
         s.setDateDebut(infos.dateDebut);
         s.setDateFin(infos.dateFin);
+        this.genconf.getConferences().get(infos.conf.getNom()).getSessions().remove(nomSession);
+        this.genconf.getConferences().get(infos.conf.getNom()).getSessions().put(s.getNom(), s);
+        s.modifieAnim(s.getAnimateurs().get(s.getNom()), nomSession);
         this.ihm.informerUtilisateur("La session "+nomSession+" à été modifié; Nom = "+infos.nom+", date de debut = "+infos.dateDebut+", date de fin = "+infos.dateFin, true);
     }
     
@@ -190,12 +195,15 @@ public class Controleur {
     public void modifierCommunication(IHM.InfosCommunication infos, String nomCom){
         Communication c = this.genconf.getConferences().get(infos.sess.getNomConf()).getSessions().get(infos.sess.getNom()).getCommunications().get(nomCom);
         c.setTitre(infos.nom);
+        this.genconf.getConferences().get(infos.sess.getNomConf()).getSessions().get(infos.sess.getNom()).getCommunications().remove(nomCom);
+        this.genconf.getConferences().get(infos.sess.getNomConf()).getSessions().get(infos.sess.getNom()).getCommunications().put(c.getTitre(), c);
+        c.modifieCorres(nomCom);
         this.ihm.informerUtilisateur("La communication "+nomCom+" à été modifié; Nom = "+infos.nom, true);
     }
     
-    public void supprimerCommunication(String nomCom) {
+    public void supprimerCommunication(String nomCom, String nomSession, String nomConf) {
         this.ihm.informerUtilisateur("La communication "+nomCom+" à été supprimé.", true);        
-        this.genconf.getConferences().remove(nomCom);
+        this.genconf.getConferences().get(nomConf).getSessions().get(nomSession).getCommunications().remove(nomCom);
     }
         
     public Set<String> getListeCommunications(String nomSession, String nomConf){

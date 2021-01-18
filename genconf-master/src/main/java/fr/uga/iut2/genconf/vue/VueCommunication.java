@@ -8,9 +8,8 @@ package fr.uga.iut2.genconf.vue;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javax.swing.ButtonGroup;
-import javax.swing.JRadioButton;
 import fr.uga.iut2.genconf.modele.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,8 +18,8 @@ import fr.uga.iut2.genconf.modele.*;
 public class VueCommunication extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> comsExistantes;
-    private JRadioButton [] boutonsComs;
     private Session s;
+    private boolean valide;
 
     /**
      * Creates new form VueConference
@@ -29,20 +28,21 @@ public class VueCommunication extends javax.swing.JPanel {
         this.gui = gui;
         this.comsExistantes = new HashSet<>();        
         
-        initComponents();
-        contentPane(comsExistantes);
-
+        initComponents();        
+        this.modifier.setEnabled(false);
+        this.supCom.setEnabled(false);
     }
         
     public void setComsExistantes(final Set<String> comsExistantes) {
         assert comsExistantes != null;
-        this.comsExistantes = comsExistantes;    
+        this.comsExistantes = comsExistantes;
+        contentPane(comsExistantes);
     }
 
     public void setSession(Session s) {
         this.s = s;
-        this.labelConf.setText(this.labelConf.getText()+this.s.getNomConf());
-        this.labelSession.setText(this.labelSession.getText()+this.s.getNom());
+        this.labelConf.setText("Pour la conférence : "+this.s.getNomConf());
+        this.labelSession.setText("Pour la session : "+this.s.getNom());
     }    
 
     /**
@@ -58,6 +58,7 @@ public class VueCommunication extends javax.swing.JPanel {
         modifier = new javax.swing.JButton();
         annuler = new javax.swing.JButton();
         comsPane = new javax.swing.JScrollPane();
+        listComs = new javax.swing.JList<>();
         labelConf = new javax.swing.JLabel();
         CreerCom = new javax.swing.JButton();
         Précedent = new javax.swing.JButton();
@@ -80,7 +81,14 @@ public class VueCommunication extends javax.swing.JPanel {
             }
         });
 
-        labelConf.setText("Pour la conférence .");
+        listComs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listComsMouseClicked(evt);
+            }
+        });
+        comsPane.setViewportView(listComs);
+
+        labelConf.setText("Pour la conférence ");
 
         CreerCom.setText("Creer communication");
         CreerCom.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +104,7 @@ public class VueCommunication extends javax.swing.JPanel {
             }
         });
 
-        labelSession.setText("Pour la session .");
+        labelSession.setText("Pour la session ");
 
         supCom.setText("Supprimer communication");
         supCom.addActionListener(new java.awt.event.ActionListener() {
@@ -164,12 +172,7 @@ public class VueCommunication extends javax.swing.JPanel {
     }//GEN-LAST:event_annulerActionPerformed
 
     private void modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifierActionPerformed
-        for (JRadioButton uneCom : getContentPane()){
-            if (uneCom.isSelected()){
-                this.gui.toModifierCommunication(this.s.getNom(), this.s.getNomConf(), uneCom.getName());
-                break;
-            }
-        }
+        this.gui.toModifierCommunication(this.s.getNom(), this.s.getNomConf(), this.listComs.getSelectedValue());
     }//GEN-LAST:event_modifierActionPerformed
 
     private void CreerComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreerComActionPerformed
@@ -177,39 +180,26 @@ public class VueCommunication extends javax.swing.JPanel {
     }//GEN-LAST:event_CreerComActionPerformed
 
     private void supComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supComActionPerformed
-        for (JRadioButton uneCom : getContentPane()){
-            if (uneCom.isSelected()){
-                this.gui.supprimerCommunication(uneCom.getName());
-                break;
-            }
-        }
+        this.gui.supprimerCommunication(this.listComs.getSelectedValue(), this.s.getNom(), this.s.getNomConf());
     }//GEN-LAST:event_supComActionPerformed
 
     private void PrécedentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrécedentActionPerformed
         this.gui.toVoirPlusSession(this.s.getNomConf());
     }//GEN-LAST:event_PrécedentActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void listComsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listComsMouseClicked
+        valide = !this.listComs.isSelectionEmpty();
+        this.modifier.setEnabled(valide);
+        this.supCom.setEnabled(valide);
+    }//GEN-LAST:event_listComsMouseClicked
+
     private void contentPane(Set<String> coms){
-        JRadioButton boutonCom;
-        boutonsComs = new JRadioButton[coms.size()];
-        ButtonGroup comsGroup = new ButtonGroup();
-        int i = 0;
-        for (String uneConf : coms){
-            boutonCom = new JRadioButton(uneConf);
-            boutonsComs[i] = boutonCom;
-            comsGroup.add(boutonCom);
-            comsPane.add(boutonCom);
-            i++;
-        }        
+        listComs.setModel(new javax.swing.AbstractListModel<String>() {
+            ArrayList<String> strings = new ArrayList(coms);
+            public int getSize() { return strings.size(); }
+            public String getElementAt(int i) { return strings.get(i); }
+        });           
     }
-    
-    private JRadioButton[] getContentPane(){
-        return boutonsComs;
-    }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Communication;
@@ -219,6 +209,7 @@ public class VueCommunication extends javax.swing.JPanel {
     private javax.swing.JScrollPane comsPane;
     private javax.swing.JLabel labelConf;
     private javax.swing.JLabel labelSession;
+    private javax.swing.JList<String> listComs;
     private javax.swing.JButton modifier;
     private javax.swing.JButton supCom;
     // End of variables declaration//GEN-END:variables

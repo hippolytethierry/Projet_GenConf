@@ -11,7 +11,10 @@ import java.util.Set;
 import javax.swing.JSpinner;
 import org.apache.commons.validator.routines.EmailValidator;
 
-
+/**
+ *
+ * @author hippo
+ */
 public class VueCreationConference extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> nomsExistants;

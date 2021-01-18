@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import fr.uga.iut2.genconf.util.*;
 
+/**
+ *
+ * @author hippo
+ */
 public class GenConf implements Serializable {
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation

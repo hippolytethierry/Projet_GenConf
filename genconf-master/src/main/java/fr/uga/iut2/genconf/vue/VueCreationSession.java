@@ -14,7 +14,10 @@ import org.apache.commons.validator.routines.EmailValidator;
 import fr.uga.iut2.genconf.modele.*;
 import fr.uga.iut2.genconf.util.DateUtils;
 
-
+/**
+ *
+ * @author hippo
+ */
 public class VueCreationSession extends javax.swing.JPanel {
     private final GUI gui;
     private Set<String> sessionExistantes;
@@ -234,6 +237,11 @@ public class VueCreationSession extends javax.swing.JPanel {
         jLabel7.setText("Créer une session");
 
         precedentButton.setText("Precedent");
+        precedentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precedentButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -296,7 +304,7 @@ public class VueCreationSession extends javax.swing.JPanel {
                  anim,
                  conf
          );
-
+         System.out.println(this.typeSess.getActionCommand());
          this.gui.creerSession(Optional.of(nlleSess));
     }//GEN-LAST:event_creerButtonActionPerformed
 
@@ -314,7 +322,7 @@ public class VueCreationSession extends javax.swing.JPanel {
                  && (nom != null) && (nom.length() > 0)
                  && (prenom != null) && (prenom.length() > 0);
 
-        this.creerButton.setEnabled(this.valideAnim&& this.valideSess);
+        this.creerButton.setEnabled(this.valideAnim&&this.valideSess);
     }//GEN-LAST:event_verificationAdmin
 
     private void verificationSession(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationSession
@@ -327,10 +335,10 @@ public class VueCreationSession extends javax.swing.JPanel {
     private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerButtonActionPerformed
         this.gui.creerSession(Optional.empty());
     }//GEN-LAST:event_annulerButtonActionPerformed
-    
-    private void precedentButtonActionPerformed(java.awt.event.ActionEvent evt){
+
+    private void precedentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentButtonActionPerformed
         this.gui.toVoirPlusSession(conf.getNom());
-    }
+    }//GEN-LAST:event_precedentButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Session;
